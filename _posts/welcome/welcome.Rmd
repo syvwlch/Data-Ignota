@@ -15,7 +15,7 @@ It's time to stand up a little website to share the results of my explorations i
 
 Since the ship I've launched on that digital ocean is built from __R__, it makes sense to build this site from the same timber. After some research, I've decided to use the `distill` package as the primary tool, and to publish via Github Pages.
 
-## To-Do:
+## What It Took to Get Here:
 - [x] Create public repo at: https://github.com/syvwlch/Data-Ignota
 - [x] Clone repo to R project (using Github Desktop, not R studio)
 - [x] Create Distill blog within project
@@ -26,4 +26,7 @@ Since the ship I've launched on that digital ocean is built from __R__, it makes
 - [x] Site is up at: https://syvwlch.github.io/Data-Ignota/
 - [x] Add base_url: key to site.yml (used for RSS feed and share cards) 
 
+## Lessons Learned
+### Always Be Knitting (your posts)
+The `distill` package automatically builds web pages _except_ for posts like this one. This is done to keep the build fast and to protect posts which might have dependencies from breaking later. So for posts it's not enough to hit save, you have to reknit them on purpose.
 

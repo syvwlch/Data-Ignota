@@ -6,7 +6,7 @@
       "description": "Some additional details about the Data Ignota project",
       "author": [],
       "contents": "\n\n\n\n",
-      "last_modified": "2022-09-30T14:10:56-04:00"
+      "last_modified": "2022-09-30T14:24:24-04:00"
     },
     {
       "path": "devlog.html",
@@ -14,14 +14,14 @@
       "description": "Developper's log for Data Ignota\n",
       "author": [],
       "contents": "\n\n\n\n",
-      "last_modified": "2022-09-30T14:10:58-04:00"
+      "last_modified": "2022-09-30T14:24:25-04:00"
     },
     {
       "path": "index.html",
       "title": "Data Ignota",
       "author": [],
       "contents": "\nA data-driven exploration of Ada Palmer’s Terra Ignota series.\n\n\n\n",
-      "last_modified": "2022-09-30T14:10:59-04:00"
+      "last_modified": "2022-09-30T14:24:27-04:00"
     }
   ],
   "collections": ["posts/posts.json"]

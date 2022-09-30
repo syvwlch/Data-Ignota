@@ -2151,7 +2151,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <div class="d-article">
 <p>It’s time to stand up a little website to share the results of my explorations into “data ignota”, the digital edition I’ve been creating of <em>Ada Palmer</em>’s <em>Terra Ignota</em> series. This is that website.</p>
 <p>Since the ship I’ve launched on that digital ocean is built from <strong>R</strong>, it makes sense to build this site from the same timber. After some research, I’ve decided to use the <code>distill</code> package as the primary tool, and to publish via Github Pages.</p>
-<h2 id="to-do">To-Do:</h2>
+<h2 id="what-it-took-to-get-here">What It Took to Get Here:</h2>
 <ul class="task-list">
 <li><input type="checkbox" disabled="" checked="" />
 Create public repo at: <a href="https://github.com/syvwlch/Data-Ignota" class="uri">https://github.com/syvwlch/Data-Ignota</a></li>
@@ -2172,6 +2172,9 @@ Site is up at: <a href="https://syvwlch.github.io/Data-Ignota/" class="uri">http
 <li><input type="checkbox" disabled="" checked="" />
 Add base_url: key to site.yml (used for RSS feed and share cards)</li>
 </ul>
+<h2 id="lessons-learned">Lessons Learned</h2>
+<h3 id="always-be-knitting-your-posts">Always Be Knitting (your posts)</h3>
+<p>The <code>distill</code> package automatically builds web pages <em>except</em> for posts like this one. This is done to keep the build fast and to protect posts which might have dependencies from breaking later. So for posts it’s not enough to hit save, you have to reknit them on purpose.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
