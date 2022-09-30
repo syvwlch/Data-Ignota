@@ -4,6 +4,4 @@ description: |
   Some additional details about the Data Ignota project
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-```
+Under Construction
