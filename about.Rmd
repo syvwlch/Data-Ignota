@@ -1,7 +1,7 @@
 ---
-title: "About this blog"
+title: "About this project"
 description: |
-  Some additional details about the blog
+  Some additional details about the Data Ignota project
 ---
 
 ```{r setup, include=FALSE}

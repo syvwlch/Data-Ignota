@@ -1,0 +1,12 @@
+---
+title: "Dev Log"
+description: |
+  Developper's log for Data Ignota
+listing: posts
+---
+
+
+
+
+
+

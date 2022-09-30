@@ -2,18 +2,26 @@
   "articles": [
     {
       "path": "about.html",
-      "title": "About this blog",
-      "description": "Some additional details about the blog",
+      "title": "About this project",
+      "description": "Some additional details about the Data Ignota project",
       "author": [],
       "contents": "\n\n\n\n",
-      "last_modified": "2022-09-30T12:52:34-04:00"
+      "last_modified": "2022-09-30T13:57:28-04:00"
+    },
+    {
+      "path": "devlog.html",
+      "title": "Dev Log",
+      "description": "Developper's log for Data Ignota\n",
+      "author": [],
+      "contents": "\n\n\n\n",
+      "last_modified": "2022-09-30T13:57:29-04:00"
     },
     {
       "path": "index.html",
       "title": "Data Ignota",
       "author": [],
-      "contents": "\n\n\n\n",
-      "last_modified": "2022-09-30T12:52:35-04:00"
+      "contents": "\nA data-driven exploration of Ada Palmer’s Terra Ignota series.\n\n\n\n",
+      "last_modified": "2022-09-30T13:57:31-04:00"
     }
   ],
   "collections": ["posts/posts.json"]

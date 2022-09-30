@@ -1,19 +1,19 @@
 [
   {
     "path": "posts/welcome/",
-    "title": "Welcome to Data Ignota",
-    "description": "Welcome to our new blog, Data Ignota. We hope you enjoy \nreading what we have to say!",
+    "title": "Hello World",
+    "description": "Standing up the website, and saying hello...",
     "author": [
       {
-        "name": "Nora Jones",
-        "url": "https://example.com/norajones"
+        "name": "Mathieu Glachant",
+        "url": "https://github.com/syvwlch"
       }
     ],
     "date": "2022-09-30",
     "categories": [],
-    "contents": "\n\n\n\n",
+    "contents": "\nIt’s time to stand up a little website to share the results of my explorations into “data ignota”, the digital edition I’ve been creating of Ada Palmer’s Terra Ignota series. This is that website.\nSince the ship I’ve launched on that digital ocean is built from R, it makes sense to build this site from the same timber. After some research, I’ve decided to use the distill package as the primary tool, and to publish via Github Pages.\nTo-Do:\n\nCreate public repo at: https://github.com/syvwlch/Data-Ignota\n\nClone repo to R project (using Github Desktop, not R studio)\n\nCreate Distill blog within project\n\nAdd/update content\n\nBuild site & preview locally\n\nPush to github\n\nSetup github pages\n\nSite is up at:\n\nAdd base_url: key to site.yml (used for RSS feed and share cards)\n\n\n\n",
     "preview": {},
-    "last_modified": "2022-09-30T12:52:32-04:00",
-    "input_file": {}
+    "last_modified": "2022-09-30T13:58:04-04:00",
+    "input_file": "welcome.knit.md"
   }
 ]

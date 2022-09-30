@@ -1,5 +1,7 @@
 ---
 title: "Data Ignota"
 site: distill::distill_website
-listing: posts
+
 ---
+
+A data-driven exploration of Ada Palmer's Terra Ignota series.
