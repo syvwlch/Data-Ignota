@@ -21,9 +21,9 @@ Since the ship I've launched on that digital ocean is built from __R__, it makes
 - [x] Create Distill blog within project
 - [x] Add/update content
 - [x] Build site & preview locally
-- [ ] Push to github
-- [ ] Setup github pages
-- [ ] Site is up at:
-- [ ] Add base_url: key to site.yml (used for RSS feed and share cards) 
+- [x] Push to github
+- [x] Setup github pages
+- [x] Site is up at: https://syvwlch.github.io/Data-Ignota/
+- [x] Add base_url: key to site.yml (used for RSS feed and share cards) 
 
 
