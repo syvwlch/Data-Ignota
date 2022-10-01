@@ -1,3 +1,9 @@
+---
+title: "Code of Conduct"
+output:
+  rmarkdown::html_document
+---
+
 # Contributor Covenant Code of Conduct
 
 ## Our Pledge
