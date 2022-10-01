@@ -1,7 +1,0 @@
----
-title: "About this project"
-description: |
-  Some additional details about the Data Ignota project
----
-
-Under Construction
