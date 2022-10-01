@@ -1,0 +1,10 @@
+---
+title: "Index"
+description: |
+  My Index Page
+site: distill::distill_website
+output:
+  distill::distill_article
+---
+
+Hello world

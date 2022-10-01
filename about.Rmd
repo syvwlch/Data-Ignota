@@ -2,7 +2,6 @@
 title: "A Data-Ship"
 description: |
   Fit to Sail a Sea of Words
-site: distill::distill_website
 output:
   distill::distill_article:
     toc: true
