@@ -1,10 +1,23 @@
 ---
-title: "Index"
+title: "Welcome Aboard"
 description: |
-  My Index Page
+  The Data-Ship _Data Ignota_
 site: distill::distill_website
 output:
   distill::distill_article
 ---
 
-Hello world
+This is the online lab journal for my experiments exploring [Ada Palmer](https://www.adapalmer.com/)'s [Terra Ignota](https://www.adapalmer.com/series/terra-ignota/) series using techniques and tools from the __Digital Humanities__. In it I will:
+
+- [document the journey](devlog.html),
+- explain [how and why](about.html) I'm doing what I'm doing,
+- post a dashboard of the progress made
+- write up any discoveries made along the way, and 
+- share the data collected which are not covered by the author's copyright.
+
+## Feedback
+
+If you'd like to contribute, comment, or otherwise engage with this project, you can:
+
+ - Start or join a discussion on our [Github Discussions page](https://github.com/syvwlch/Data-Ignota/discussions),
+ - Request a particular analysis, dataset, or explanation on our [Github Issues page](https://github.com/syvwlch/Data-Ignota/issues).
