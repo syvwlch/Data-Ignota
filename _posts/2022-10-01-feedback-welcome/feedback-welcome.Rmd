@@ -1,0 +1,59 @@
+---
+title: "Feedback Welcome!"
+description: |
+  I've added a couple different ways for you, gentle reader, to provide feedback on our voyage together.
+author:
+  - name: Mathieu Glachant 
+    url: https://github.com/syvwlch
+date: 10-01-2022
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+## GitHub Is Where We Live
+
+These feedback methods all require a Github account, which has the following advantages:
+
+ - it keeps all of the feedback in one place, within the project itself,
+ - it provides me with robust tools to organize, respond to, and implement changes based on that feedback,
+ - it provides you with robust tools to manage replies and notifications, and
+ - I can give you proper credit when I implement or fix something based on your feedback.
+ 
+If you need a new account, try [the instructions here](https://docs.github.com/en/get-started/signing-up-for-github/signing-up-for-a-new-github-account).
+
+# General Conversations
+
+Via the [GitHub Discussions page](https://github.com/syvwlch/Data-Ignota/discussions), you can start or join conversations about whatever aspects of this project strikes your fancy. Keep it civil and follow [our code of conduct](https://github.com/syvwlch/Data-Ignota/blob/main/CODE_OF_CONDUCT.md) is all I ask.
+
+A good place to start is our [Meet & Greet thread](https://github.com/syvwlch/Data-Ignota/discussions/1). Drop by and introduce yourself!
+
+# Requesting Changes
+
+You can request changes and updates via the [GitHub Issues page](https://github.com/syvwlch/Data-Ignota/issues). When creating an new issue, you will be offered a choice of three templates:
+
+- Analysis or Data Request: Use this to suggest an idea for a new analysis, or to request a CSV file I'm not currently providing.
+- Clarification Request: Use this to request a clarification, when I've been less than clear, perhaps, or when you'd like me to explain something at longer length.
+- Typo Report: USe this to help me fix typos anywhere on the site.
+
+When in doubt, feel free to create a generic issue or to start a new discussion instead.
+
+## What It Took to Get Here:
+- [x] Add a Code of Conduct to the repo
+- [x] Turn on GitHub Discussions
+- [x] Add three templates to GitHub Issues
+- [x] Branch the code
+- [x] Rename `index` page to `about` to move that content while preserving change history
+- [x] Write pithier content for new `index` page
+- [x] Create and merge Pull Request back to `main` branch
+
+## Lessons Learned
+
+### `index` page must have `site:` in yaml header
+
+The `distill` package will complain about there being no listing page for your blog posts until it finds the `site: distill::distill_website` key in the yaml of the `index` page.
+
+### `CODE_OF_CONDUCT.md` now gets rendered
+
+It didn't before, and `README.md` still doesn't. I added a `rmarkdown` yaml to it so that at least the text renders. Created [this issue](https://github.com/syvwlch/Data-Ignota/issues/7) to track.
+
