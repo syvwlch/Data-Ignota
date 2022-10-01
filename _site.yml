@@ -4,6 +4,7 @@ description: |
   A data-driven exploration of Ada Palmer's Terra Ignota series.
 base_url : https://syvwlch.github.io/Data-Ignota/
 output_dir: "docs"
+exclude: ["CODE_OF_CONDUCT.md"]
 navbar:
   right:
     - text: "Dev Log"
