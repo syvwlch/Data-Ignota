@@ -7,12 +7,20 @@
     <description>A data-driven exploration of Ada Palmer's Terra Ignota series.
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Fri, 30 Sep 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 01 Oct 2022 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Feedback Welcome!</title>
+      <dc:creator>Mathieu Glachant</dc:creator>
+      <link>https://syvwlch.github.io/Data-Ignota/posts/2022-10-01-feedback-welcome</link>
+      <description>I've added a couple different ways for you, gentle reader, to provide feedback on our voyage together.</description>
+      <guid>https://syvwlch.github.io/Data-Ignota/posts/2022-10-01-feedback-welcome</guid>
+      <pubDate>Sat, 01 Oct 2022 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>Hello World</title>
       <dc:creator>Mathieu Glachant</dc:creator>
       <link>https://syvwlch.github.io/Data-Ignota/posts/welcome</link>
-      <description>Standing up the website, and saying hello...</description>
+      <description>Standing up the website and saying hello...</description>
       <guid>https://syvwlch.github.io/Data-Ignota/posts/welcome</guid>
       <pubDate>Fri, 30 Sep 2022 00:00:00 +0000</pubDate>
     </item>

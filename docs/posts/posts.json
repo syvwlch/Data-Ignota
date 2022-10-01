@@ -1,8 +1,25 @@
 [
   {
+    "path": "posts/2022-10-01-feedback-welcome/",
+    "title": "Feedback Welcome!",
+    "description": "I've added a couple different ways for you, gentle reader, to provide feedback on our voyage together.",
+    "author": [
+      {
+        "name": "Mathieu Glachant",
+        "url": "https://github.com/syvwlch"
+      }
+    ],
+    "date": "2022-10-01",
+    "categories": [],
+    "contents": "\nGitHub Is Where We Live\nThese feedback methods all require a Github account, which has the following advantages:\nit keeps all of the feedback in one place, within the project itself,\nit provides me with robust tools to organize, respond to, and implement changes based on that feedback,\nit provides you with robust tools to manage replies and notifications, and\nI can give you proper credit when I implement or fix something based on your feedback.\nIf you need a new account, try the instructions here.\nGeneral Conversations\nVia the GitHub Discussions page, you can start or join conversations about whatever aspects of this project strikes your fancy. Keep it civil and follow our code of conduct is all I ask.\nA good place to start is our Meet & Greet thread. Drop by and introduce yourself!\nRequesting Changes\nYou can request changes and updates via the GitHub Issues page. When creating an new issue, you will be offered a choice of three templates:\nAnalysis or Data Request: Use this to suggest an idea for a new analysis, or to request a CSV file I’m not currently providing.\nClarification Request: Use this to request a clarification, when I’ve been less than clear, perhaps, or when you’d like me to explain something at longer length.\nTypo Report: USe this to help me fix typos anywhere on the site.\nWhen in doubt, feel free to create a generic issue or to start a new discussion instead.\nWhat It Took to Get Here:\n\nAdd a Code of Conduct to the repo\n\nTurn on GitHub Discussions\n\nAdd three templates to GitHub Issues\n\nBranch the code\n\nRename index page to about to move that content while preserving change history\n\nWrite pithier content for new index page\n\nCreate and merge Pull Request back to main branch\nLessons Learned\nindex page must have site: in yaml header\nThe distill package will complain about there being no listing page for your blog posts until it finds the site: distill::distill_website key in the yaml of the index page.\nCODE_OF_CONDUCT.md now gets rendered\nIt didn’t before, and README.md still doesn’t. I added a rmarkdown yaml to it so that at least the text renders. Created this issue to track.\n\n\n\n",
+    "preview": {},
+    "last_modified": "2022-10-01T17:20:10-04:00",
+    "input_file": {}
+  },
+  {
     "path": "posts/welcome/",
     "title": "Hello World",
-    "description": "Standing up the website, and saying hello...",
+    "description": "Standing up the website and saying hello...",
     "author": [
       {
         "name": "Mathieu Glachant",
@@ -11,9 +28,9 @@
     ],
     "date": "2022-09-30",
     "categories": [],
-    "contents": "\nIt’s time to stand up a little website to share the results of my explorations into “data ignota”, the digital edition I’ve been creating of Ada Palmer’s Terra Ignota series. This is that website.\nSince the ship I’ve launched on that digital ocean is built from R, it makes sense to build this site from the same timber. After some research, I’ve decided to use the distill package as the primary tool, and to publish via Github Pages.\nWhat It Took to Get Here:\n\nCreate public repo at: https://github.com/syvwlch/Data-Ignota\n\nClone repo to R project (using Github Desktop, not R studio)\n\nCreate Distill blog within project\n\nAdd/update content\n\nBuild site & preview locally\n\nPush to github\n\nSetup github pages\n\nSite is up at: https://syvwlch.github.io/Data-Ignota/\n\nAdd base_url: key to site.yml (used for RSS feed and share cards)\nLessons Learned\nAlways Be Knitting (your posts)\nThe distill package automatically builds web pages except for posts like this one. This is done to keep the build fast and to protect posts which might have dependencies from breaking later. So for posts it’s not enough to hit save, you have to reknit them on purpose.\n\n\n\n",
+    "contents": "\nIt’s time to stand up a little website to share the results of my explorations into “data ignota”, the digital edition I’ve been creating of Ada Palmer’s Terra Ignota series. This is that website.\nSince the ship I’ve launched on that digital ocean is built from R, it makes sense to build this site from the same timber. After some research, I’ve decided to use the distill package as the primary tool, and to publish via Github Pages.\nWhat It Took to Get Here\n\nCreate public repo at: https://github.com/syvwlch/Data-Ignota\n\nClone repo to R project (using Github Desktop, not R studio)\n\nCreate Distill blog within project\n\nAdd/update content\n\nBuild site & preview locally\n\nPush to github\n\nSetup github pages\n\nSite is up at: https://syvwlch.github.io/Data-Ignota/\n\nAdd base_url: key to site.yml (used for RSS feed and share cards)\nLessons Learned\nAlways Be Knitting (your posts)\nThe distill package automatically builds web pages except for posts like this one. This is done to keep the build fast and to protect posts which might have dependencies from breaking later. So for posts it’s not enough to hit save, you have to reknit them on purpose.\n\n\n\n",
     "preview": {},
-    "last_modified": "2022-09-30T14:23:21-04:00",
+    "last_modified": "2022-10-01T17:20:22-04:00",
     "input_file": {}
   }
 ]
