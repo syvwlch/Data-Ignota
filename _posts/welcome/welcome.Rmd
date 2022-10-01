@@ -1,7 +1,7 @@
 ---
 title: "Hello World"
 description: |
-  Standing up the website, and saying hello...
+  Standing up the website and saying hello...
 author:
   - name: Mathieu Glachant 
     url: https://github.com/syvwlch
@@ -15,7 +15,8 @@ It's time to stand up a little website to share the results of my explorations i
 
 Since the ship I've launched on that digital ocean is built from __R__, it makes sense to build this site from the same timber. After some research, I've decided to use the `distill` package as the primary tool, and to publish via Github Pages.
 
-## What It Took to Get Here:
+## What It Took to Get Here
+
 - [x] Create public repo at: https://github.com/syvwlch/Data-Ignota
 - [x] Clone repo to R project (using Github Desktop, not R studio)
 - [x] Create Distill blog within project
