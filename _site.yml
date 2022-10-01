@@ -6,8 +6,6 @@ base_url : https://syvwlch.github.io/Data-Ignota/
 output_dir: "docs"
 navbar:
   right:
-    - text: "Home"
-      href: index.html
     - text: "Dev Log"
       href: devlog.html
     - text: "About"
