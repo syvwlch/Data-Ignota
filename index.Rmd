@@ -1,7 +1,7 @@
 ---
-title: "Data Ignota"
+title: "A Data-Ship"
 description: |
-  A Sharper Ship to Heed Apollo's Call
+  Fit to Sail a Sea of Words
 site: distill::distill_website
 output:
   distill::distill_article:
