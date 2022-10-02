@@ -11,7 +11,7 @@ output:
     self_contained: false
 ---
 
-## GitHub Is Where We Live
+## GitHub Is Where We Live Now
 
 These feedback methods all require a Github account, which has the following advantages:
 
@@ -34,7 +34,7 @@ You can request changes and updates via the [GitHub Issues page](https://github.
 
 - Analysis or Data Request: Use this to suggest an idea for a new analysis, or to request a CSV file I'm not currently providing.
 - Clarification Request: Use this to request a clarification, when I've been less than clear, perhaps, or when you'd like me to explain something at longer length.
-- Typo Report: USe this to help me fix typos anywhere on the site.
+- Typo Report: Use this to help me fix typos anywhere on the site.
 
 When in doubt, feel free to create a generic issue or to start a new discussion instead.
 
