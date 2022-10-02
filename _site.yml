@@ -8,6 +8,8 @@ navbar:
   right:
     - icon: fa fa-home
       href: index.html
+    - text: "Digital Edition"
+      href: tei.html
     - text: "Dev Log"
       href: devlog.html
     - text: "About"

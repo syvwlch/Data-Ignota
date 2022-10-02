@@ -1,0 +1,159 @@
+---
+title: "TEI - High Level Structure"
+description: |
+  How I structured my personal digital edition of _Terra Ignota_
+author:
+  - name: Mathieu Glachant
+date: 2022-10-02
+output:
+  distill::distill_article:
+    toc: true
+    toc_depth: 3
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Structure of a TEI Edition
+
+This project rests on a personal digital edition of the _Terra Ignota_ series. All of the analyses use data that ultimately come from a single file containing the text of all four books marked up in a dialect of __XML__ called __TEI__^[Text Encoding Initiative: https://tei-c.org/].
+
+This article explains the high-level structure of that file and serves as an orientation for those interested in where the data lives in relation to the text itself. Other articles in [this collection](../../tei.html) will drill down into specific XML elements from the TEI schema.
+
+### Metadata and Text (Required)
+
+All TEI documents must have the following structure:
+
+```xml
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+  <teiHeader>
+    Metadata about this Digital Edition
+  </teiHeader>
+  <text>
+    Ada Palmer's text(s)
+  </text>
+</TEI>
+```
+
+The root is a `<TEI>` node with a `xmlns` parameter that declares the schema. The metadata about the file itself goes into the required `<teiHeader>` element (sources, editorial and encoding decisions, change control, contributors, etc...) and the text(s) go into the aptly named `<text>` node.
+
+### Standoff (Optional)
+
+I have also included an optional `<standoff>` node. This contains anything I want to add alongside the text to support my analysis, while keeping them separate:
+
+```xml
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+  <teiHeader>
+    Metadata about this Digital Edition
+  </teiHeader>
+  <standoff>
+    My many long lists of things, people, places, and events I'm tracking
+  </standoff>
+  <text>
+    Ada Palmer's text(s)
+  </text>
+</TEI>
+```
+
+This is particularly useful to create lists of `<person>`,`<place>`, `<object>`, or `<event>` nodes which I can then point to from within the text, e.g. each time a character is mentioned, I can mark that mention with a `<persName>` tag pointing to that character's `<person>` entry in `<standoff>`, to disambiguate who is being referred to:
+
+```xml
+<standoff>
+  <person xml:id="Mycroft">
+    <name>Mycroft Canner</name>
+  </person>
+</standoff>
+<text>
+  ....
+  "Where hast thou been, <persName ref="#Mycroft">stray</persName>?"
+  ....
+</text>
+```
+
+## Series As One File
+
+I opted to group the four novels into a single file to simplify data retrieval and analysis across the series. I may change this later if the file just gets too cumbersome.
+
+### Series vs. Novels
+
+Because _Terra Ignota_ is a series, I have structured the contents of the top-level `<text>` node as a `<group>` node for the series containing a child `<text>` node for each novel. Each of these nodes has a a unique `xml:id` parameter we can query or point to.
+
+```xml
+<text>
+  <group xml:id="TerraIgnota">
+    <text xml:id="TooLikeTheLightning"></text>
+    <text xml:id="SevenSurrenders"></text>
+    <text xml:id="TheWillToBattle"></text>
+    <text xml:id="PerhapsTheStars"></text>
+  </group>
+</text>
+```
+
+### Contents of a Novel
+
+Lastly, I have broken down each novel into different nodes for the front matter, the main body of the text, and the back matter. The `<front>` node contains the title page, the dedication, epigraph, and permissions, the `<body>` node contains the chapters, and the `<back>` node contains the acknowledgments, author bio, etc...
+
+```xml
+<text xml:id="TooLikeTheLightning">
+  <front>
+    Dedication
+    Permissions
+    Epigraph
+    Title Page
+  </front>
+  <body>
+    Chapter the First
+    Chapter the Second
+    etc...
+  </body>
+  <back>
+    Acknowledgments
+    Author's Bio
+    Copyright Notice
+  </back>
+</text>
+```
+
+## Putting It Together
+
+### High-Level Structure
+
+Putting it all together, we get the following structure against which to run our queries to extract that sweet, sweet data:
+
+```xml
+<TEI xmlns="http://www.tei-c.org/ns/1.0">
+  <teiHeader>
+    Metadata about this Digital Edition
+  </teiHeader>
+  <standoff>
+    My many long lists of things, people, places, and events I'm tracking
+  </standoff>
+  <text>
+    <group xml:id="TerraIgnota">
+      <text xml:id="TooLikeTheLightning">
+        <front></front>
+        <body></body>
+        <back></back>
+      </text>
+      <text xml:id="SevenSurrenders">
+        <front></front>
+        <body></body>
+        <back></back>
+      </text>
+      <text xml:id="TheWillToBattle">
+        <front></front>
+        <body></body>
+        <back></back>
+      </text>
+      <text xml:id="PerhapsTheStars">
+        <front></front>
+        <body></body>
+        <back></back>
+      </text>
+    </group>
+  </text>
+</TEI>
+```
