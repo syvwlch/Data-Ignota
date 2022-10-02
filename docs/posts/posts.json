@@ -1,5 +1,22 @@
 [
   {
+    "path": "posts/2022-10-02-documenting-structure/",
+    "title": "Documenting Structure",
+    "description": "Finally, some content!",
+    "author": [
+      {
+        "name": "Mathieu Glachant",
+        "url": "https://github.com/syvwlch"
+      }
+    ],
+    "date": "2022-10-02",
+    "categories": [],
+    "contents": "\nAfter a couple days focused on the infrastructure of this site, I finally got to post some content beside this Dev Log!\nSpecifically, I started a new collection of posts which will focus on how my digital edition of Terra Ignota is structured. The inaugural entry documents the high-level structure of the edition’s single TEI-XML file.\nFuture entries will drill down into specific elements in the schema and how I used them during mark-up and analysis.\nAlso fixed some typos and improved the navigation.\nWhat It Took to Get Here\nClarifications\nClarify Structure of TEI DocumentUse distill::create_post() with collection parameter to create the collection and its first post at the same time\nAdd new collection to Nav\nWrite content for first post\n\n\nEnhancements\nAdd Home to Nav\n\nTypos\nTypo in About#Xquery\nTypo in Feedback Welcome\n\nTypo in Dev Log’s description\n\nLessons Learned\nNone\nSometimes stuff just works!\n\n\n\n",
+    "preview": {},
+    "last_modified": "2022-10-02T15:33:13-04:00",
+    "input_file": {}
+  },
+  {
     "path": "posts/2022-10-01-feedback-welcome/",
     "title": "Feedback Welcome!",
     "description": "I've added a couple different ways for you, gentle reader, to provide feedback on our voyage together.",
