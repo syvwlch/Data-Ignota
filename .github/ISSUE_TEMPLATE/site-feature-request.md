@@ -1,7 +1,7 @@
 ---
 name: Site Feature request
 about: Suggest an idea for this website
-title: "[feature] "
+title: "[Feature] "
 labels: enhancement
 assignees: ''
 

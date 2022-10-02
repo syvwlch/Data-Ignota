@@ -1,8 +1,8 @@
 ---
 name: Analysis or data request
 about: Suggest an idea for a new analysis
-title: "[analysis] "
-labels: enhancement
+title: "[Analysis] "
+labels: question
 assignees: ''
 
 ---
