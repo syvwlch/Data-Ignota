@@ -1,7 +1,7 @@
 ---
 name: Typo report
 about: Create a report to help us fix our typos
-title: "[Typo] "
+title: "[typo] "
 labels: typo
 assignees: ''
 

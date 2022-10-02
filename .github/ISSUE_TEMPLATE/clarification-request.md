@@ -1,8 +1,8 @@
 ---
 name: Clarification request
 about: Request a clarification
-title: "[Clarification] "
-labels: documentation
+title: "[clarification] "
+labels: question
 assignees: ''
 
 ---
