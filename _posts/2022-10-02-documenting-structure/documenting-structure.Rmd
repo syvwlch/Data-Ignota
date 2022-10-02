@@ -1,0 +1,40 @@
+---
+title: "Documenting Structure"
+description: |
+  Finally, some content!
+author:
+  - name: Mathieu Glachant 
+    url: https://github.com/syvwlch
+date: 10-02-2022
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+After a couple days focused on the infrastructure of this site, I finally got to post some content beside this Dev Log!
+
+Specifically, I started [a new collection of posts](../../tei.html) which will focus on how my digital edition of _Terra Ignota_ is structured. The inaugural entry documents the high-level structure of the edition's single __TEI-XML__ file. 
+
+Future entries will drill down into specific elements in the schema and how I used them during mark-up and analysis.
+
+Also fixed some typos and improved the navigation.
+
+## What It Took to Get Here
+
+- Clarifications
+	- [x] [Clarify Structure of TEI Document](https://github.com/syvwlch/Data-Ignota/issues/5)
+	  - Use `distill::create_post()` with `collection` parameter to create the collection and its first post at the same time
+	  - Add new collection to Nav
+	  - Write content for first post
+- Enhancements
+	- [x] [Add `Home` to Nav](https://github.com/syvwlch/Data-Ignota/issues/9)
+- Typos
+	- [x] [Typo in About#Xquery](https://github.com/syvwlch/Data-Ignota/issues/3)
+	- [x] [Typo in Feedback Welcome](https://github.com/syvwlch/Data-Ignota/issues/8)
+	- [x] Typo in Dev Log's description
+
+## Lessons Learned
+### None
+
+Sometimes stuff just works!
+
