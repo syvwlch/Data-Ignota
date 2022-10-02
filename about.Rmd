@@ -47,7 +47,7 @@ This is truly a labor of love^[It took a month of sustained effort to mark up th
 
 It's worth it, tho, because then I can use Xquery^[a query and functional programming language that queries and transforms collections of structured and unstructured data, usually in the form of XML. https://en.wikipedia.org/wiki/XQuery] to ask questions like: 
 
-- "How many different ways Mycroft does refer to J.E.D.D. Mason while speaking to Bridger?"
+- "How many different ways does Mycroft refer to J.E.D.D. Mason while speaking to Bridger?"
 - "¿Who talks about the Masons in Humanist Spanish? ¿On which pages?"
 - "How many different Utopian coats are there in the text? How are they described?"
 
