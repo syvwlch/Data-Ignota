@@ -11,9 +11,9 @@
     ],
     "date": "2022-10-04",
     "categories": [],
-    "contents": "\n\n\n\nWhat Is <said> For?\nShort explanation of use case, with link to section lower down with all the details.\nGet the File\nDownload link: click here\nLast Updated\nHealth Check\nMaking Sense of the Data\nRows\nColumn index\nColumn chapter\netc…\n\n\n\n",
+    "contents": "\n\nContents\nWhat Is <said> For?\nGet the Data\nLast Updated\nHealth Check\n\nMaking Sense of the Data\nRows\nColumn index\nColumn chapter\netc…\n\n\n\n\n\nWhat Is <said> For?\nThis project uses the TEI <said> element to mark up passages of the text that represent direct communication between characters.\nA line of dialog between Mycroft and Dominic would be encoded as an XML node, thus:\n<p>\n  <said>\"Where hast thou been, stray?\"<\/said>\n    , Dominic snarled.\n<\/p>\nAdditional information about such passages can be retrieved in various ways, see details below.\nGet the Data\nThe data extracted from the Digital Edition’s <said> nodes is available as a CSV file.\n\nDownload the data\nLast Updated\nHealth Check\nMaking Sense of the Data\nA lot of additional information about each line of dialog is encoded beyond its content.\nWhat follows is a data dictionary, explaining the contents of the file. How they are generated, what they mean, with some simple examples of what you can do with them.\nRows\nColumn index\nColumn chapter\netc…\n\n\n\n",
     "preview": {},
-    "last_modified": "2022-10-04T11:14:54-04:00",
+    "last_modified": "2022-10-04T12:50:34-04:00",
     "input_file": {}
   },
   {
