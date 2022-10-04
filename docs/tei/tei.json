@@ -13,8 +13,8 @@
     "categories": [],
     "contents": "\n\nContents\nWhat Is <said> For?\nGet the Data\nLast Updated\nEditing Progress\n\nMaking Sense of the Data\nRows\nColumn index\nColumn chapter\netc…\n\n\n\n\n\n\n\n\nWhat Is <said> For?\nThis project uses the TEI <said> element to mark up passages of the text that represent direct communication between characters.\nA line of dialog between Mycroft and Dominic would be encoded as an XML node, thus:\n<p>\n  <said>\"Where hast thou been, stray?\"<\/said>\n    , Dominic snarled.\n<\/p>\nAdditional information about such passages can be retrieved in various ways, see details below.\nGet the Data\nThe data extracted from the Digital Edition’s <said> nodes is available as a CSV file.\n\n\n\n\nDownload the data\nLast Updated\nThis file was last updated on 2022-10-04.\nEditing Progress\nPercentage of lines of dialog for which the editorial process of manually adding a speaker and an addressee parameter is complete, per chapter:\n\n\n\nMaking Sense of the Data\nA lot of additional information about each line of dialog is encoded beyond its content.\nWhat follows is a data dictionary, explaining the contents of the file. How they are generated, what they mean, with some simple examples of what you can do with them.\nRows\nColumn index\nColumn chapter\netc…\n\n\n\n",
     "preview": "tei/said-element/said-element_files/figure-html5/editing_progress-1.png",
-    "last_modified": "2022-10-04T14:30:20-04:00",
-    "input_file": "said-element.knit.md",
+    "last_modified": "2022-10-04T14:47:55-04:00",
+    "input_file": {},
     "preview_width": 1248,
     "preview_height": 768
   },
