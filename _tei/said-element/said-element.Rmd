@@ -82,7 +82,19 @@ said %>%
 
 This file was last updated on `r Sys.Date()`.
 
-### Health Check
+### Editing Progress
+
+Percentage of lines of dialog for which the editorial process of manually adding a speaker and an addressee parameter is complete, per chapter:
+
+```{r editing_progress}
+said %>%
+  mutate(complete = !(is.na(speaker) | is.na(addressee))) %>%
+  ggplot() +
+  geom_bar(
+    aes(x = chapter, fill = complete),
+    position = "fill"
+  )
+```
 
 ## Making Sense of the Data
 
