@@ -118,7 +118,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["said-element_files/anchor-4.2.2/anchor.min.js","said-element_files/bowser-1.9.3/bowser.min.js","said-element_files/distill-2.2.21/template.v2.js","said-element_files/figure-html5/data_health-1.png","said-element_files/figure-html5/editing_progress-1.png","said-element_files/header-attrs-2.16/header-attrs.js","said-element_files/jquery-3.6.0/jquery-3.6.0.js","said-element_files/jquery-3.6.0/jquery-3.6.0.min.js","said-element_files/jquery-3.6.0/jquery-3.6.0.min.map","said-element_files/popper-2.6.0/popper.min.js","said-element_files/tippy-6.2.7/tippy-bundle.umd.min.js","said-element_files/tippy-6.2.7/tippy-light-border.css","said-element_files/tippy-6.2.7/tippy.css","said-element_files/tippy-6.2.7/tippy.umd.min.js","said-element_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["said-element_files/anchor-4.2.2/anchor.min.js","said-element_files/bowser-1.9.3/bowser.min.js","said-element_files/distill-2.2.21/template.v2.js","said-element_files/figure-html5/chapter_column-1.png","said-element_files/figure-html5/data_health-1.png","said-element_files/figure-html5/editing_progress-1.png","said-element_files/header-attrs-2.16/header-attrs.js","said-element_files/jquery-3.6.0/jquery-3.6.0.js","said-element_files/jquery-3.6.0/jquery-3.6.0.min.js","said-element_files/jquery-3.6.0/jquery-3.6.0.min.map","said-element_files/popper-2.6.0/popper.min.js","said-element_files/tippy-6.2.7/tippy-bundle.umd.min.js","said-element_files/tippy-6.2.7/tippy-light-border.css","said-element_files/tippy-6.2.7/tippy.css","said-element_files/tippy-6.2.7/tippy.umd.min.js","said-element_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
   <!--/radix_placeholder_navigation_in_header-->
@@ -1532,7 +1532,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </ul></li>
 <li><a href="#making-sense-of-the-data" id="toc-making-sense-of-the-data">Making Sense of the Data</a>
 <ul>
-<li><a href="#rows" id="toc-rows">Rows</a></li>
 <li><a href="#index" id="toc-index"><code>index</code></a></li>
 <li><a href="#chapter" id="toc-chapter"><code>chapter</code></a></li>
 <li><a href="#page" id="toc-page"><code>page</code></a></li>
@@ -1583,22 +1582,32 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h2 id="making-sense-of-the-data">Making Sense of the Data</h2>
 <p>A lot of additional information about each line of dialog is encoded beyond its content.</p>
 <p>What follows is a data dictionary, explaining the contents of the file. How they are generated, what they mean, with some simple examples of what you can do with them.</p>
-<h3 id="rows">Rows</h3>
-<p>In accordance with the <strong>Tidy Data</strong> paradigm<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, each row is an observation with a single value for each column/variable.</p>
-<p>Since a line of dialog can have multiple speakers, addressees, etc… it may be represented by multiple rows in the data.</p>
 <h3 id="index"><code>index</code></h3>
 <p>The unique identifier for the actual line of dialog in the original text.</p>
+<h4 id="multiple-rows-per-line">Multiple Rows Per Line</h4>
+<p>In accordance with the <strong>Tidy Data</strong> paradigm<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, since a line of dialog can have multiple speakers, addressees, etc… it may be represented by multiple rows in the data.</p>
 <p>If it is important to count or visualize the data by lines in the original text, the data should be grouped by index first.</p>
+<p>There are currently 4995 lines of dialog in the data but there are 5866 rows.</p>
+<h4 id="index-can-change-between-releases">Index Can Change Between Releases!</h4>
 <p>The index is assigned dynamically by the Xquery when the file is generated, not embedded in the text as markup. Therefore it can change between releases of the data file.</p>
 <h3 id="chapter"><code>chapter</code></h3>
 <p>The number of the chapter containing the line.</p>
 <p>Derived from parameter <code>n</code> of the <code>&lt;div type="chapter"&gt;</code> node the line is a child of.</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
 <h3 id="page"><code>page</code></h3>
 <p>The number of the page on which the line starts.</p>
 <p>Derived from parameter <code>n</code> of the <code>&lt;pb/&gt;</code> milestone node which precedes the line in document order.</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
 <h3 id="speaker"><code>speaker</code></h3>
 <p>The unique identifier of the character speaking the line.</p>
 <p>Derived from parameter <code>Who</code> of the line’s <code>&lt;said&gt;</code> node, broken out to multiple rows if it contained a space-delimited list of values.</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
 <h4 id="character-ids">Character IDs</h4>
 <p>The identifier takes the form <code>#Mycroft</code> or <code>#Carlyle</code>. It points to a unique <code>&lt;person&gt;</code> node with the <code>xml:id</code> parameter set to that value.</p>
 <p>Those <code>&lt;person&gt;</code> nodes contain metadata about the character, e.g. names, affiliations, age, etc… and are stored outside the text in a <code>&lt;standoff&gt;</code> node within the Digital Edition’s file.</p>
@@ -1609,6 +1618,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h3 id="addressee"><code>addressee</code></h3>
 <p>The unique identifier of the character the line is being spoken to.</p>
 <p>Derived from the parameter <code>ToWhom</code> of the line’s <code>&lt;said&gt;</code> node, broken out to multiple rows if it contained a space-delimited list of values. See <code>speaker</code> for format and meaning of the identifier.</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
 <h4 id="asides-to-the-reader">Asides to the Reader</h4>
 <p>The text does not call out Mycroft’s asides to his gentle reader typographically. I have therefore had to make some editorial choices in marking up those parts of the text which are set like the rest of Mycroft’s narration but which I believe to be such an aside using the <code>&lt;said&gt;</code> element.</p>
 <p>This allows me to include the conversations between Mycroft and the reader in this data, but at the cost of some personal interpretation in what does or does not make the cut.</p>
@@ -1616,15 +1628,24 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h3 id="person"><code>person</code></h3>
 <p>The unique identifier of a character mentioned by name in the line.</p>
 <p>Derived from the <code>ref</code> parameter of any children <code>&lt;persName&gt;</code> nodes of the line, broken out to multiple rows if there is more than one. See <code>speaker</code> for format and meaning of the identifier.</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
 <h3 id="org"><code>org</code></h3>
 <p>The unique identifier of an organization or group mentioned by name in the line.</p>
 <p>Derived from the <code>ref</code> parameter of any children <code>&lt;orgName&gt;</code> nodes of the line, broken out to multiple rows if there is more than one.</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
 <h4 id="org-ids">Org IDs</h4>
 <p>The organizations are managed much like the characters, but using <code>&lt;org&gt;</code> nodes instead of <code>&lt;person&gt;</code>. Unlike persons, orgs can nest.</p>
 <p>These include Hives, bash’es, nation strats, the servicers, or the Chicago Museum of Science and Industry with its Junior Scientist Club.</p>
 <h3 id="place"><code>place</code></h3>
 <p>The unique identifier of a place mentioned by name in the line.</p>
 <p>Derived from the <code>ref</code> parameter of any children <code>&lt;placeName&gt;</code> nodes of the line, broken out to multiple rows if there is more than one.</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
 <h4 id="place-ids">Place IDs</h4>
 <p>Places are managed much like orgs, but using <code>&lt;place&gt;</code> nodes instead of <code>&lt;org&gt;</code>.</p>
 <p>These include planets, continents, cities, bash’houses, palaces, or flower trenches.</p>
@@ -1632,6 +1653,9 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>The ISO-code for the language the line is spoken in.</p>
 <p>Derived from the <code>xml:lang</code> parameter of the line’s <code>&lt;said&gt;</code> node.</p>
 <p>Note that this is <em>not</em> the language of the line in the text itself, since Mycroft takes it upon himself to translate most of the dialog into English. Instead it is inferred from Mycroft’s typographical convention to represent the original language via the style of quotation marks used, or sometimes given directly by Mycroft in the narration.</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
 <h4 id="future-iso-language-codes">Future ISO Language Codes</h4>
 <p>Several of the languages spoken are future, invented variant of existing ones. In that spirit, I have created fictitious ISO codes for this parameter:</p>
 <ul>
@@ -1648,12 +1672,21 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h3 id="aloud"><code>aloud</code></h3>
 <p>A boolean that indicates whether the line is spoken aloud or not. Takes the value <code>FALSE</code> when texting, or between Mycroft and the reader, for example.</p>
 <p>Derived from the <code>aloud</code> parameter of the line’s <code>&lt;said&gt;</code> node.</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
 <h3 id="format"><code>format</code></h3>
 <p>The style in which the dialog is rendered in the text. Takes the value <code>script</code> when the layout changes to a script-like format with the speaker’s name repeated at each line, and <code>novel</code> otherwise.</p>
 <p>Derived from whether the ancestor of the line just below the chapter <code>&lt;div&gt;</code> level is a <code>&lt;p&gt;</code> node (novel format) or an <code>&lt;sp&gt;</code> node (script format).</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
 <h3 id="words"><code>words</code></h3>
 <p>The number of words in the line.</p>
 <p>Derived by counting the normalized spaces in the line, plus one. Faster than tokenizing and then counting.</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
 <h4 id="including-the-words-themselves">Including the Words Themselves</h4>
 <p>I want to be respectful of the author’s copyright and to stay well on the side of fair use. I am not a lawyer, let alone one specialized in these matters, so my current rule is that I will not include stretches of text in the data files I offer here.</p>
 <p>Across large enough chunks of text, I will share list of words that have been tokenized but at the level of individual lines of dialog included in this data file, I’m not comfortable doing that. If you have suggestions on how to group the lines before tokenizing, please create an issue on the project’s GitHub repo, or start a conversation in the Discussions area.</p>
