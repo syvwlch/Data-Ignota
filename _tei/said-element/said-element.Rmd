@@ -37,7 +37,8 @@ said <- xmlToDataFrame(xml_path) %>%
     orgs = na_if(orgs, "NA"),
     places = na_if(places, "NA"),
     aloud = as.logical(aloud)
-    )
+    ) %>%
+  mutate(words = str_count(text, " ") + 1) # proxy for word count, counting spaces as separators.
 ```
 
 ```{r data-tidy}
