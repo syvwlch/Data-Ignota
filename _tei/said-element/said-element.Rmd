@@ -20,6 +20,7 @@ library(tidyverse)
 library(XML)
 
 xml_path = "../../../DigitalTerraIgnota/output/said.xml"
+csv_path = "../../data/said.csv"
 
 ```
 
@@ -68,9 +69,18 @@ Additional information about such passages can be retrieved in various ways, see
 
 The data extracted from the Digital Edition's `<said>` nodes is available as a CSV file.
 
-<div style="text-align: right">[Download the data](../../data/said.csv)<br></div>
+```{r write_to_csv}
+# Must not include the original text for copyright reasons
+said %>%
+  mutate(text = NULL) %>%
+  write_csv(csv_path)
+```
+
+<div style="text-align: right">[Download the data](`r csv_path`)<br></div>
 
 ### Last Updated
+
+This file was last updated on `r Sys.Date()`.
 
 ### Health Check
 
