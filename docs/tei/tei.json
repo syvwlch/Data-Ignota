@@ -1,5 +1,22 @@
 [
   {
+    "path": "tei/said-element/",
+    "title": "`<said>` Element",
+    "description": "Use of the `<said>` element in this project.",
+    "author": [
+      {
+        "name": "Mathieu Glachant",
+        "url": {}
+      }
+    ],
+    "date": "2022-10-04",
+    "categories": [],
+    "contents": "\n\n\n\nWhat Is <said> For?\nShort explanation of use case, with link to section lower down with all the details.\nGet the File\nDownload link: click here\nLast Updated\nHealth Check\nMaking Sense of the Data\nRows\nColumn index\nColumn chapter\netc…\n\n\n\n",
+    "preview": {},
+    "last_modified": "2022-10-04T11:14:54-04:00",
+    "input_file": {}
+  },
+  {
     "path": "tei/2022-10-02-tei-structure/",
     "title": "TEI - High Level Structure",
     "description": "How I structured my personal digital edition of _Terra Ignota_",
