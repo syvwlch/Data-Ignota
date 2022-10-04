@@ -33,9 +33,9 @@ said <- xmlToDataFrame(xml_path) %>%
     page = as.integer(page),
     speaker = na_if(speaker, "NA"),
     addressee = na_if(addressee, "NA"),
-    persons = na_if(persons, "NA"),
-    orgs = na_if(orgs, "NA"),
-    places = na_if(places, "NA"),
+    person = na_if(person, "NA"),
+    org = na_if(org, "NA"),
+    place = na_if(place, "NA"),
     aloud = as.logical(aloud)
     ) %>%
   mutate(words = str_count(text, " ") + 1) # proxy for word count, counting spaces as separators.
@@ -46,16 +46,16 @@ said <- xmlToDataFrame(xml_path) %>%
 said <- said %>%
   separate_rows(speaker, sep = " ") %>%
   separate_rows(addressee, sep = " ") %>%
-  separate_rows(persons, sep = " ") %>%
-  separate_rows(orgs, sep = " ") %>%
-  separate_rows(places, sep = " ") 
+  separate_rows(person, sep = " ") %>%
+  separate_rows(org, sep = " ") %>%
+  separate_rows(place, sep = " ") 
 ```
 
 ## What Is `<said>` For?
 
-This project uses the __TEI__ `<said>` element to mark up passages of the text that represent direct communication between characters.
+This project uses the __TEI__ `<said>` element to mark up passages of the text that represent direct communication between characters. I usually refer to such passages as a 'line of dialog' or 'line' for short.
 
-A line of dialog between Mycroft and Dominic would be encoded as an XML node, thus:
+A line between Mycroft and Dominic would be encoded as an XML node, thus:
 
 ```xml
 <p>
@@ -67,6 +67,8 @@ A line of dialog between Mycroft and Dominic would be encoded as an XML node, th
 Additional information about such passages can be retrieved in various ways, see [details below](#making-sense-of-the-data).
 
 ## Get the Data
+
+### Download
 
 The data extracted from the Digital Edition's `<said>` nodes is available as a CSV file.
 
@@ -85,17 +87,19 @@ This file was last updated on `r Sys.Date()`.
 
 ### Editing Progress
 
-Percentage of lines of dialog for which the editorial process of manually adding a speaker and an addressee parameter is complete, per chapter:
+Percent complete, by chapter:
 
 ```{r editing_progress}
 said %>%
   mutate(complete = !(is.na(speaker) | is.na(addressee))) %>%
+  group_by(index) %>%
   ggplot() +
   geom_bar(
     aes(x = chapter, fill = complete),
     position = "fill"
   )
 ```
+Measured as percentage of lines of dialog with both a speaker and an addressee.
 
 ## Making Sense of the Data
 
@@ -105,8 +109,139 @@ What follows is a data dictionary, explaining the contents of the file. How they
 
 ### Rows
 
-### Column `index`
+In accordance with the __Tidy Data__ paradigm^[Tidy datasets are easy to manipulate, model and visualize, and have a specific structure: each variable is a column, each observation is a row, and each type of observational unit is a table. https://vita.had.co.nz/papers/tidy-data.html], each row is an observation with a single value for each column/variable.
 
-### Column `chapter`
+Since a line of dialog can have multiple speakers, addressees, etc... it may be represented by multiple rows in the data. 
 
-### etc...
+### `index`
+
+The unique identifier for the actual line of dialog in the original text.
+
+If it is important to count or visualize the data by lines in the original text, the data should be grouped by index first.
+
+The index is assigned dynamically by the Xquery when the file is generated, not embedded in the text as markup. Therefore it can change between releases of the data file.
+
+### `chapter`
+
+The number of the chapter containing the line.
+
+Derived from parameter `n` of the `<div type="chapter">` node the line is a child of.
+
+### `page`
+
+The number of the page on which the line starts.
+
+Derived from parameter `n` of the `<pb/>` milestone node which precedes the line in document order.
+
+### `speaker`
+
+The unique identifier of the character speaking the line.
+
+Derived from parameter `Who` of the line's `<said>` node, broken out to multiple rows if it contained a space-delimited list of values.
+
+#### Character IDs
+
+The identifier takes the form `#Mycroft` or `#Carlyle`. It points to a unique `<person>` node with the `xml:id` parameter set to that value.
+
+Those `<person>` nodes contain metadata about the character, e.g. names, affiliations, age, etc... and are stored outside the text in a `<standoff>` node within the Digital Edition's file.
+
+I will, at some point, publish the list of characters as its own file and the primary key will be this identifier to permit joins.
+
+#### 'Unknown' Characters
+
+It is not always clear in the text who is speaking, e.g. when Carlyle first overhears thru Thisbe's door in Chapter the First, or the speaker is an unnamed individual in a crowd or group, e.g. the several services who witness Vivien dragging Mycroft out of the gutter in Chapter the Sixth.
+
+For such cases, I use generic IDs with  the form `#Unknown-Soldier` or `#Unknown-Servicer` or the fallback `#Unknown`.
+
+### `addressee`
+
+The unique identifier of the character the line is being spoken to.
+
+Derived from the parameter `ToWhom` of the line's `<said>` node, broken out to multiple rows if it contained a space-delimited list of values. See `speaker` for format and meaning of the identifier.
+
+#### Asides to the Reader
+
+The text does not call out Mycroft's asides to his gentle reader typographically. I have therefore had to make some editorial choices in marking up those parts of the text which are set like the rest of Mycroft's narration but which I believe to be such an aside using the `<said>` element.
+
+This allows me to include the conversations between Mycroft and the reader in this data, but at the cost of some personal interpretation in what does or does not make the cut.
+
+The rule I've tried to follow is that narration that uses the second person and/or addresses the reader directly should be included. Usually I have found that once this pattern starts it persists to the end of the paragraph. Some individual cases are less clear-cut, and of course I will have made errors during the editing.
+
+### `person`
+
+The unique identifier of a character mentioned by name in the line.
+
+Derived from the `ref` parameter of any children `<persName>` nodes of the line, broken out to multiple rows if there is more than one. See `speaker` for format and meaning of the identifier.
+
+### `org`
+
+The unique identifier of an organization or group mentioned by name in the line.
+
+Derived from the `ref` parameter of any children `<orgName>` nodes of the line, broken out to multiple rows if there is more than one. 
+
+#### Org IDs
+
+The organizations are managed much like the characters, but using `<org>` nodes instead of `<person>`. Unlike persons, orgs can nest.
+
+These include Hives, bash'es, nation strats, the servicers, or the Chicago Museum of Science and Industry with its Junior Scientist Club.
+
+### `place`
+
+The unique identifier of a place mentioned by name in the line.
+
+Derived from the `ref` parameter of any children `<placeName>` nodes of the line, broken out to multiple rows if there is more than one. 
+
+#### Place IDs
+
+Places are managed much like orgs, but using `<place>` nodes instead of `<org>`.
+
+These include planets, continents, cities, bash'houses, palaces, or flower trenches.
+
+### `language`
+
+The ISO-code for the language the line is spoken in. 
+
+Derived from the `xml:lang` parameter of the line's `<said>` node.
+
+Note that this is _not_ the language of the line in the text itself, since Mycroft takes it upon himself to translate most of the dialog into English. Instead it is inferred from Mycroft's typographical convention to represent the original language via the style of quotation marks used, or sometimes given directly by Mycroft in the narration.
+
+#### Future ISO Language Codes
+
+Several of the languages spoken are future, invented variant of existing ones. In that spirit, I have created fictitious ISO codes for this parameter:
+
+- `en-ar`: archaic English, as used by the reader and Dominic,
+- `sp-hu`: Humanist Spanish,
+- `jp-mi`: Mitsubishi Japanese, on the premise that Ando makes little distinction betweent voting bloc and strat,
+- `fr-eu`: European French,
+- `en-tx`: the uncapitalized unpunctuated form of text only english used by eureka weeksbooth
+- `la-ma`: Masonic neo-latin.
+
+Others to come as they appear in the text, such as Ute-Speak as a dialect of English. When the text does not imply or affirm otherwise, I have used `en-en` as the language code for default English
+
+#### Non-English Languages in the Text
+
+I have used the `<foreign xml:lang="fr-eu">` element to wrap text that is actually given in a language other than English, e.g. here in European French, but I am not including this information in this data file. Create a feature request on the project GitHub repository if you'd like me to revisit that decision.
+
+### `aloud`
+
+A boolean that indicates whether the line is spoken aloud or not. Takes the value `FALSE` when texting, or between Mycroft and the reader, for example.
+
+Derived from the `aloud` parameter of the line's `<said>` node.
+
+### `format`
+
+The style in which the dialog is rendered in the text. Takes the value `script` when the layout changes to a script-like format with the speaker's name repeated at each line, and `novel` otherwise.
+
+Derived from whether the ancestor of the line just below the chapter `<div>` level is a `<p>` node (novel format) or an `<sp>` node (script format).
+
+### `words`
+
+The number of words in the line. 
+
+Derived by counting the normalized spaces in the line, plus one. Faster than tokenizing and then counting. 
+
+#### Including the Words Themselves
+
+I want to be respectful of the author's copyright and to stay well on the side of fair use. I am not a lawyer, let alone one specialized in these matters, so my current rule is that I will not include stretches of text in the data files I offer here.
+
+Across large enough chunks of text, I will share list of words that have been tokenized but at the level of individual lines of dialog included in this data file, I'm not comfortable doing that. If you have suggestions on how to group the lines before tokenizing, please create an issue on the project's GitHub repo, or start a conversation in the Discussions area.

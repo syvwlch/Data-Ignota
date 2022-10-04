@@ -1,4 +1,4 @@
-index,chapter,page,speaker,addressee,persons,orgs,places,language,aloud,format,words
+index,chapter,page,speaker,addressee,person,org,place,language,aloud,format,words
 1,1,13,#Mycroft,#reader,#reader,NA,NA,en-en,FALSE,novel,156
 2,1,13,#Mycroft,#reader,#reader,NA,NA,en-en,FALSE,novel,155
 2,1,13,#Mycroft,#reader,#Mycroft,NA,NA,en-en,FALSE,novel,155
