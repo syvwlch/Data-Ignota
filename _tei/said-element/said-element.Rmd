@@ -1,0 +1,43 @@
+---
+title: "`<said>` Element"
+description: |
+  Use of the `<said>` element in this project.
+author:
+  - name: Mathieu Glachant
+    url: {}
+date: 2022-10-04
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r data_cleanup}
+
+```
+
+## What Is `<said>` For?
+
+Short explanation of use case, with link to section lower down with all the details.
+
+## Get the File
+
+Download link: [click here](../../data/said.csv)
+
+### Last Updated
+
+### Health Check
+
+## Making Sense of the Data
+
+### Rows
+
+### Column `index`
+
+### Column `chapter`
+
+### etc...
