@@ -9,30 +9,76 @@ date: 2022-10-04
 output:
   distill::distill_article:
     self_contained: false
+    toc: true
+    toc_depth: 3
 ---
 
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(XML)
+
+xml_path = "../../../DigitalTerraIgnota/output/said.xml"
+
 ```
 
 ```{r data_cleanup}
+# Fix types, NA values
+said <- xmlToDataFrame(xml_path) %>%
+  mutate(
+    index = as.integer(index),
+    chapter = as.integer(chapter),
+    page = as.integer(page),
+    speaker = na_if(speaker, "NA"),
+    addressee = na_if(addressee, "NA"),
+    persons = na_if(persons, "NA"),
+    orgs = na_if(orgs, "NA"),
+    places = na_if(places, "NA"),
+    aloud = as.logical(aloud)
+    )
+```
 
+```{r data-tidy}
+# Break space-delimited columns across multiple rows
+said <- said %>%
+  separate_rows(speaker, sep = " ") %>%
+  separate_rows(addressee, sep = " ") %>%
+  separate_rows(persons, sep = " ") %>%
+  separate_rows(orgs, sep = " ") %>%
+  separate_rows(places, sep = " ") 
 ```
 
 ## What Is `<said>` For?
 
-Short explanation of use case, with link to section lower down with all the details.
+This project uses the __TEI__ `<said>` element to mark up passages of the text that represent direct communication between characters.
 
-## Get the File
+A line of dialog between Mycroft and Dominic would be encoded as an XML node, thus:
 
-Download link: [click here](../../data/said.csv)
+```xml
+<p>
+  <said>"Where hast thou been, stray?"</said>
+    , Dominic snarled.
+</p>
+```
+
+Additional information about such passages can be retrieved in various ways, see [details below](#making-sense-of-the-data).
+
+## Get the Data
+
+The data extracted from the Digital Edition's `<said>` nodes is available as a CSV file.
+
+<div style="text-align: right">[Download the data](../../data/said.csv)<br></div>
 
 ### Last Updated
 
 ### Health Check
 
 ## Making Sense of the Data
+
+A lot of additional information about each line of dialog is encoded beyond its content. 
+
+What follows is a data dictionary, explaining the contents of the file. How they are generated, what they mean, with some simple examples of what you can do with them.
 
 ### Rows
 
