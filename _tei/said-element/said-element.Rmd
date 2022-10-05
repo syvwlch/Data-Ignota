@@ -28,9 +28,10 @@ csv_path = "../../data/said.csv"
 # Fix types, NA values
 said <- xmlToDataFrame(xml_path) %>%
   mutate(
-    index = as.integer(index),
+    book = as.integer(book),
     chapter = as.integer(chapter),
     page = as.integer(page),
+    line = as.integer(line),
     speaker = na_if(speaker, "NA"),
     addressee = na_if(addressee, "NA"),
     person = na_if(person, "NA"),
@@ -92,7 +93,7 @@ Percent complete, by chapter:
 ```{r editing_progress}
 said %>%
   mutate(complete = !(is.na(speaker) | is.na(addressee))) %>%
-  group_by(index) %>%
+  group_by(line) %>%
   ggplot() +
   geom_bar(
     aes(x = chapter, fill = complete),
@@ -107,29 +108,27 @@ A lot of additional information about each line of dialog is encoded beyond its 
 
 What follows is a data dictionary, explaining the contents of the file. How they are generated, what they mean, with some simple examples of what you can do with them.
 
-### `index`
+### `book`
 
-The unique identifier for the actual line of dialog in the original text. 
+The number of the book containing the line.
 
-#### Multiple Rows Per Line
+Required, numeric.
 
-In accordance with the __Tidy Data__ paradigm^[Tidy datasets are easy to manipulate, model and visualize, and have a specific structure: each variable is a column, each observation is a row, and each type of observational unit is a table. https://vita.had.co.nz/papers/tidy-data.html], since a line of dialog can have multiple speakers, addressees, etc... it may be represented by multiple rows in the data.
+Derived from parameter `n` of the `<text type="book">` node the line is a child of.
 
-If it is important to count or visualize the data by lines in the original text, the data should be grouped by index first.
-
-There are currently `r said %>% group_by(index) %>% summarize(n = n()) %>% nrow()` lines of dialog in the data but there are `r said %>% nrow()` rows.
-
-#### Index Can Change Between Releases!
-
-The index is assigned dynamically by the Xquery when the file is generated, not embedded in the text as markup. Therefore it can change between releases of the data file.
+```{r book_demo, echo=TRUE}
+unique(said$book)
+```
 
 ### `chapter`
 
 The number of the chapter containing the line.
 
+Required, numeric.
+
 Derived from parameter `n` of the `<div type="chapter">` node the line is a child of.
 
-```{r chapter_demo}
+```{r chapter_demo, echo=TRUE}
 
 ```
 
@@ -137,19 +136,45 @@ Derived from parameter `n` of the `<div type="chapter">` node the line is a chil
 
 The number of the page on which the line starts.
 
+Required, numeric.
+
 Derived from parameter `n` of the `<pb/>` milestone node which precedes the line in document order.
 
-```{r page_demo}
+```{r page_demo, echo=TRUE}
 
 ```
 
+### `line`
+
+The number of the actual line of dialog in the original text, unique across all four books.
+
+Required, numeric.
+
+If it is important to count or visualize the data by lines in the original text, the data should be grouped by `line` first.
+
+```{r line_demo, echo=TRUE}
+
+```
+
+#### Multiple Rows Per Line
+
+In accordance with the __Tidy Data__ paradigm^[Tidy datasets are easy to manipulate, model and visualize, and have a specific structure: each variable is a column, each observation is a row, and each type of observational unit is a table. https://vita.had.co.nz/papers/tidy-data.html], since a line of dialog can have multiple speakers, addressees, etc... it may be represented by multiple rows in the data.
+
+There are currently `r said %>% group_by(line) %>% summarize(n = n()) %>% nrow()` lines of dialog in the data but there are `r said %>% nrow()` rows.
+
+#### `line` Can Change Between Releases!
+
+The `line` value is assigned dynamically by the Xquery when the file is generated, not embedded in the text as markup. Therefore it can change between releases.
+
 ### `speaker`
 
-The unique identifier of the character speaking the line.
+The unique identifier of the character speaking the line. 
+
+Required, `NA` indicates the line has not been edited^[That is, the editor has not gotten to that part of the text or has missed a line.].
 
 Derived from parameter `Who` of the line's `<said>` node, broken out to multiple rows if it contained a space-delimited list of values.
 
-```{r speaker_demo}
+```{r speaker_demo, echo=TRUE}
 
 ```
 
@@ -169,11 +194,13 @@ For such cases, I use generic IDs with  the form `#Unknown-Soldier` or `#Unknown
 
 ### `addressee`
 
-The unique identifier of the character the line is being spoken to.
+The unique identifier of the character the line is being spoken to. 
+
+Required, `NA` indicates the line has not been edited.
 
 Derived from the parameter `ToWhom` of the line's `<said>` node, broken out to multiple rows if it contained a space-delimited list of values. See `speaker` for format and meaning of the identifier.
 
-```{r addressee_demo}
+```{r addressee_demo, echo=TRUE}
 
 ```
 
@@ -187,11 +214,13 @@ The rule I've tried to follow is that narration that uses the second person and/
 
 ### `person`
 
-The unique identifier of a character mentioned by name in the line.
+The unique identifier of a person mentioned by name in the line.
+
+Optional, `NA` indicates no  was mentioned in the line.
 
 Derived from the `ref` parameter of any children `<persName>` nodes of the line, broken out to multiple rows if there is more than one. See `speaker` for format and meaning of the identifier.
 
-```{r person_demo}
+```{r person_demo, echo=TRUE}
 
 ```
 
@@ -199,9 +228,11 @@ Derived from the `ref` parameter of any children `<persName>` nodes of the line,
 
 The unique identifier of an organization or group mentioned by name in the line.
 
+Optional, `NA` indicates no organization was mentioned in the line.
+
 Derived from the `ref` parameter of any children `<orgName>` nodes of the line, broken out to multiple rows if there is more than one. 
 
-```{r org_demo}
+```{r org_demo, echo=TRUE}
 
 ```
 
@@ -215,9 +246,11 @@ These include Hives, bash'es, nation strats, the servicers, or the Chicago Museu
 
 The unique identifier of a place mentioned by name in the line.
 
+Optional, `NA` indicates no place was mentioned in the line.
+
 Derived from the `ref` parameter of any children `<placeName>` nodes of the line, broken out to multiple rows if there is more than one. 
 
-```{r place_demo}
+```{r place_demo, echo=TRUE}
 
 ```
 
@@ -231,11 +264,13 @@ These include planets, continents, cities, bash'houses, palaces, or flower trenc
 
 The ISO-code for the language the line is spoken in. 
 
+Required, but the file defaults to `en-en` since Mycroft's typographic conventions allowed a programmatic approach to setting the attribute in the text.
+
 Derived from the `xml:lang` parameter of the line's `<said>` node.
 
 Note that this is _not_ the language of the line in the text itself, since Mycroft takes it upon himself to translate most of the dialog into English. Instead it is inferred from Mycroft's typographical convention to represent the original language via the style of quotation marks used, or sometimes given directly by Mycroft in the narration.
 
-```{r lang_demo}
+```{r lang_demo, echo=TRUE}
 
 ```
 
@@ -260,9 +295,11 @@ I have used the `<foreign xml:lang="fr-eu">` element to wrap text that is actual
 
 A boolean that indicates whether the line is spoken aloud or not. Takes the value `FALSE` when texting, or between Mycroft and the reader, for example.
 
+Required, but the file defaults to `TRUE` when the attribute has not been set in the text.
+
 Derived from the `aloud` parameter of the line's `<said>` node.
 
-```{r aloud_demo}
+```{r aloud_demo, echo=TRUE}
 
 ```
 
@@ -270,19 +307,23 @@ Derived from the `aloud` parameter of the line's `<said>` node.
 
 The style in which the dialog is rendered in the text. Takes the value `script` when the layout changes to a script-like format with the speaker's name repeated at each line, and `novel` otherwise.
 
+Required, `NA` indicates a `<said>` element which does not match the criteria below.
+
 Derived from whether the ancestor of the line just below the chapter `<div>` level is a `<p>` node (novel format) or an `<sp>` node (script format).
 
-```{r format_demo}
+```{r format_demo, echo=TRUE}
 
 ```
 
 ### `words`
 
-The number of words in the line. 
+The number of words in the line.
+
+Required, numeric.
 
 Derived by counting the normalized spaces in the line, plus one. Faster than tokenizing and then counting. 
 
-```{r words_demo}
+```{r words_demo, echo=TRUE}
 
 ```
 
