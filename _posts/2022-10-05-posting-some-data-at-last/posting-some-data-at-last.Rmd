@@ -1,0 +1,78 @@
+---
+title: "Posting Some Data at Last!"
+description: |
+  First data file available for download
+author:
+  - name: Mathieu Glachant 
+    url: https://github.com/syvwlch
+date: 10-05-2022
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+Posted a new article in the [TEI collection](../../tei.html) which explains how the `<said>` element works, provides a CSV file for download that extracts all such nodes, and explains what each column in the file contains.
+
+I still need to show some examples or demos of what can be done with this data, but big step forward.
+
+I'd forgotten how much I enjoy the Git workflow:
+
+  1. Drop ideas as they come in the issues tracker
+  1. Start a new branch to work on something
+  1. Commit code when features work, repeat as needed
+  1. Create Pull Request from working branch to main
+  1. Merge PR, delete branch
+  1. Check issues tracker for idea to work on
+
+## What It Took to Get Here
+
+- Clarifications:
+	- [Clarify `said` element and provide CSV file](https://github.com/syvwlch/Data-Ignota/issues/4)
+		- [x] Run Xquery in private repo
+		- [x] Outline the post and how to make it
+				- [x] Create a `data` folder just under root, to contain CSV files for download/analysis
+		- [x] Create new TEI post which will:
+			- [x] pull in xml from private repo
+			- [x] tidy the data
+			- [x] add a word count column
+			- [x] __remove raw text column__
+			- [x] save the data to CSV
+			- [x] Display a summary/health-check for file at top of page
+				- [x] Histogram of elements without a speaker or an addressee by chapter
+			- [x] Provide link for download
+			- [x] Explain the data
+				- [x] What is a row?
+				- [x] What are the columns?
+	- [Clarify NA vs. NULL values in `said.csv`](https://github.com/syvwlch/Data-Ignota/issues/17)
+		- [x] Research proper usage:
+		  - NA means missing data. Flags editing or data collection issues without invalidating the entire row.
+		  - NULL means the data does not exist. It would invalidate the row and raises errors during assignment.
+		- [x] Define usage for project:
+		  - Use NA when the data is required but missing, e.g. for `speaker`. Will usually flag that the editing missed or has not gotten to this line.
+		  - Use NA when the data is optional and missing, e.g. for `place`. Will not flag an issue with editing, but will drop out nicely when filtering or grouping or summarizing by that column, as opposed to, say, an empty string.
+		- [x] Update column descriptions to call out whether NA is normal or not.
+		- [x] Add a `book` column
+		- [x] Rename `index` column to `line` and move to after `page`
+		- [x] Publish updated file
+- [Check `skimr` package for data summary](https://github.com/syvwlch/Data-Ignota/issues/15)
+	- [x] Research usage
+	- [x] Implement on the page (used the awesome `gt` package for layout)
+- Enhancements: 
+  - [x] Removed date prefix from URL of first post in the TEI collection
+	- [Add RSS feed for TEI collection to nav bar](https://github.com/syvwlch/Data-Ignota/issues/11)
+		- [x] Turned RSS section of nav into a dropdown menu
+		- [x] Added a link to each of the existing feeds
+- Bugs: 
+	- [Stop rendering the code of conduct file during site builds](https://github.com/syvwlch/Data-Ignota/issues/7)
+		- [x] Moved `CODE_OF_CONDUCT.md` to `.github` folder
+		- [x] Removed unnecessary yaml header from file
+
+## Lessons Learned
+
+### `skimr`
+
+A [really cool package](https://docs.ropensci.org/skimr/) to generate summaries about data.
+
+### `gt`
+
+A [snazzy, tidyverse-compatible package](https://gt.rstudio.com/) to generate tables in Rmarkdown. For when a plot is overkill or not as easy to read.
