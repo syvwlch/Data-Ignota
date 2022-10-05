@@ -1,5 +1,22 @@
 [
   {
+    "path": "posts/2022-10-05-posting-some-data-at-last/",
+    "title": "Posting Some Data at Last!",
+    "description": "First data file available for download",
+    "author": [
+      {
+        "name": "Mathieu Glachant",
+        "url": "https://github.com/syvwlch"
+      }
+    ],
+    "date": "2022-10-05",
+    "categories": [],
+    "contents": "\nPosted a new article in the TEI collection which explains how the <said> element works, provides a CSV file for download that extracts all such nodes, and explains what each column in the file contains.\nI still need to show some examples or demos of what can be done with this data, but big step forward.\nI’d forgotten how much I enjoy the Git workflow:\nDrop ideas as they come in the issues tracker\nStart a new branch to work on something\nCommit code when features work, repeat as needed\nCreate Pull Request from working branch to main\nMerge PR, delete branch\nCheck issues tracker for idea to work on\nWhat It Took to Get Here\nClarifications:\nClarify said element and provide CSV file\n\nRun Xquery in private repo\n\nOutline the post and how to make it\n- [x] Create a data folder just under root, to contain CSV files for download/analysis\n\nCreate new TEI post which will:\npull in xml from private repo\n\ntidy the data\n\nadd a word count column\nremove raw text column\n\nsave the data to CSV\n\nDisplay a summary/health-check for file at top of page\nHistogram of elements without a speaker or an addressee by chapter\n\n\nProvide link for download\n\nExplain the data\nWhat is a row?\n\nWhat are the columns?\n\n\n\nClarify NA vs. NULL values in said.csv\n\nResearch proper usage:NA means missing data. Flags editing or data collection issues without invalidating the entire row.\nNULL means the data does not exist. It would invalidate the row and raises errors during assignment.\n\n\nDefine usage for project:Use NA when the data is required but missing, e.g. for speaker. Will usually flag that the editing missed or has not gotten to this line.\nUse NA when the data is optional and missing, e.g. for place. Will not flag an issue with editing, but will drop out nicely when filtering or grouping or summarizing by that column, as opposed to, say, an empty string.\n\n\nUpdate column descriptions to call out whether NA is normal or not.\n\nAdd a book column\n\nRename index column to line and move to after page\n\nPublish updated file\n\n\nCheck skimr package for data summary\n\nResearch usage\n\nImplement on the page (used the awesome gt package for layout)\n\nEnhancements:\n\nRemoved date prefix from URL of first post in the TEI collectionAdd RSS feed for TEI collection to nav bar\n\nTurned RSS section of nav into a dropdown menu\n\nAdded a link to each of the existing feeds\n\n\n\nBugs:\nStop rendering the code of conduct file during site builds\n\nMoved CODE_OF_CONDUCT.md to .github folder\n\nRemoved unnecessary yaml header from file\n\n\nLessons Learned\nskimr\nA really cool package to generate summaries about data.\ngt\nA snazzy, tidyverse-compatible package to generate tables in Rmarkdown. For when a plot is overkill or not as easy to read.\n\n\n\n",
+    "preview": {},
+    "last_modified": "2022-10-05T19:21:58-04:00",
+    "input_file": {}
+  },
+  {
     "path": "posts/2022-10-02-documenting-structure/",
     "title": "Documenting Structure",
     "description": "Finally, some content!",
