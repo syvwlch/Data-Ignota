@@ -1532,9 +1532,10 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </ul></li>
 <li><a href="#making-sense-of-the-data" id="toc-making-sense-of-the-data">Making Sense of the Data</a>
 <ul>
-<li><a href="#index" id="toc-index"><code>index</code></a></li>
+<li><a href="#book" id="toc-book"><code>book</code></a></li>
 <li><a href="#chapter" id="toc-chapter"><code>chapter</code></a></li>
 <li><a href="#page" id="toc-page"><code>page</code></a></li>
+<li><a href="#line" id="toc-line"><code>line</code></a></li>
 <li><a href="#speaker" id="toc-speaker"><code>speaker</code></a></li>
 <li><a href="#addressee" id="toc-addressee"><code>addressee</code></a></li>
 <li><a href="#person" id="toc-person"><code>person</code></a></li>
@@ -1572,7 +1573,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <a href="../../data/said.csv">Download the data</a><br>
 </div>
 <h3 id="last-updated">Last Updated</h3>
-<p>This file was last updated on 2022-10-04.</p>
+<p>This file was last updated on 2022-10-05.</p>
 <h3 id="editing-progress">Editing Progress</h3>
 <p>Percent complete, by chapter:</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -1582,28 +1583,42 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h2 id="making-sense-of-the-data">Making Sense of the Data</h2>
 <p>A lot of additional information about each line of dialog is encoded beyond its content.</p>
 <p>What follows is a data dictionary, explaining the contents of the file. How they are generated, what they mean, with some simple examples of what you can do with them.</p>
-<h3 id="index"><code>index</code></h3>
-<p>The unique identifier for the actual line of dialog in the original text.</p>
-<h4 id="multiple-rows-per-line">Multiple Rows Per Line</h4>
-<p>In accordance with the <strong>Tidy Data</strong> paradigm<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, since a line of dialog can have multiple speakers, addressees, etc… it may be represented by multiple rows in the data.</p>
-<p>If it is important to count or visualize the data by lines in the original text, the data should be grouped by index first.</p>
-<p>There are currently 4995 lines of dialog in the data but there are 5866 rows.</p>
-<h4 id="index-can-change-between-releases">Index Can Change Between Releases!</h4>
-<p>The index is assigned dynamically by the Xquery when the file is generated, not embedded in the text as markup. Therefore it can change between releases of the data file.</p>
+<h3 id="book"><code>book</code></h3>
+<p>The number of the book containing the line.</p>
+<p>Required, numeric.</p>
+<p>Derived from parameter <code>n</code> of the <code>&lt;text type="book"&gt;</code> node the line is a child of.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/r/base/unique.html'>unique</a></span><span class='op'>(</span><span class='va'>said</span><span class='op'>$</span><span class='va'>book</span><span class='op'>)</span></span></code></pre>
+</div>
+<pre><code>[1] 1</code></pre>
+</div>
 <h3 id="chapter"><code>chapter</code></h3>
 <p>The number of the chapter containing the line.</p>
+<p>Required, numeric.</p>
 <p>Derived from parameter <code>n</code> of the <code>&lt;div type="chapter"&gt;</code> node the line is a child of.</p>
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
 <h3 id="page"><code>page</code></h3>
 <p>The number of the page on which the line starts.</p>
+<p>Required, numeric.</p>
 <p>Derived from parameter <code>n</code> of the <code>&lt;pb/&gt;</code> milestone node which precedes the line in document order.</p>
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
+<h3 id="line"><code>line</code></h3>
+<p>The number of the actual line of dialog in the original text, unique across all four books.</p>
+<p>Required, numeric.</p>
+<p>If it is important to count or visualize the data by lines in the original text, the data should be grouped by <code>line</code> first.</p>
+<h4 id="multiple-rows-per-line">Multiple Rows Per Line</h4>
+<p>In accordance with the <strong>Tidy Data</strong> paradigm<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, since a line of dialog can have multiple speakers, addressees, etc… it may be represented by multiple rows in the data.</p>
+<p>There are currently 4995 lines of dialog in the data but there are 5866 rows.</p>
+<h4 id="line-can-change-between-releases"><code>line</code> Can Change Between Releases!</h4>
+<p>The <code>line</code> value is assigned dynamically by the Xquery when the file is generated, not embedded in the text as markup. Therefore it can change between releases.</p>
 <h3 id="speaker"><code>speaker</code></h3>
 <p>The unique identifier of the character speaking the line.</p>
+<p>Required, <code>NA</code> indicates the line has not been edited<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
 <p>Derived from parameter <code>Who</code> of the line’s <code>&lt;said&gt;</code> node, broken out to multiple rows if it contained a space-delimited list of values.</p>
 <div class="layout-chunk" data-layout="l-body">
 
@@ -1617,6 +1632,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>For such cases, I use generic IDs with the form <code>#Unknown-Soldier</code> or <code>#Unknown-Servicer</code> or the fallback <code>#Unknown</code>.</p>
 <h3 id="addressee"><code>addressee</code></h3>
 <p>The unique identifier of the character the line is being spoken to.</p>
+<p>Required, <code>NA</code> indicates the line has not been edited.</p>
 <p>Derived from the parameter <code>ToWhom</code> of the line’s <code>&lt;said&gt;</code> node, broken out to multiple rows if it contained a space-delimited list of values. See <code>speaker</code> for format and meaning of the identifier.</p>
 <div class="layout-chunk" data-layout="l-body">
 
@@ -1626,13 +1642,15 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>This allows me to include the conversations between Mycroft and the reader in this data, but at the cost of some personal interpretation in what does or does not make the cut.</p>
 <p>The rule I’ve tried to follow is that narration that uses the second person and/or addresses the reader directly should be included. Usually I have found that once this pattern starts it persists to the end of the paragraph. Some individual cases are less clear-cut, and of course I will have made errors during the editing.</p>
 <h3 id="person"><code>person</code></h3>
-<p>The unique identifier of a character mentioned by name in the line.</p>
+<p>The unique identifier of a person mentioned by name in the line.</p>
+<p>Optional, <code>NA</code> indicates no was mentioned in the line.</p>
 <p>Derived from the <code>ref</code> parameter of any children <code>&lt;persName&gt;</code> nodes of the line, broken out to multiple rows if there is more than one. See <code>speaker</code> for format and meaning of the identifier.</p>
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
 <h3 id="org"><code>org</code></h3>
 <p>The unique identifier of an organization or group mentioned by name in the line.</p>
+<p>Optional, <code>NA</code> indicates no organization was mentioned in the line.</p>
 <p>Derived from the <code>ref</code> parameter of any children <code>&lt;orgName&gt;</code> nodes of the line, broken out to multiple rows if there is more than one.</p>
 <div class="layout-chunk" data-layout="l-body">
 
@@ -1642,6 +1660,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>These include Hives, bash’es, nation strats, the servicers, or the Chicago Museum of Science and Industry with its Junior Scientist Club.</p>
 <h3 id="place"><code>place</code></h3>
 <p>The unique identifier of a place mentioned by name in the line.</p>
+<p>Optional, <code>NA</code> indicates no place was mentioned in the line.</p>
 <p>Derived from the <code>ref</code> parameter of any children <code>&lt;placeName&gt;</code> nodes of the line, broken out to multiple rows if there is more than one.</p>
 <div class="layout-chunk" data-layout="l-body">
 
@@ -1651,6 +1670,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>These include planets, continents, cities, bash’houses, palaces, or flower trenches.</p>
 <h3 id="language"><code>language</code></h3>
 <p>The ISO-code for the language the line is spoken in.</p>
+<p>Required, but the file defaults to <code>en-en</code> since Mycroft’s typographic conventions allowed a programmatic approach to setting the attribute in the text.</p>
 <p>Derived from the <code>xml:lang</code> parameter of the line’s <code>&lt;said&gt;</code> node.</p>
 <p>Note that this is <em>not</em> the language of the line in the text itself, since Mycroft takes it upon himself to translate most of the dialog into English. Instead it is inferred from Mycroft’s typographical convention to represent the original language via the style of quotation marks used, or sometimes given directly by Mycroft in the narration.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -1671,18 +1691,21 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>I have used the <code>&lt;foreign xml:lang="fr-eu"&gt;</code> element to wrap text that is actually given in a language other than English, e.g. here in European French, but I am not including this information in this data file. Create a feature request on the project GitHub repository if you’d like me to revisit that decision.</p>
 <h3 id="aloud"><code>aloud</code></h3>
 <p>A boolean that indicates whether the line is spoken aloud or not. Takes the value <code>FALSE</code> when texting, or between Mycroft and the reader, for example.</p>
+<p>Required, but the file defaults to <code>TRUE</code> when the attribute has not been set in the text.</p>
 <p>Derived from the <code>aloud</code> parameter of the line’s <code>&lt;said&gt;</code> node.</p>
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
 <h3 id="format"><code>format</code></h3>
 <p>The style in which the dialog is rendered in the text. Takes the value <code>script</code> when the layout changes to a script-like format with the speaker’s name repeated at each line, and <code>novel</code> otherwise.</p>
+<p>Required, <code>NA</code> indicates a <code>&lt;said&gt;</code> element which does not match the criteria below.</p>
 <p>Derived from whether the ancestor of the line just below the chapter <code>&lt;div&gt;</code> level is a <code>&lt;p&gt;</code> node (novel format) or an <code>&lt;sp&gt;</code> node (script format).</p>
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
 <h3 id="words"><code>words</code></h3>
 <p>The number of words in the line.</p>
+<p>Required, numeric.</p>
 <p>Derived by counting the normalized spaces in the line, plus one. Faster than tokenizing and then counting.</p>
 <div class="layout-chunk" data-layout="l-body">
 
@@ -1690,11 +1713,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h4 id="including-the-words-themselves">Including the Words Themselves</h4>
 <p>I want to be respectful of the author’s copyright and to stay well on the side of fair use. I am not a lawyer, let alone one specialized in these matters, so my current rule is that I will not include stretches of text in the data files I offer here.</p>
 <p>Across large enough chunks of text, I will share list of words that have been tokenized but at the level of individual lines of dialog included in this data file, I’m not comfortable doing that. If you have suggestions on how to group the lines before tokenizing, please create an issue on the project’s GitHub repo, or start a conversation in the Discussions area.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <section class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr />
 <ol>
 <li id="fn1" role="doc-endnote"><p>Tidy datasets are easy to manipulate, model and visualize, and have a specific structure: each variable is a column, each observation is a row, and each type of observational unit is a table. <a href="https://vita.had.co.nz/papers/tidy-data.html" class="uri">https://vita.had.co.nz/papers/tidy-data.html</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>That is, the editor has not gotten to that part of the text or has missed a line.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 <!--radix_placeholder_article_footer-->
