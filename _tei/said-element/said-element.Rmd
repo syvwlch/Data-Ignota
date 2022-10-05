@@ -17,7 +17,9 @@ output:
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
+library(gt)
 library(XML)
+library(skimr)
 
 xml_path = "../../../DigitalTerraIgnota/output/said.xml"
 csv_path = "../../data/said.csv"
@@ -88,19 +90,46 @@ This file was last updated on `r Sys.Date()`.
 
 ### Editing Progress
 
-Percent complete, by chapter:
+```{r editing_progress, echo=FALSE, message=FALSE, warning=FALSE}
+progress <- said %>% 
+  nest(addressee, person, org, place) %>%
+  select(chapter, speaker) %>%
+  group_by(chapter) %>%
+  skim(speaker) %>%
+  filter(complete_rate > 0) %>%
+  summarize(chapter, Progress = complete_rate, Speaker = n_missing)
 
-```{r editing_progress}
-said %>%
-  mutate(complete = !(is.na(speaker) | is.na(addressee))) %>%
-  group_by(line) %>%
-  ggplot() +
-  geom_bar(
-    aes(x = chapter, fill = complete),
-    position = "fill"
+progress <- progress %>%
+  left_join(
+    said %>%
+      nest(speaker, person, org, place) %>%
+      select(chapter, addressee) %>%
+      group_by(chapter) %>% 
+      skim(addressee) %>% 
+      summarize(chapter, Addressee = n_missing)
   )
+
+progress %>%
+  gt(rowname_col = "chapter") %>%
+  tab_header(
+    title = "Too Like the Lightning",
+    subtitle = md("_Editing Progress_")
+  ) %>%
+  opt_align_table_header(align = "left") %>%
+  tab_stubhead(label = "Chapter") %>%
+  tab_spanner(
+    label = md("_Missing_"),
+    columns = c(Speaker, Addressee)
+  ) %>%
+  fmt_percent(Progress, decimals = 0,) %>%
+  sub_zero(zero_text = "-") %>%
+  cols_label(
+    Speaker = md("`speaker`"),
+    Addressee = md("`addressee`")
+  ) %>%
+  opt_row_striping()
+
 ```
-Measured as percentage of lines of dialog with both a speaker and an addressee.
 
 ## Making Sense of the Data
 
@@ -150,7 +179,7 @@ The number of the actual line of dialog in the original text, unique across all 
 
 Required, numeric.
 
-If it is important to count or visualize the data by lines in the original text, the data should be grouped by `line` first.
+If it is important to count or visualize the data by lines in the original text, the data should be nested first by the columns from `speaker` to `place`.
 
 ```{r line_demo, echo=TRUE}
 
