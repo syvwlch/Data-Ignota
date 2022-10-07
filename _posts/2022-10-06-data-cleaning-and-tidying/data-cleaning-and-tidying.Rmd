@@ -1,0 +1,35 @@
+---
+title: "Data Cleaning and Tidying"
+description: |
+  Explained how the raw data from Xquery becomes the `said.csv` file
+author:
+  - name: Mathieu Glachant
+    url: https://github.com/syvwlch
+date: 2022-10-06
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+Data quality was the theme today:
+
+  - Thanks to the handy table in the `said` post, was able to go back to the Digital Edition in the private repo and fix all of the missing attributes.
+  - Also explained in the post how the raw xml extracted from the digital edition is cleaned and tidied before being saved to provided `said.csv` file.
+
+Also started a conversation around using emojis to label main characters.
+
+## What It Took to Get Here
+
+- Clarifications:
+  - [Fixed all missing `speaker` and `addressee` attributes in chapters 1 thru 12](https://github.com/syvwlch/Data-Ignota/issues/24)
+  - [Showed data cleaning & tidying](https://github.com/syvwlch/Data-Ignota/issues/22):
+  	- [x] Add a section on Data Cleaning & Tidying, 
+	  - [x] Move relevant __R__ code chunks and make visible, and
+	  - [x] General readability editing pass on the post.
+	  
+- Enhancements:
+  - Mapping main characters to emojis:
+	  - Would be great to have a persistent mapping of main characters to emojis, for visualizations that will not have a lot of room to label them, e.g. network graphs.
+	  - Started a [discussion](https://github.com/syvwlch/Data-Ignota/discussions/25) to track suggestions, including from the _Reading Group_ on Signal.
+	  - Started an [issue](https://github.com/syvwlch/Data-Ignota/issues/26) to track implementation
+  	- Research how emojis would work in __R__, e.g. https://github.com/hadley/emo

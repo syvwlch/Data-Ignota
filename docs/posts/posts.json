@@ -1,5 +1,22 @@
 [
   {
+    "path": "posts/2022-10-06-data-cleaning-and-tidying/",
+    "title": "Data Cleaning and Tidying",
+    "description": "Explained how the raw data from Xquery becomes the `said.csv` file",
+    "author": [
+      {
+        "name": "Mathieu Glachant",
+        "url": "https://github.com/syvwlch"
+      }
+    ],
+    "date": "2022-10-06",
+    "categories": [],
+    "contents": "\nData quality was the theme today:\nThanks to the handy table in the said post, was able to go back to the Digital Edition in the private repo and fix all of the missing attributes.\nAlso explained in the post how the raw xml extracted from the digital edition is cleaned and tidied before being saved to provided said.csv file.\nAlso started a conversation around using emojis to label main characters.\nWhat It Took to Get Here\nClarifications:\nFixed all missing speaker and addressee attributes in chapters 1 thru 12\nShowed data cleaning & tidying:\n\nAdd a section on Data Cleaning & Tidying,\nMove relevant R code chunks and make visible, and\n\nGeneral readability editing pass on the post.\n\n\n\nEnhancements:\nMapping main characters to emojis:\nWould be great to have a persistent mapping of main characters to emojis, for visualizations that will not have a lot of room to label them, e.g. network graphs.\nStarted a discussion to track suggestions, including from the Reading Group on Signal.\nStarted an issue to track implementation\nResearch how emojis would work in R, e.g. https://github.com/hadley/emo\n\n\n",
+    "preview": {},
+    "last_modified": "2022-10-07T10:00:12-04:00",
+    "input_file": "data-cleaning-and-tidying.knit.md"
+  },
+  {
     "path": "posts/2022-10-05-posting-some-data-at-last/",
     "title": "Posting Some Data at Last!",
     "description": "First data file available for download",
@@ -51,7 +68,7 @@
     "input_file": {}
   },
   {
-    "path": "posts/welcome/",
+    "path": "posts/2022-09-30-hello-world/",
     "title": "Hello World",
     "description": "Standing up the website and saying hello...",
     "author": [
@@ -64,7 +81,7 @@
     "categories": [],
     "contents": "\nIt’s time to stand up a little website to share the results of my explorations into “data ignota”, the digital edition I’ve been creating of Ada Palmer’s Terra Ignota series. This is that website.\nSince the ship I’ve launched on that digital ocean is built from R, it makes sense to build this site from the same timber. After some research, I’ve decided to use the distill package as the primary tool, and to publish via Github Pages.\nWhat It Took to Get Here\n\nCreate public repo at: https://github.com/syvwlch/Data-Ignota\n\nClone repo to R project (using Github Desktop, not R studio)\n\nCreate Distill blog within project\n\nAdd/update content\n\nBuild site & preview locally\n\nPush to github\n\nSetup github pages\n\nSite is up at: https://syvwlch.github.io/Data-Ignota/\n\nAdd base_url: key to site.yml (used for RSS feed and share cards)\nLessons Learned\nAlways Be Knitting (your posts)\nThe distill package automatically builds web pages except for posts like this one. This is done to keep the build fast and to protect posts which might have dependencies from breaking later. So for posts it’s not enough to hit save, you have to reknit them on purpose.\n\n\n\n",
     "preview": {},
-    "last_modified": "2022-10-01T17:20:22-04:00",
+    "last_modified": "2022-10-07T09:42:09-04:00",
     "input_file": {}
   }
 ]

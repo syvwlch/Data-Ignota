@@ -7,7 +7,15 @@
     <description>A data-driven exploration of Ada Palmer's Terra Ignota series.
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Wed, 05 Oct 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 06 Oct 2022 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Data Cleaning and Tidying</title>
+      <dc:creator>Mathieu Glachant</dc:creator>
+      <link>https://syvwlch.github.io/Data-Ignota/posts/2022-10-06-data-cleaning-and-tidying</link>
+      <description>Explained how the raw data from Xquery becomes the `said.csv` file</description>
+      <guid>https://syvwlch.github.io/Data-Ignota/posts/2022-10-06-data-cleaning-and-tidying</guid>
+      <pubDate>Thu, 06 Oct 2022 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>Posting Some Data at Last!</title>
       <dc:creator>Mathieu Glachant</dc:creator>
@@ -35,9 +43,9 @@
     <item>
       <title>Hello World</title>
       <dc:creator>Mathieu Glachant</dc:creator>
-      <link>https://syvwlch.github.io/Data-Ignota/posts/welcome</link>
+      <link>https://syvwlch.github.io/Data-Ignota/posts/2022-09-30-hello-world</link>
       <description>Standing up the website and saying hello...</description>
-      <guid>https://syvwlch.github.io/Data-Ignota/posts/welcome</guid>
+      <guid>https://syvwlch.github.io/Data-Ignota/posts/2022-09-30-hello-world</guid>
       <pubDate>Fri, 30 Sep 2022 00:00:00 +0000</pubDate>
     </item>
   </channel>
