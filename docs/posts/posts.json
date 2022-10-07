@@ -13,8 +13,8 @@
     "categories": [],
     "contents": "\nData quality was the theme today:\nThanks to the handy table in the said post, was able to go back to the Digital Edition in the private repo and fix all of the missing attributes.\nAlso explained in the post how the raw xml extracted from the digital edition is cleaned and tidied before being saved to provided said.csv file.\nAlso started a conversation around using emojis to label main characters.\nWhat It Took to Get Here\nClarifications:\nFixed all missing speaker and addressee attributes in chapters 1 thru 12\nShowed data cleaning & tidying:\n\nAdd a section on Data Cleaning & Tidying,\nMove relevant R code chunks and make visible, and\n\nGeneral readability editing pass on the post.\n\n\n\nEnhancements:\nMapping main characters to emojis:\nWould be great to have a persistent mapping of main characters to emojis, for visualizations that will not have a lot of room to label them, e.g. network graphs.\nStarted a discussion to track suggestions, including from the Reading Group on Signal.\nStarted an issue to track implementation\nResearch how emojis would work in R, e.g. https://github.com/hadley/emo\n\n\n",
     "preview": {},
-    "last_modified": "2022-10-07T10:00:12-04:00",
-    "input_file": "data-cleaning-and-tidying.knit.md"
+    "last_modified": "2022-10-07T10:00:15-04:00",
+    "input_file": {}
   },
   {
     "path": "posts/2022-10-05-posting-some-data-at-last/",

@@ -12,7 +12,7 @@
       <title>`&lt;said&gt;` Element</title>
       <dc:creator>Mathieu Glachant</dc:creator>
       <link>https://syvwlch.github.io/Data-Ignota/tei/said-element</link>
-      <description>Use of the `&lt;said&gt;` element in this project.</description>
+      <description>Who says what and to whom...</description>
       <guid>https://syvwlch.github.io/Data-Ignota/tei/said-element</guid>
       <pubDate>Tue, 04 Oct 2022 00:00:00 +0000</pubDate>
     </item>
@@ -20,7 +20,7 @@
       <title>TEI - High Level Structure</title>
       <dc:creator>Mathieu Glachant</dc:creator>
       <link>https://syvwlch.github.io/Data-Ignota/tei/tei-structure</link>
-      <description>How I structured my personal digital edition of _Terra Ignota_</description>
+      <description>A map of where all this data comes from...</description>
       <guid>https://syvwlch.github.io/Data-Ignota/tei/tei-structure</guid>
       <pubDate>Sun, 02 Oct 2022 00:00:00 +0000</pubDate>
     </item>
