@@ -1,7 +1,7 @@
 ---
 title: "`<said>` Element"
 description: |
-  Use of the `<said>` element in this project.
+  Who says what and to whom...
 author:
   - name: Mathieu Glachant
     url: {}

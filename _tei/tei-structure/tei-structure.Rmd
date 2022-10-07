@@ -1,7 +1,7 @@
 ---
 title: "TEI - High Level Structure"
 description: |
-  How I structured my personal digital edition of _Terra Ignota_
+  A map of where all this data comes from...
 author:
   - name: Mathieu Glachant
 date: 2022-10-02

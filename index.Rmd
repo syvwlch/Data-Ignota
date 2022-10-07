@@ -7,13 +7,15 @@ output:
   distill::distill_article
 ---
 
-This is the online lab journal for my experiments exploring [Ada Palmer](https://www.adapalmer.com/)'s [Terra Ignota](https://www.adapalmer.com/series/terra-ignota/) series using techniques and tools from the __Digital Humanities__. In it I will:
+This is the online lab journal for my experiments exploring [Ada Palmer](https://www.adapalmer.com/)'s [Terra Ignota](https://www.adapalmer.com/series/terra-ignota/) series using techniques and tools from the __Digital Humanities__. 
+
+In it I will:
 
 - [document the journey](devlog.html),
 - explain [how and why](about.html) I'm doing what I'm doing,
-- post a dashboard of the progress made
+- post a dashboard of the progress made,
 - write up any discoveries made along the way, and 
-- share the data collected which are not covered by the author's copyright.
+- [share the data](tei.html) collected which are not covered by the author's copyright.
 
 ## Feedback
 

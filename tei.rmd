@@ -1,7 +1,7 @@
 ---
-title: "Terra Ignota - Digital Edition"
+title: "Data Files"
 description: |
-  Posts about the structure of the digital edition
+  Each post provides a data file for download and explains its contents
 listing: tei
 ---
 
