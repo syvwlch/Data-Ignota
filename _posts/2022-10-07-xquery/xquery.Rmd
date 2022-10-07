@@ -1,0 +1,31 @@
+---
+title: "Xquery"
+description: |
+  Quick gloss on Xquery in `said` post
+author:
+  - name: Mathieu Glachant
+    url: https://github.com/syvwlch
+date: 2022-10-07
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+Added a simple gloss on the use of Xquery to generate the `said.csv` data, and some usability enhancements.
+
+## What It Took to Get Here
+
+Clarifications:
+
+- [Improved access to Data posts](https://github.com/syvwlch/Data-Ignota/issues/30)
+	- [x] Renamed Nav menu option to `Data`
+	- [x] Changed sub-titles on `TEI` collection listing page and posts
+- [Show Xquery](https://github.com/syvwlch/Data-Ignota/issues/21)
+	- [x] Added a section about Generating the Raw Data
+	- [x] Added the first two levels of the Xquery script to that section
+	- [x] Added the xml output format with one line of results to that section
+	- [x] Added the Xquery snippet for each column to the data dictionary section
+
+## Lessons Learned
+
+NA
