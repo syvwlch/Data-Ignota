@@ -1,5 +1,22 @@
 [
   {
+    "path": "posts/2022-10-07-xquery/",
+    "title": "Xquery",
+    "description": "Quick gloss on Xquery in `said` post",
+    "author": [
+      {
+        "name": "Mathieu Glachant",
+        "url": "https://github.com/syvwlch"
+      }
+    ],
+    "date": "2022-10-07",
+    "categories": [],
+    "contents": "\nAdded a simple gloss on the use of Xquery to generate the said.csv data, and some usability enhancements.\nWhat It Took to Get Here\nClarifications:\nImproved access to Data posts\n\nRenamed Nav menu option to Data\n\nChanged sub-titles on TEI collection listing page and posts\n\nShow Xquery\n\nAdded a section about Generating the Raw Data\n\nAdded the first two levels of the Xquery script to that section\n\nAdded the xml output format with one line of results to that section\n\nAdded the Xquery snippet for each column to the data dictionary section\n\nLessons Learned\nNA\n\n\n\n",
+    "preview": {},
+    "last_modified": "2022-10-07T15:32:31-04:00",
+    "input_file": {}
+  },
+  {
     "path": "posts/2022-10-06-data-cleaning-and-tidying/",
     "title": "Data Cleaning and Tidying",
     "description": "Explained how the raw data from Xquery becomes the `said.csv` file",

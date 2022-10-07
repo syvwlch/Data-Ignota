@@ -7,7 +7,15 @@
     <description>A data-driven exploration of Ada Palmer's Terra Ignota series.
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Thu, 06 Oct 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 07 Oct 2022 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Xquery</title>
+      <dc:creator>Mathieu Glachant</dc:creator>
+      <link>https://syvwlch.github.io/Data-Ignota/posts/2022-10-07-xquery</link>
+      <description>Quick gloss on Xquery in `said` post</description>
+      <guid>https://syvwlch.github.io/Data-Ignota/posts/2022-10-07-xquery</guid>
+      <pubDate>Fri, 07 Oct 2022 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>Data Cleaning and Tidying</title>
       <dc:creator>Mathieu Glachant</dc:creator>
