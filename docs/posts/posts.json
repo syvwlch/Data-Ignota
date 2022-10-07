@@ -51,7 +51,7 @@
     "input_file": {}
   },
   {
-    "path": "posts/welcome/",
+    "path": "posts/2022-09-30-hello-world/",
     "title": "Hello World",
     "description": "Standing up the website and saying hello...",
     "author": [
@@ -64,7 +64,7 @@
     "categories": [],
     "contents": "\nIt’s time to stand up a little website to share the results of my explorations into “data ignota”, the digital edition I’ve been creating of Ada Palmer’s Terra Ignota series. This is that website.\nSince the ship I’ve launched on that digital ocean is built from R, it makes sense to build this site from the same timber. After some research, I’ve decided to use the distill package as the primary tool, and to publish via Github Pages.\nWhat It Took to Get Here\n\nCreate public repo at: https://github.com/syvwlch/Data-Ignota\n\nClone repo to R project (using Github Desktop, not R studio)\n\nCreate Distill blog within project\n\nAdd/update content\n\nBuild site & preview locally\n\nPush to github\n\nSetup github pages\n\nSite is up at: https://syvwlch.github.io/Data-Ignota/\n\nAdd base_url: key to site.yml (used for RSS feed and share cards)\nLessons Learned\nAlways Be Knitting (your posts)\nThe distill package automatically builds web pages except for posts like this one. This is done to keep the build fast and to protect posts which might have dependencies from breaking later. So for posts it’s not enough to hit save, you have to reknit them on purpose.\n\n\n\n",
     "preview": {},
-    "last_modified": "2022-10-01T17:20:22-04:00",
+    "last_modified": "2022-10-07T09:42:09-04:00",
     "input_file": {}
   }
 ]
