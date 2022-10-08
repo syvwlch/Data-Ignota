@@ -33,7 +33,7 @@ To help with navigation, I will set up a dashboard page to display the progress 
 
 ### The Data
 
-This website will have links to data files generated for and used in the analyses. Feel free to download and re-use for non-commercial use with attribution.
+This website will have [links to data files](tei.html) generated for and used in the analyses. Feel free to download and re-use for non-commercial use with attribution.
 
 ## What Is This Ship Made of?
 
@@ -55,6 +55,12 @@ It's worth it, tho, because then I can use Xquery^[a query and functional progra
 
 To analyze this data further and display the results, I use the R language^[a language and environment for statistical computing and graphics. https://www.r-project.org/]. In particular I am applying the __Tidy Data__ paradigm^[Tidy datasets are easy to manipulate, model and visualize, and have a specific structure: each variable is a column, each observation is a row, and each type of observational unit is a table. https://vita.had.co.nz/papers/tidy-data.html] as best I understand it. This is a new language for me and this serves as practical hands-on learning for me.
 
+### TEI Publisher
+
+Lastly, I can load this Digital Edition into __TEI Publisher__^[http://teipublisher.com/] an application running on top of the XML database __eXist-db__^[http://exist-db.org/] which will display the text with various enhanced features based on the markup, such as highlighting names and displaying popups with their metadata on hover.
+
+For interest, here is a copy of [the ODD configuration file](./data/TerraIgnota.odd) for this digital edition.
+
 ## Copyright Concerns
 
 The novels are under copyright, so there are parts of this project I can share and others I cannot. 
@@ -62,7 +68,7 @@ The novels are under copyright, so there are parts of this project I can share a
 The project therefore has two repositories on Github: 
 
 - a private repo to version control and back-up the marked-up text
-- a public repo for everything else, including this website
+- a [public repo](https://github.com/syvwlch/Data-Ignota) for everything else, including this website
 
 ### What I Will Share in the Public Repo
 
