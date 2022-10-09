@@ -1,5 +1,22 @@
 [
   {
+    "path": "posts/2022-10-09-first-visualization/",
+    "title": "First Visualization",
+    "description": "Ironically, it's about verbosity!",
+    "author": [
+      {
+        "name": "Mathieu Glachant",
+        "url": "https://github.com/syvwlch"
+      }
+    ],
+    "date": "2022-10-09",
+    "categories": [],
+    "contents": "\nI put up the first demo visualization based on the said.csv data. Given how many words I’ve already written on this website to get to this point, the subject is rather ironic: verbosity, and in particular in asides to the reader. 😅\nWhat It Took to Get Here\nClarifications:\nAdd some demo visualizations\nCreate new viz collection\n\ncreate collection\n\ncreate listing page\n\nadd listing page to nav bar\n\nadd RSS feed to feed menu\n\nadd link to listing page to homepage\n\nWrite up inaugural post for new collection\nPicked distribution of number of words as proxy for verbosity\n\n\nLessons Learned\nThe group_by() + summarise() pattern requires an explicit assignment of a summary value any other column you want to keep, e.g using mean() here to keep the words when grouping by the unique line id:\nsaid  %>%\n  group_by(line) %>%\n  summarize(words = mean(words), .groups = \"drop\")\n\n\n\n",
+    "preview": {},
+    "last_modified": "2022-10-09T14:01:01-04:00",
+    "input_file": "first-visualization.knit.md"
+  },
+  {
     "path": "posts/2022-10-07-xquery/",
     "title": "Xquery",
     "description": "Quick gloss on Xquery in `said` post",
