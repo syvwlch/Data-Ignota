@@ -1,0 +1,36 @@
+---
+title: "Exploring Verbosity"
+description: |
+  A brief look at how many words characters use per line of dialog
+author:
+  - name: Mathieu Glachant
+date: 2022-10-09
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+
+PATH_TO_SAID <- "../../data/said.csv"
+said <- read.csv(PATH_TO_SAID)
+```
+
+Let's define, for now, verbosity as the tendency to use lots of words each time a character communicates with another. 
+
+What visualizations of this concept can we generate from our `said.csv` file?
+
+## Overall Verbosity
+
+What does the distribution of the number of words per line look like?
+
+```{r overall}
+said  %>%
+  group_by()
+  ggplot(mapping = aes(x = words)) +
+    geom_histogram(binwidth = 5)
+
+```

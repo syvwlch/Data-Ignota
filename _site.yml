@@ -8,6 +8,8 @@ navbar:
   right:
     - icon: fa fa-home
       href: index.html
+    - text: "Visualizations"
+      href: viz.html
     - text: "Data"
       href: tei.html
     - text: "Dev Log"
@@ -18,6 +20,8 @@ navbar:
       href: https://github.com/syvwlch/Data-Ignota
     - text: RSS
       menu:
+        - text: Visualization Feed
+          href: viz.xml
         - text: Digital Edition Feed
           href: tei.xml
         - text: Dev Log Feed
