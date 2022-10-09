@@ -11,9 +11,9 @@
     ],
     "date": "2022-10-09",
     "categories": [],
-    "contents": "\nLet’s define, for now, verbosity as the tendency to use lots of words each time a character communicates with another.\nWhat visualizations of this concept can we generate from our said.csv file?\nOverall Verbosity\nWhat does the distribution of the number of words per line look like?\n\n\n\n\n\n\n",
-    "preview": "viz/2022-10-09-exploring-verbosity/exploring-verbosity_files/figure-html5/overall-1.png",
-    "last_modified": "2022-10-09T10:45:13-04:00",
+    "contents": "\nLet’s define, for now, verbosity as the tendency to use lots of words each time a character communicates with another. What visualizations of this concept can we generate from the chapters edited to date, i.e. the first twelve?\nOverall Verbosity\nVerbosity overall in the novels follows a classic Power Law Distribution with a fairly long tail. This is pretty standard for human communications.\n\n\n\nVerbosity by Language\nOur cast of characters is much more verbose in some languages than others, e.g. archaic English, which the reader primarily uses to rant at Mycroft.\n\n\n\nVerbosity by Character\nLet’s define a main character as one who speaks or texts at least 25 lines of dialog, and look at a box plot of the number of words they use per line of dialog.\n\n\n\n\n\n\nEureka’s median word count per line is highest, but Mycroft has some extreme outliers, as high as 350 words for one line of dialog off the right edge of that chart. Who could be on the receiving end of such prolixity?\n\n\n\nAh, of course. Mycroft is much more verbose in his historical & philosophical asides to the reader. By contrast he’s almost monosyllabic with the Major. How does Mycroft’s verbosity compare to the others if we exclude the reader?\n\n\n\nMycroft is still in the top three but without his asides to the reader his verbosity is much more like the others’.\n\n\n\n",
+    "preview": "viz/2022-10-09-exploring-verbosity/exploring-verbosity_files/figure-html5/verbosity_wo_reader-1.png",
+    "last_modified": "2022-10-09T13:41:03-04:00",
     "input_file": {},
     "preview_width": 1248,
     "preview_height": 768
