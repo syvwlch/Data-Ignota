@@ -1,0 +1,38 @@
+---
+title: "First Visualization"
+description: |
+  Ironically, it's about verbosity!
+author:
+  - name: Mathieu Glachant
+    url: https://github.com/syvwlch
+date: 2022-10-09
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+I put up the first demo visualization based on the `said.csv` data. Given how many words I've already written on this website to get to this point, the subject is rather ironic: verbosity, and in particular in asides to the reader. 😅
+
+## What It Took to Get Here
+
+Clarifications:
+
+- [Add some demo visualizations](https://github.com/syvwlch/Data-Ignota/issues/19)
+	- Create new `viz` collection
+		- [x] create collection
+		- [x] create listing page
+		- [x] add listing page to nav bar
+		- [x] add RSS feed to feed menu
+		- [x] add link to listing page to homepage
+	- Write up inaugural post for new collection
+		- Picked distribution of number of words as proxy for verbosity
+
+## Lessons Learned
+
+The `group_by()` + `summarise()` pattern requires an explicit assignment of a summary value any other column you want to keep, e.g using `mean()` here to keep the words when grouping by the unique line id:
+
+```
+said  %>%
+  group_by(line) %>%
+  summarize(words = mean(words), .groups = "drop")
+```

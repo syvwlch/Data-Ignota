@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+  <channel>
+    <title>Data Ignota</title>
+    <link>https://syvwlch.github.io/Data-Ignota/</link>
+    <atom:link href="https://syvwlch.github.io/Data-Ignota/viz.xml" rel="self" type="application/rss+xml"/>
+    <description>A data-driven exploration of Ada Palmer's Terra Ignota series.
+</description>
+    <generator>Distill</generator>
+    <lastBuildDate>Sun, 09 Oct 2022 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Exploring Verbosity</title>
+      <dc:creator>Mathieu Glachant</dc:creator>
+      <link>https://syvwlch.github.io/Data-Ignota/viz/2022-10-09-exploring-verbosity</link>
+      <description>A brief look at how many words characters use per line of dialog</description>
+      <guid>https://syvwlch.github.io/Data-Ignota/viz/2022-10-09-exploring-verbosity</guid>
+      <pubDate>Sun, 09 Oct 2022 00:00:00 +0000</pubDate>
+      <media:content url="https://syvwlch.github.io/Data-Ignota/viz/2022-10-09-exploring-verbosity/exploring-verbosity_files/figure-html5/verbosity_wo_reader-1.png" medium="image" type="image/png" width="1248" height="768"/>
+    </item>
+  </channel>
+</rss>

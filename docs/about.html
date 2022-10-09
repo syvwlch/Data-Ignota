@@ -2109,6 +2109,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <a href="index.html">
 <i class="fa fa-home" aria-hidden="true"></i>
 </a>
+<a href="viz.html">Visualizations</a>
 <a href="tei.html">Data</a>
 <a href="devlog.html">Dev Log</a>
 <a href="about.html">About</a>
@@ -2122,6 +2123,7 @@ RSS
 <span class="down-arrow">&#x25BE;</span>
 </button>
 <div class="nav-dropdown-content">
+<a href="viz.xml">Visualization Feed</a>
 <a href="tei.xml">Digital Edition Feed</a>
 <a href="devlog.xml">Dev Log Feed</a>
 </div>
@@ -2159,6 +2161,7 @@ RSS
 <li><a href="#tei-encoding" id="toc-tei-encoding">TEI Encoding</a></li>
 <li><a href="#xquery" id="toc-xquery">Xquery</a></li>
 <li><a href="#r" id="toc-r">R</a></li>
+<li><a href="#tei-publisher" id="toc-tei-publisher">TEI Publisher</a></li>
 </ul></li>
 <li><a href="#copyright-concerns" id="toc-copyright-concerns">Copyright Concerns</a>
 <ul>
@@ -2176,13 +2179,13 @@ Simple marginalia are just not cutting it anymore.
 <h2 id="a-ship-worthy-of-apollos-call">A Ship Worthy of Apollo’s Call</h2>
 <p>This project is an attempt to upgrade from those first hollowed logs to a ship worthy of the perils and mysteries we gentle readers face when we heed Apollo’s call to push away from shore and sail toward terra ignota.</p>
 <h3 id="the-analyses">The Analyses</h3>
-<p>I will post demos and examples of the analyses that can be performed on the data generated from this digital edition of the novels. As these accumulate, they should progressively build a map of the feasible… more of a spur to your own explorations than anything definitive or comprehensive.</p>
+<p>I will post <a href="viz.html">demos and examples of the analyses</a> that can be performed on the data generated from this digital edition of the novels. As these accumulate, they should progressively build a map of the feasible… more of a spur to your own explorations than anything definitive or comprehensive.</p>
 <h3 id="the-dev-log">The Dev Log</h3>
 <p>I will also keep <a href="devlog.html">a dev log</a> along this voyage. This will provide a more sequential view of what we found when, any shoals we hit along the way, and any issues with the crew’s morale or theology which might crop up.</p>
 <h3 id="the-dashboard">The Dashboard</h3>
 <p>To help with navigation, I will set up a dashboard page to display the progress made and list any failed sanity checks &amp; smoke tests with the latest version of the data.</p>
 <h3 id="the-data">The Data</h3>
-<p>This website will have links to data files generated for and used in the analyses. Feel free to download and re-use for non-commercial use with attribution.</p>
+<p>This website will have <a href="tei.html">links to data files</a> generated for and used in the analyses. Feel free to download and re-use for non-commercial use with attribution.</p>
 <h2 id="what-is-this-ship-made-of">What Is This Ship Made of?</h2>
 <h3 id="tei-encoding">TEI Encoding</h3>
 <p>I am encoding the novels in the <strong>TEI</strong><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> dialect of <strong>XML</strong>, as this is the de facto standard for text analysis in the <em>Digital Humanities</em><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
@@ -2196,12 +2199,15 @@ Simple marginalia are just not cutting it anymore.
 </ul>
 <h3 id="r">R</h3>
 <p>To analyze this data further and display the results, I use the R language<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>. In particular I am applying the <strong>Tidy Data</strong> paradigm<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> as best I understand it. This is a new language for me and this serves as practical hands-on learning for me.</p>
+<h3 id="tei-publisher">TEI Publisher</h3>
+<p>Lastly, I can load this Digital Edition into <strong>TEI Publisher</strong><a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> an application running on top of the XML database <strong>eXist-db</strong><a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> which will display the text with various enhanced features based on the markup, such as highlighting names and displaying popups with their metadata on hover.</p>
+<p>For interest, here is a copy of <a href="./data/TerraIgnota.odd">the ODD configuration file</a> for this digital edition.</p>
 <h2 id="copyright-concerns">Copyright Concerns</h2>
 <p>The novels are under copyright, so there are parts of this project I can share and others I cannot.</p>
 <p>The project therefore has two repositories on Github:</p>
 <ul>
 <li>a private repo to version control and back-up the marked-up text</li>
-<li>a public repo for everything else, including this website</li>
+<li>a <a href="https://github.com/syvwlch/Data-Ignota">public repo</a> for everything else, including this website</li>
 </ul>
 <h3 id="what-i-will-share-in-the-public-repo">What I Will Share in the Public Repo</h3>
 <ul>
@@ -2237,6 +2243,8 @@ Simple marginalia are just not cutting it anymore.
 <li id="fn5" role="doc-endnote"><p>a query and functional programming language that queries and transforms collections of structured and unstructured data, usually in the form of XML. <a href="https://en.wikipedia.org/wiki/XQuery" class="uri">https://en.wikipedia.org/wiki/XQuery</a><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn6" role="doc-endnote"><p>a language and environment for statistical computing and graphics. <a href="https://www.r-project.org/" class="uri">https://www.r-project.org/</a><a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn7" role="doc-endnote"><p>Tidy datasets are easy to manipulate, model and visualize, and have a specific structure: each variable is a column, each observation is a row, and each type of observational unit is a table. <a href="https://vita.had.co.nz/papers/tidy-data.html" class="uri">https://vita.had.co.nz/papers/tidy-data.html</a><a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn8" role="doc-endnote"><p><a href="http://teipublisher.com/" class="uri">http://teipublisher.com/</a><a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn9" role="doc-endnote"><p><a href="http://exist-db.org/" class="uri">http://exist-db.org/</a><a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 <!--radix_placeholder_article_footer-->

@@ -14,7 +14,7 @@ In it I will:
 - [document the journey](devlog.html),
 - explain [how and why](about.html) I'm doing what I'm doing,
 - post a dashboard of the progress made,
-- write up any discoveries made along the way, and 
+- write up [some demo visualizations](viz.html), and 
 - [share the data](tei.html) collected which are not covered by the author's copyright.
 
 ## Feedback
