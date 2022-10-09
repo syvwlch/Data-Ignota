@@ -1,0 +1,21 @@
+[
+  {
+    "path": "viz/2022-10-09-exploring-verbosity/",
+    "title": "Exploring Verbosity",
+    "description": "A brief look at how many words characters use per line of dialog",
+    "author": [
+      {
+        "name": "Mathieu Glachant",
+        "url": {}
+      }
+    ],
+    "date": "2022-10-09",
+    "categories": [],
+    "contents": "\nLet’s define, for now, verbosity as the tendency to use lots of words each time a character communicates with another.\nWhat visualizations of this concept can we generate from our said.csv file?\nOverall Verbosity\nWhat does the distribution of the number of words per line look like?\n\n\n\n\n\n\n",
+    "preview": "viz/2022-10-09-exploring-verbosity/exploring-verbosity_files/figure-html5/overall-1.png",
+    "last_modified": "2022-10-09T10:45:13-04:00",
+    "input_file": {},
+    "preview_width": 1248,
+    "preview_height": 768
+  }
+]

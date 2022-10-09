@@ -88,638 +88,39 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
   <!--radix_placeholder_meta_tags-->
-  <title>Data Ignota: A Data-Ship</title>
+  <title>Exploring Verbosity</title>
 
-  <meta property="description" itemprop="description" content="Fit to Sail a Sea of Words"/>
+  <meta property="description" itemprop="description" content="A brief look at how many words characters use per line of dialog"/>
 
 
+  <!--  https://schema.org/Article -->
+  <meta property="article:published" itemprop="datePublished" content="2022-10-09"/>
+  <meta property="article:created" itemprop="dateCreated" content="2022-10-09"/>
+  <meta name="article:author" content="Mathieu Glachant"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Data Ignota: A Data-Ship"/>
+  <meta property="og:title" content="Exploring Verbosity"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="Fit to Sail a Sea of Words"/>
+  <meta property="og:description" content="A brief look at how many words characters use per line of dialog"/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:site_name" content="Data Ignota"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Data Ignota: A Data-Ship"/>
-  <meta property="twitter:description" content="Fit to Sail a Sea of Words"/>
+  <meta property="twitter:title" content="Exploring Verbosity"/>
+  <meta property="twitter:description" content="A brief look at how many words characters use per line of dialog"/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","output"]}},"value":[{"type":"character","attributes":{},"value":["A Data-Ship"]},{"type":"character","attributes":{},"value":["Fit to Sail a Sea of Words\n"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["toc","toc_depth"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[3]}]}]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Exploring Verbosity"]},{"type":"character","attributes":{},"value":["A brief look at how many words characters use per line of dialog\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Mathieu Glachant"]}]}]},{"type":"character","attributes":{},"value":["2022-10-09"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
+  
+  <script type="text/json" id="radix-resource-manifest">
+  {"type":"character","attributes":{},"value":["exploring-verbosity_files/anchor-4.2.2/anchor.min.js","exploring-verbosity_files/bowser-1.9.3/bowser.min.js","exploring-verbosity_files/distill-2.2.21/template.v2.js","exploring-verbosity_files/figure-html5/overall-1.png","exploring-verbosity_files/header-attrs-2.16/header-attrs.js","exploring-verbosity_files/jquery-3.6.0/jquery-3.6.0.js","exploring-verbosity_files/jquery-3.6.0/jquery-3.6.0.min.js","exploring-verbosity_files/jquery-3.6.0/jquery-3.6.0.min.map","exploring-verbosity_files/popper-2.6.0/popper.min.js","exploring-verbosity_files/tippy-6.2.7/tippy-bundle.umd.min.js","exploring-verbosity_files/tippy-6.2.7/tippy-light-border.css","exploring-verbosity_files/tippy-6.2.7/tippy.css","exploring-verbosity_files/tippy-6.2.7/tippy.umd.min.js","exploring-verbosity_files/webcomponents-2.0.0/webcomponents.js"]}
+  </script>
   <!--radix_placeholder_navigation_in_header-->
-  <meta name="distill:offset" content=""/>
-
-  <script type="application/javascript">
-
-    window.headroom_prevent_pin = false;
-
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-
-      // initialize headroom for banner
-      var header = $('header').get(0);
-      var headerHeight = header.offsetHeight;
-      var headroom = new Headroom(header, {
-        tolerance: 5,
-        onPin : function() {
-          if (window.headroom_prevent_pin) {
-            window.headroom_prevent_pin = false;
-            headroom.unpin();
-          }
-        }
-      });
-      headroom.init();
-      if(window.location.hash)
-        headroom.unpin();
-      $(header).addClass('headroom--transition');
-
-      // offset scroll location for banner on hash change
-      // (see: https://github.com/WickyNilliams/headroom.js/issues/38)
-      window.addEventListener("hashchange", function(event) {
-        window.scrollTo(0, window.pageYOffset - (headerHeight + 25));
-      });
-
-      // responsive menu
-      $('.distill-site-header').each(function(i, val) {
-        var topnav = $(this);
-        var toggle = topnav.find('.nav-toggle');
-        toggle.on('click', function() {
-          topnav.toggleClass('responsive');
-        });
-      });
-
-      // nav dropdowns
-      $('.nav-dropbtn').click(function(e) {
-        $(this).next('.nav-dropdown-content').toggleClass('nav-dropdown-active');
-        $(this).parent().siblings('.nav-dropdown')
-           .children('.nav-dropdown-content').removeClass('nav-dropdown-active');
-      });
-      $("body").click(function(e){
-        $('.nav-dropdown-content').removeClass('nav-dropdown-active');
-      });
-      $(".nav-dropdown").click(function(e){
-        e.stopPropagation();
-      });
-    });
-  </script>
-
-  <style type="text/css">
-
-  /* Theme (user-documented overrideables for nav appearance) */
-
-  .distill-site-nav {
-    color: rgba(255, 255, 255, 0.8);
-    background-color: #0F2E3D;
-    font-size: 15px;
-    font-weight: 300;
-  }
-
-  .distill-site-nav a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  .distill-site-nav a:hover {
-    color: white;
-  }
-
-  @media print {
-    .distill-site-nav {
-      display: none;
-    }
-  }
-
-  .distill-site-header {
-
-  }
-
-  .distill-site-footer {
-
-  }
-
-
-  /* Site Header */
-
-  .distill-site-header {
-    width: 100%;
-    box-sizing: border-box;
-    z-index: 3;
-  }
-
-  .distill-site-header .nav-left {
-    display: inline-block;
-    margin-left: 8px;
-  }
-
-  @media screen and (max-width: 768px) {
-    .distill-site-header .nav-left {
-      margin-left: 0;
-    }
-  }
-
-
-  .distill-site-header .nav-right {
-    float: right;
-    margin-right: 8px;
-  }
-
-  .distill-site-header a,
-  .distill-site-header .title {
-    display: inline-block;
-    text-align: center;
-    padding: 14px 10px 14px 10px;
-  }
-
-  .distill-site-header .title {
-    font-size: 18px;
-    min-width: 150px;
-  }
-
-  .distill-site-header .logo {
-    padding: 0;
-  }
-
-  .distill-site-header .logo img {
-    display: none;
-    max-height: 20px;
-    width: auto;
-    margin-bottom: -4px;
-  }
-
-  .distill-site-header .nav-image img {
-    max-height: 18px;
-    width: auto;
-    display: inline-block;
-    margin-bottom: -3px;
-  }
-
-
-
-  @media screen and (min-width: 1000px) {
-    .distill-site-header .logo img {
-      display: inline-block;
-    }
-    .distill-site-header .nav-left {
-      margin-left: 20px;
-    }
-    .distill-site-header .nav-right {
-      margin-right: 20px;
-    }
-    .distill-site-header .title {
-      padding-left: 12px;
-    }
-  }
-
-
-  .distill-site-header .nav-toggle {
-    display: none;
-  }
-
-  .nav-dropdown {
-    display: inline-block;
-    position: relative;
-  }
-
-  .nav-dropdown .nav-dropbtn {
-    border: none;
-    outline: none;
-    color: rgba(255, 255, 255, 0.8);
-    padding: 16px 10px;
-    background-color: transparent;
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    margin: 0;
-    margin-top: 1px;
-    z-index: 2;
-  }
-
-  .nav-dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: white;
-    min-width: 200px;
-    border: 1px solid rgba(0,0,0,0.15);
-    border-radius: 4px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
-    z-index: 1;
-    margin-top: 2px;
-    white-space: nowrap;
-    padding-top: 4px;
-    padding-bottom: 4px;
-  }
-
-  .nav-dropdown-content hr {
-    margin-top: 4px;
-    margin-bottom: 4px;
-    border: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  }
-
-  .nav-dropdown-active {
-    display: block;
-  }
-
-  .nav-dropdown-content a, .nav-dropdown-content .nav-dropdown-header {
-    color: black;
-    padding: 6px 24px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-  }
-
-  .nav-dropdown-content .nav-dropdown-header {
-    display: block;
-    padding: 5px 24px;
-    padding-bottom: 0;
-    text-transform: uppercase;
-    font-size: 14px;
-    color: #999999;
-    white-space: nowrap;
-  }
-
-  .nav-dropdown:hover .nav-dropbtn {
-    color: white;
-  }
-
-  .nav-dropdown-content a:hover {
-    background-color: #ddd;
-    color: black;
-  }
-
-  .nav-right .nav-dropdown-content {
-    margin-left: -45%;
-    right: 0;
-  }
-
-  @media screen and (max-width: 768px) {
-    .distill-site-header a, .distill-site-header .nav-dropdown  {display: none;}
-    .distill-site-header a.nav-toggle {
-      float: right;
-      display: block;
-    }
-    .distill-site-header .title {
-      margin-left: 0;
-    }
-    .distill-site-header .nav-right {
-      margin-right: 0;
-    }
-    .distill-site-header {
-      overflow: hidden;
-    }
-    .nav-right .nav-dropdown-content {
-      margin-left: 0;
-    }
-  }
-
-
-  @media screen and (max-width: 768px) {
-    .distill-site-header.responsive {position: relative; min-height: 500px; }
-    .distill-site-header.responsive a.nav-toggle {
-      position: absolute;
-      right: 0;
-      top: 0;
-    }
-    .distill-site-header.responsive a,
-    .distill-site-header.responsive .nav-dropdown {
-      display: block;
-      text-align: left;
-    }
-    .distill-site-header.responsive .nav-left,
-    .distill-site-header.responsive .nav-right {
-      width: 100%;
-    }
-    .distill-site-header.responsive .nav-dropdown {float: none;}
-    .distill-site-header.responsive .nav-dropdown-content {position: relative;}
-    .distill-site-header.responsive .nav-dropdown .nav-dropbtn {
-      display: block;
-      width: 100%;
-      text-align: left;
-    }
-  }
-
-  /* Site Footer */
-
-  .distill-site-footer {
-    width: 100%;
-    overflow: hidden;
-    box-sizing: border-box;
-    z-index: 3;
-    margin-top: 30px;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    text-align: center;
-  }
-
-  /* Headroom */
-
-  d-title {
-    padding-top: 6rem;
-  }
-
-  @media print {
-    d-title {
-      padding-top: 4rem;
-    }
-  }
-
-  .headroom {
-    z-index: 1000;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-  }
-
-  .headroom--transition {
-    transition: all .4s ease-in-out;
-  }
-
-  .headroom--unpinned {
-    top: -100px;
-  }
-
-  .headroom--pinned {
-    top: 0;
-  }
-
-  /* adjust viewport for navbar height */
-  /* helps vertically center bootstrap (non-distill) content */
-  .min-vh-100 {
-    min-height: calc(100vh - 100px) !important;
-  }
-
-  </style>
-
-  <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-  <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
-  <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
-  <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
-  <script src="site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
-  <script src="site_libs/fuse-6.4.1/fuse.min.js"></script>
-
-  <script type="application/javascript">
-
-  function getMeta(metaName) {
-    var metas = document.getElementsByTagName('meta');
-    for (let i = 0; i < metas.length; i++) {
-      if (metas[i].getAttribute('name') === metaName) {
-        return metas[i].getAttribute('content');
-      }
-    }
-    return '';
-  }
-
-  function offsetURL(url) {
-    var offset = getMeta('distill:offset');
-    return offset ? offset + '/' + url : url;
-  }
-
-  function createFuseIndex() {
-
-    // create fuse index
-    var options = {
-      keys: [
-        { name: 'title', weight: 20 },
-        { name: 'categories', weight: 15 },
-        { name: 'description', weight: 10 },
-        { name: 'contents', weight: 5 },
-      ],
-      ignoreLocation: true,
-      threshold: 0
-    };
-    var fuse = new window.Fuse([], options);
-
-    // fetch the main search.json
-    return fetch(offsetURL('search.json'))
-      .then(function(response) {
-        if (response.status == 200) {
-          return response.json().then(function(json) {
-            // index main articles
-            json.articles.forEach(function(article) {
-              fuse.add(article);
-            });
-            // download collections and index their articles
-            return Promise.all(json.collections.map(function(collection) {
-              return fetch(offsetURL(collection)).then(function(response) {
-                if (response.status === 200) {
-                  return response.json().then(function(articles) {
-                    articles.forEach(function(article) {
-                      fuse.add(article);
-                    });
-                  })
-                } else {
-                  return Promise.reject(
-                    new Error('Unexpected status from search index request: ' +
-                              response.status)
-                  );
-                }
-              });
-            })).then(function() {
-              return fuse;
-            });
-          });
-
-        } else {
-          return Promise.reject(
-            new Error('Unexpected status from search index request: ' +
-                        response.status)
-          );
-        }
-      });
-  }
-
-  window.document.addEventListener("DOMContentLoaded", function (event) {
-
-    // get search element (bail if we don't have one)
-    var searchEl = window.document.getElementById('distill-search');
-    if (!searchEl)
-      return;
-
-    createFuseIndex()
-      .then(function(fuse) {
-
-        // make search box visible
-        searchEl.classList.remove('hidden');
-
-        // initialize autocomplete
-        var options = {
-          autoselect: true,
-          hint: false,
-          minLength: 2,
-        };
-        window.autocomplete(searchEl, options, [{
-          source: function(query, callback) {
-            const searchOptions = {
-              isCaseSensitive: false,
-              shouldSort: true,
-              minMatchCharLength: 2,
-              limit: 10,
-            };
-            var results = fuse.search(query, searchOptions);
-            callback(results
-              .map(function(result) { return result.item; })
-            );
-          },
-          templates: {
-            suggestion: function(suggestion) {
-              var img = suggestion.preview && Object.keys(suggestion.preview).length > 0
-                ? `<img src="${offsetURL(suggestion.preview)}"</img>`
-                : '';
-              var html = `
-                <div class="search-item">
-                  <h3>${suggestion.title}</h3>
-                  <div class="search-item-description">
-                    ${suggestion.description || ''}
-                  </div>
-                  <div class="search-item-preview">
-                    ${img}
-                  </div>
-                </div>
-              `;
-              return html;
-            }
-          }
-        }]).on('autocomplete:selected', function(event, suggestion) {
-          window.location.href = offsetURL(suggestion.path);
-        });
-        // remove inline display style on autocompleter (we want to
-        // manage responsive display via css)
-        $('.algolia-autocomplete').css("display", "");
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-
-  });
-
-  </script>
-
-  <style type="text/css">
-
-  .nav-search {
-    font-size: x-small;
-  }
-
-  /* Algolioa Autocomplete */
-
-  .algolia-autocomplete {
-    display: inline-block;
-    margin-left: 10px;
-    vertical-align: sub;
-    background-color: white;
-    color: black;
-    padding: 6px;
-    padding-top: 8px;
-    padding-bottom: 0;
-    border-radius: 6px;
-    border: 1px #0F2E3D solid;
-    width: 180px;
-  }
-
-
-  @media screen and (max-width: 768px) {
-    .distill-site-nav .algolia-autocomplete {
-      display: none;
-      visibility: hidden;
-    }
-    .distill-site-nav.responsive .algolia-autocomplete {
-      display: inline-block;
-      visibility: visible;
-    }
-    .distill-site-nav.responsive .algolia-autocomplete .aa-dropdown-menu {
-      margin-left: 0;
-      width: 400px;
-      max-height: 400px;
-    }
-  }
-
-  .algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
-    width: 90%;
-    outline: none;
-    border: none;
-  }
-
-  .algolia-autocomplete .aa-hint {
-    color: #999;
-  }
-  .algolia-autocomplete .aa-dropdown-menu {
-    width: 550px;
-    max-height: 70vh;
-    overflow-x: visible;
-    overflow-y: scroll;
-    padding: 5px;
-    margin-top: 3px;
-    margin-left: -150px;
-    background-color: #fff;
-    border-radius: 5px;
-    border: 1px solid #999;
-    border-top: none;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
-    cursor: pointer;
-    padding: 5px 4px;
-    border-bottom: 1px solid #eee;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion:last-of-type {
-    border-bottom: none;
-    margin-bottom: 2px;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item {
-    overflow: hidden;
-    font-size: 0.8em;
-    line-height: 1.4em;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item h3 {
-    font-size: 1rem;
-    margin-block-start: 0;
-    margin-block-end: 5px;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-description {
-    display: inline-block;
-    overflow: hidden;
-    height: 2.8em;
-    width: 80%;
-    margin-right: 4%;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview {
-    display: inline-block;
-    width: 15%;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img {
-    height: 3em;
-    width: auto;
-    display: none;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img[src] {
-    display: initial;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
-    background-color: #eee;
-  }
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
-    font-weight: bold;
-    font-style: normal;
-  }
-
-  </style>
-
-
   <!--/radix_placeholder_navigation_in_header-->
   <!--radix_placeholder_distill-->
 
@@ -2074,15 +1475,16 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
-  <script src="site_libs/popper-2.6.0/popper.min.js"></script>
-  <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
-  <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
-  <script src="site_libs/tippy-6.2.7/tippy.umd.min.js"></script>
-  <script src="site_libs/anchor-4.2.2/anchor.min.js"></script>
-  <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
-  <script src="site_libs/webcomponents-2.0.0/webcomponents.js"></script>
-  <script src="site_libs/distill-2.2.21/template.v2.js"></script>
+  <script src="exploring-verbosity_files/header-attrs-2.16/header-attrs.js"></script>
+  <script src="exploring-verbosity_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+  <script src="exploring-verbosity_files/popper-2.6.0/popper.min.js"></script>
+  <link href="exploring-verbosity_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="exploring-verbosity_files/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="exploring-verbosity_files/tippy-6.2.7/tippy.umd.min.js"></script>
+  <script src="exploring-verbosity_files/anchor-4.2.2/anchor.min.js"></script>
+  <script src="exploring-verbosity_files/bowser-1.9.3/bowser.min.js"></script>
+  <script src="exploring-verbosity_files/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="exploring-verbosity_files/distill-2.2.21/template.v2.js"></script>
   <!--radix_placeholder_site_in_header-->
   <!--/radix_placeholder_site_in_header-->
 
@@ -2094,159 +1496,37 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"A Data-Ship","description":"Fit to Sail a Sea of Words","authors":[]}
+{"title":"Exploring Verbosity","description":"A brief look at how many words characters use per line of dialog","authors":[{"author":"Mathieu Glachant","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2022-10-09T00:00:00.000-04:00","citationText":"Glachant, 2022"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
 <!--radix_placeholder_navigation_before_body-->
-<header class="header header--fixed" role="banner">
-<nav class="distill-site-nav distill-site-header">
-<div class="nav-left">
-<a href="index.html" class="title">Data Ignota</a>
-<input id="distill-search" class="nav-search hidden" type="text" placeholder="Search..."/>
-</div>
-<div class="nav-right">
-<a href="index.html">
-<i class="fa fa-home" aria-hidden="true"></i>
-</a>
-<a href="viz.html">Visualizations</a>
-<a href="tei.html">Data</a>
-<a href="devlog.html">Dev Log</a>
-<a href="about.html">About</a>
-<a href="https://github.com/syvwlch/Data-Ignota">
-<i class="fa fa-github" aria-hidden="true"></i>
-</a>
-<div class="nav-dropdown">
-<button class="nav-dropbtn">
-RSS
- 
-<span class="down-arrow">&#x25BE;</span>
-</button>
-<div class="nav-dropdown-content">
-<a href="viz.xml">Visualization Feed</a>
-<a href="tei.xml">Digital Edition Feed</a>
-<a href="devlog.xml">Dev Log Feed</a>
-</div>
-</div>
-<a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
-</div>
-</nav>
-</header>
 <!--/radix_placeholder_navigation_before_body-->
 <!--radix_placeholder_site_before_body-->
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>A Data-Ship</h1>
+<h1>Exploring Verbosity</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>Fit to Sail a Sea of Words</p></p>
+<p><p>A brief look at how many words characters use per line of dialog</p></p>
 </div>
 
+<div class="d-byline">
+  Mathieu Glachant  
+  
+<br/>2022-10-09
+</div>
 
 <div class="d-article">
-<div class="d-contents d-contents-float">
-<nav class="l-text toc figcaption" id="TOC">
-<h3>Contents</h3>
-<ul>
-<li><a href="#a-ship-worthy-of-apollos-call" id="toc-a-ship-worthy-of-apollos-call">A Ship Worthy of Apollo’s Call</a>
-<ul>
-<li><a href="#the-analyses" id="toc-the-analyses">The Analyses</a></li>
-<li><a href="#the-dev-log" id="toc-the-dev-log">The Dev Log</a></li>
-<li><a href="#the-dashboard" id="toc-the-dashboard">The Dashboard</a></li>
-<li><a href="#the-data" id="toc-the-data">The Data</a></li>
-</ul></li>
-<li><a href="#what-is-this-ship-made-of" id="toc-what-is-this-ship-made-of">What Is This Ship Made of?</a>
-<ul>
-<li><a href="#tei-encoding" id="toc-tei-encoding">TEI Encoding</a></li>
-<li><a href="#xquery" id="toc-xquery">Xquery</a></li>
-<li><a href="#r" id="toc-r">R</a></li>
-<li><a href="#tei-publisher" id="toc-tei-publisher">TEI Publisher</a></li>
-</ul></li>
-<li><a href="#copyright-concerns" id="toc-copyright-concerns">Copyright Concerns</a>
-<ul>
-<li><a href="#what-i-will-share-in-the-public-repo" id="toc-what-i-will-share-in-the-public-repo">What I Will Share in the Public Repo</a></li>
-<li><a href="#what-i-will-not-share" id="toc-what-i-will-not-share">What I Will Not Share</a></li>
-</ul></li>
-</ul>
-</nav>
+<p>Let’s define, for now, verbosity as the tendency to use lots of words each time a character communicates with another.</p>
+<p>What visualizations of this concept can we generate from our <code>said.csv</code> file?</p>
+<h2 id="overall-verbosity">Overall Verbosity</h2>
+<p>What does the distribution of the number of words per line look like?</p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="exploring-verbosity_files/figure-html5/overall-1.png" width="624" /></p>
 </div>
-<p>I have read <a href="https://www.adapalmer.com/">Ada Palmer</a>’s <a href="https://www.adapalmer.com/series/terra-ignota/">Terra Ignota</a> series a few times<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> since it came out - alone or with friends - because on every reread I discover new ideas, new calls forward or back within the text or outside of it, and new structural complexities.</p>
-<p>I am, to be frank, obsessed with it, and I have the years-long chat logs, the dedicated Zettelkasten vault, and the nigh-unreadable ebooks bursting with rainbow-hued highlights to prove it.</p>
-<aside>
-Simple marginalia are just not cutting it anymore.
-</aside>
-<h2 id="a-ship-worthy-of-apollos-call">A Ship Worthy of Apollo’s Call</h2>
-<p>This project is an attempt to upgrade from those first hollowed logs to a ship worthy of the perils and mysteries we gentle readers face when we heed Apollo’s call to push away from shore and sail toward terra ignota.</p>
-<h3 id="the-analyses">The Analyses</h3>
-<p>I will post demos and examples of the analyses that can be performed on the data generated from this digital edition of the novels. As these accumulate, they should progressively build a map of the feasible… more of a spur to your own explorations than anything definitive or comprehensive.</p>
-<h3 id="the-dev-log">The Dev Log</h3>
-<p>I will also keep <a href="devlog.html">a dev log</a> along this voyage. This will provide a more sequential view of what we found when, any shoals we hit along the way, and any issues with the crew’s morale or theology which might crop up.</p>
-<h3 id="the-dashboard">The Dashboard</h3>
-<p>To help with navigation, I will set up a dashboard page to display the progress made and list any failed sanity checks &amp; smoke tests with the latest version of the data.</p>
-<h3 id="the-data">The Data</h3>
-<p>This website will have <a href="tei.html">links to data files</a> generated for and used in the analyses. Feel free to download and re-use for non-commercial use with attribution.</p>
-<h2 id="what-is-this-ship-made-of">What Is This Ship Made of?</h2>
-<h3 id="tei-encoding">TEI Encoding</h3>
-<p>I am encoding the novels in the <strong>TEI</strong><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> dialect of <strong>XML</strong>, as this is the de facto standard for text analysis in the <em>Digital Humanities</em><a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a>.</p>
-<p>This is truly a labor of love<a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>: going over the text, line by line, and marking it up with various xml elements. This is also the step where most errors will be introduced by yours truly, altho some of those errors can be detected by sanity check queries.</p>
-<h3 id="xquery">Xquery</h3>
-<p>It’s worth it, tho, because then I can use Xquery<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> to ask questions like:</p>
-<ul>
-<li>“How many different ways does Mycroft refer to J.E.D.D. Mason while speaking to Bridger?”</li>
-<li>“¿Who talks about the Masons in Humanist Spanish? ¿On which pages?”</li>
-<li>“How many different Utopian coats are there in the text? How are they described?”</li>
-</ul>
-<h3 id="r">R</h3>
-<p>To analyze this data further and display the results, I use the R language<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>. In particular I am applying the <strong>Tidy Data</strong> paradigm<a href="#fn7" class="footnote-ref" id="fnref7" role="doc-noteref"><sup>7</sup></a> as best I understand it. This is a new language for me and this serves as practical hands-on learning for me.</p>
-<h3 id="tei-publisher">TEI Publisher</h3>
-<p>Lastly, I can load this Digital Edition into <strong>TEI Publisher</strong><a href="#fn8" class="footnote-ref" id="fnref8" role="doc-noteref"><sup>8</sup></a> an application running on top of the XML database <strong>eXist-db</strong><a href="#fn9" class="footnote-ref" id="fnref9" role="doc-noteref"><sup>9</sup></a> which will display the text with various enhanced features based on the markup, such as highlighting names and displaying popups with their metadata on hover.</p>
-<p>For interest, here is a copy of <a href="./data/TerraIgnota.odd">the ODD configuration file</a> for this digital edition.</p>
-<h2 id="copyright-concerns">Copyright Concerns</h2>
-<p>The novels are under copyright, so there are parts of this project I can share and others I cannot.</p>
-<p>The project therefore has two repositories on Github:</p>
-<ul>
-<li>a private repo to version control and back-up the marked-up text</li>
-<li>a <a href="https://github.com/syvwlch/Data-Ignota">public repo</a> for everything else, including this website</li>
-</ul>
-<h3 id="what-i-will-share-in-the-public-repo">What I Will Share in the Public Repo</h3>
-<ul>
-<li>CSV files containing tidy data about the text.
-<ul>
-<li>To allow others to reuse the data for their own analysis.</li>
-<li>These will <strong>NOT</strong> contain stretches of text from the books.</li>
-</ul></li>
-<li>Xquery files which extract data from the text.
-<ul>
-<li>To show my work and to help anyone who’s trying to do something similar.</li>
-<li>These will pull from the private repo and put their output xml files there as well.</li>
-</ul></li>
-<li>R markdown files which generate example analysis reports from the data.
-<ul>
-<li>To show my work and to demo how the data can be used.</li>
-<li>These will pull the output xml files from the private repo and put their output html and CSV files in the public repo, i.e. accessible on this website.</li>
-</ul></li>
-</ul>
-<h3 id="what-i-will-not-share">What I Will Not Share</h3>
-<ul>
-<li>The text of the novels, in any format.</li>
-<li>Data files containing stretches of text from the novels, in any format.</li>
-</ul>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
-<section class="footnotes footnotes-end-of-document" role="doc-endnotes">
-<hr />
-<ol>
-<li id="fn1" role="doc-endnote"><p>This project counts as my eighth reread of the first book in the series, <em>Too Like the Lighting</em>.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn2" role="doc-endnote"><p>Text Encoding Initiative: <a href="https://tei-c.org/" class="uri">https://tei-c.org/</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn3" role="doc-endnote"><p>an area of scholarly activity at the intersection of computing and the disciplines of the humanities. <a href="https://en.wikipedia.org/wiki/Digital_humanities" class="uri">https://en.wikipedia.org/wiki/Digital_humanities</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn4" role="doc-endnote"><p>It took a month of sustained effort to mark up the first twelve chapters of <em>Too Like the Lightning</em>.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn5" role="doc-endnote"><p>a query and functional programming language that queries and transforms collections of structured and unstructured data, usually in the form of XML. <a href="https://en.wikipedia.org/wiki/XQuery" class="uri">https://en.wikipedia.org/wiki/XQuery</a><a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn6" role="doc-endnote"><p>a language and environment for statistical computing and graphics. <a href="https://www.r-project.org/" class="uri">https://www.r-project.org/</a><a href="#fnref6" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn7" role="doc-endnote"><p>Tidy datasets are easy to manipulate, model and visualize, and have a specific structure: each variable is a column, each observation is a row, and each type of observational unit is a table. <a href="https://vita.had.co.nz/papers/tidy-data.html" class="uri">https://vita.had.co.nz/papers/tidy-data.html</a><a href="#fnref7" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn8" role="doc-endnote"><p><a href="http://teipublisher.com/" class="uri">http://teipublisher.com/</a><a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-<li id="fn9" role="doc-endnote"><p><a href="http://exist-db.org/" class="uri">http://exist-db.org/</a><a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
