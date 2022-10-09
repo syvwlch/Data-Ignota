@@ -21,7 +21,7 @@ This project is an attempt to upgrade from those first hollowed logs to a ship w
 
 ### The Analyses
 
-I will post demos and examples of the analyses that can be performed on the data generated from this digital edition of the novels. As these accumulate, they should progressively build a map of the feasible... more of a spur to your own explorations than anything definitive or comprehensive.
+I will post [demos and examples of the analyses](viz.html) that can be performed on the data generated from this digital edition of the novels. As these accumulate, they should progressively build a map of the feasible... more of a spur to your own explorations than anything definitive or comprehensive.
 
 ### The Dev Log
 
