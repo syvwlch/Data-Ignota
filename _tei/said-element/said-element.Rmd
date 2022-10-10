@@ -148,6 +148,8 @@ said <- xmlToDataFrame(xml_path) %>%
   )
 ```
 
+NB: Luckily for you, when you read in this data as a CSV file the `readr` package is smart enough to correctly guess on all of this.
+
 ### Tidy: Separate Delimited Lists
 
 Second, any rows containing delimited lists^[In the XML output the lists were space-delimited, since they derived from XML node parameters.], e.g. a line of dialog with more than one addressee, must be^[In order to be _Tidy Data_, in which each row represents a single observation.] separated into multiple rows.
@@ -186,32 +188,26 @@ NB: If you have ideas for other columns I could generate from the text at this s
 
 ## Editing Progress
 
-```{r editing_progress, echo=FALSE, message=FALSE, warning=FALSE}
+```{r editing_progress}
 progress <- said %>% 
-  filter(book == 1) %>%
-  nest(addressee, person, org, place) %>%
-  select(chapter, speaker) %>%
-  group_by(chapter) %>%
-  skim(speaker) %>%
-  filter(complete_rate > 0) %>%
-  summarize(chapter, Progress = complete_rate, Speaker = n_missing)
+  mutate(chapter = book + chapter/100) %>%
+  group_by(chapter, line, speaker, addressee) %>%
+  summarize(line = mean(line), .groups = "drop") %>%
+  group_by(chapter)
 
 progress <- progress %>%
+  skim(speaker) %>%
+  filter(complete_rate > 0) %>%
+  summarize(chapter, Progress = complete_rate, Speaker = n_missing) %>%
   left_join(
-    said %>%
-      nest(speaker, person, org, place) %>%
-      select(chapter, addressee) %>%
-      group_by(chapter) %>% 
+    progress %>% 
       skim(addressee) %>% 
-      summarize(chapter, Addressee = n_missing)
+      summarize(chapter, Addressee = n_missing),
+    by = "chapter",
   )
 
 progress %>%
   gt(rowname_col = "chapter") %>%
-  tab_header(
-    title = "Too Like the Lightning",
-    subtitle = ""
-  ) %>%
   opt_align_table_header(align = "left") %>%
   tab_stubhead(label = "Chapter") %>%
   tab_spanner(
