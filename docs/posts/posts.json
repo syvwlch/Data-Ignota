@@ -1,5 +1,22 @@
 [
   {
+    "path": "posts/2022-10-10-refactoring-verbosity/",
+    "title": "Refactoring Verbosity",
+    "description": "A short description of the post.",
+    "author": [
+      {
+        "name": "Mathieu Glachant",
+        "url": "https://github.com/syvwlch"
+      }
+    ],
+    "date": "2022-10-10",
+    "categories": [],
+    "contents": "\nRefactored some of the code, showed more of it in the verbosity viz post, and generally tried to do a better explaining what I was doing.\nWhat It Took to Get Here\nClarifications:\nRefactored the code in said element post\nUse group_by() + summarize() pattern instead of nest()\nBe explicit about left-join’s key to avoid a message\nLet future messages flow to markdown document to stop hiding warnings, etc…\n\nRefactored the code in the verbosity viz post\nSwitched to violin plots instead of box plots. Much more revealing.\nCleaned up use of the group_by() + summarize() pattern\nFound some errors in implementation that miscounted lines of dialog in various scenarios\nShow parts of the code that manipulate the data according to that pattern, while still hiding the generation of tables or graphs.\nExplain how and why this pattern works\nAdded a footnote to explain that the word count is always in English no matter which language the line is tagged with.\n\nLessons Learned\nIt pays to show the code and some intermediate objects in a demo post, as this forces me to be clearer, catch errors, and in the end, understand the concepts better myself.\n\n\n\n",
+    "preview": {},
+    "last_modified": "2022-10-10T18:27:43-04:00",
+    "input_file": {}
+  },
+  {
     "path": "posts/2022-10-09-first-visualization/",
     "title": "First Visualization",
     "description": "Ironically, it's about verbosity!",
