@@ -1,0 +1,34 @@
+---
+title: "Refactoring Verbosity"
+description: |
+  A short description of the post.
+author:
+  - name: Mathieu Glachant
+    url: https://github.com/syvwlch
+date: 2022-10-10
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+Refactored some of the code, showed more of it in the verbosity viz post, and generally tried to do a better explaining what I was doing.
+
+## What It Took to Get Here
+
+Clarifications:
+
+- Refactored the code in `said` element post
+	- Use `group_by()` + `summarize()` pattern instead of `nest()`
+	- Be explicit about left-join's key to avoid a message
+	- Let future messages flow to markdown document to stop hiding warnings, etc...
+- Refactored the code in the verbosity viz post
+	- [Switched to violin plots instead of box plots](https://github.com/syvwlch/Data-Ignota/issues/42). Much more revealing.
+	- Cleaned up use of the `group_by()` + `summarize()` pattern
+	- Found some errors in implementation that miscounted lines of dialog in various scenarios
+	- Show parts of the code that manipulate the data according to that pattern, while still hiding the generation of tables or graphs.
+	- [Explain how and why this pattern works](https://github.com/syvwlch/Data-Ignota/issues/41)
+	- [Added a footnote to explain that the word count is always in English](https://github.com/syvwlch/Data-Ignota/issues/38) no matter which language the line is tagged with.
+	
+## Lessons Learned
+
+It pays to show the code and some intermediate objects in a demo post, as this forces me to be clearer, catch errors, and in the end, understand the concepts better myself.

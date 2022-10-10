@@ -7,7 +7,15 @@
     <description>A data-driven exploration of Ada Palmer's Terra Ignota series.
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Sun, 09 Oct 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 10 Oct 2022 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Refactoring Verbosity</title>
+      <dc:creator>Mathieu Glachant</dc:creator>
+      <link>https://syvwlch.github.io/Data-Ignota/posts/2022-10-10-refactoring-verbosity</link>
+      <description>A short description of the post.</description>
+      <guid>https://syvwlch.github.io/Data-Ignota/posts/2022-10-10-refactoring-verbosity</guid>
+      <pubDate>Mon, 10 Oct 2022 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>First Visualization</title>
       <dc:creator>Mathieu Glachant</dc:creator>

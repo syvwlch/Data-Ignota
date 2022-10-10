@@ -10,145 +10,254 @@ output:
     self_contained: false
 ---
 
+Let's define, for now, verbosity as the tendency to use lots of words each time a character communicates with another. 
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
+What visualizations of this concept can we generate from the chapters edited to date, i.e. the first twelve?
+
+```{r setup}
 library(tidyverse)
 library(gt)
 
 PATH_TO_SAID <- "../../data/said.csv"
-said <- read.csv(PATH_TO_SAID) %>%
-  filter(chapter < 13)
-```
 
-Let's define, for now, verbosity as the tendency to use lots of words each time a character communicates with another. What visualizations of this concept can we generate from the chapters edited to date, i.e. the first twelve?
+said <- read.csv(PATH_TO_SAID) %>%
+  filter(
+    book == 1,
+    chapter <= 12
+  )
+```
 
 ## Overall Verbosity
 
-Verbosity overall in the novels follows a classic _Power Law Distribution_ with a fairly long tail. This is pretty standard for human communications.
+To show the distribution of lines of dialog by number of words, we can use a histogram... but we have a problem. Some lines show up more than once in the data, e.g. line 2 in which Mycroft refers by name to both himself and the reader.
 
-```{r verbosity}
-said  %>%
+```{r duplicate-lines, echo=FALSE}
+said %>%
+  filter(line < 6) %>%
+  select(line, speaker, person, words) %>%
+  gt() %>%
+  tab_style(
+    style = cell_fill(color = "lightgray"),
+    locations = cells_body(row = line == 2)
+  )
+```
+
+So first we need to `group_by()` & `summarize()` by the `line` column, a pattern we'll need to apply anytime we care about the number of times the line appears in the text.
+
+```{r deduped-lines}
+lines <- said %>%
+  # Group by line
   group_by(line) %>%
-  summarize(words = mean(words), .groups = "drop") %>%
+  # Summarize by line and words per line
+  summarize(words = mean(words), .groups = "drop") 
+```
+
+```{r depuded-table, echo=FALSE}
+lines %>%
+  filter(line < 6) %>%
+  gt() %>%
+  tab_style(
+    style = cell_fill(color = "lightgray"),
+    locations = cells_body(row = line == 2)
+  )
+```
+
+This operation dropped `r nrow(said) - nrow(lines)` duplicate lines from our data. 
+
+We're now ready to plot our histogram.
+
+```{r verbosity, echo=FALSE}
+lines  %>%
   ggplot(mapping = aes(x = words)) +
-    geom_histogram(binwidth = 5) +
+    geom_histogram(binwidth = 3) +
     labs(
       title = "Verbosity Across the Text",
       x = "Number of words per line of dialog",
       y = "Number of lines of dialog",
-    )
+    ) +
+    coord_cartesian(xlim = c(0, 100))
 ```
+
+Verbosity overall in the novels follows a classic _Power Law Distribution_ with a fairly long tail. This is pretty standard for human communications.
 
 ## Verbosity by Language
 
-Our cast of characters is much more verbose in some languages than others, e.g. archaic English, which the reader primarily uses to rant at Mycroft.
+Let's drill a little deeper to see if the distribution changes for different sets of lines, e.g. by the language spoken^[Note this is the language Mycroft tells us the line was in _before_ translation. This allows an apples-to-apples comparison, since the word count is always done in English.].
+
+We just group by `line` _and_ `language` before summarizing to remove duplicate lines of dialog.
 
 ```{r verbosity_by_language}
-said  %>%
-  filter(!is.na(speaker)) %>%
+lines_by_lang <- said  %>%
+  # Group by line AND by language
   group_by(line, language) %>%
-  summarize(words = mean(words), .groups = "drop") %>%
+  # Summarize and drop everything else except the words per line
+  summarize(words = mean(words), .groups = "drop")
+```
+
+Note that there is only ever one language per line of dialog, so this operation does remove all duplicate lines. We'll see later that this is not always the case.
+
+Alright, time to draw some violin-plots!
+
+```{r lang_plot, echo=FALSE}
+lines_by_lang %>%  
   ggplot(mapping = aes(
-    y = reorder(language, words, FUN = median),
-    x = words,
+    x = reorder(language, -line, FUN = sum),
+    y = words,
     )
   ) +
-    geom_boxplot() +
-    coord_cartesian(xlim = c(0, 100)) +
+    geom_violin() +
+    coord_cartesian(ylim = c(0, 150)) +
     labs(
       title = "Verbosity by Language",
-      x = "Number of words per line of dialog",
-      y = NULL,
+      y = "Number of words per line of dialog",
+      x = "Language in decreasing order by number of lines",
     )
 ```
+
+There's a general trend for well-represented languages to have 'squatter' distributions, favoring shorter lines of dialog. This may just be an artifact of small sample size. We'd need to revisit this with a few more chapters of data available.
+
+Also note how languages like Mitsubishi Japanese have a second bulge around ~50 words per line, indicating conversations may fall into two _modes_ depending on context or participants, perhaps?
 
 ## Verbosity by Character
 
-Let's define a main character as one who speaks or texts at least 25 lines of dialog, and look at a box plot of the number of words they use per line of dialog.
+Let's look at how verbose our top chatterboxes are.
 
-```{r main_characters}
-characters <- said %>%
+To start, we need a list of our top speakers, which we can build with the following steps:
+
+  1. Group & summarize by line and speaker to get one row per line and speaker,
+  1. Group & summarize again by speaker and keep the count, and
+  1. Arrange by count and keep the top ones.
+
+Note that in the first step, since some lines of dialog have multiple speakers^[Usually when multiple characters cry out the same thing at the same time, and the text ascribes a single quote to all of them.], there will remain duplicate lines in the data. This is what we want here, since in the following step we will group & count by speaker and we want the duplicate lines to count for their respective speakers.
+
+```{r top_speakers}
+top_speakers <- said  %>%
+  # Group by line AND by speaker to deduplicate lines
+  group_by(line, speaker) %>%
+  summarize(.groups = "drop") %>%
+  # Group by speaker and count
   group_by(speaker) %>%
   summarize(count = n()) %>%
-  rename(
-    character = speaker, 
-    speaks = count,
-  ) %>%
-  filter(
-    !is.na(character),
-    speaks > 24,
-  )
-
-characters <- characters$character
+  # Arrange by count and keep only the top
+  arrange(desc(count)) %>%
+  head(5)
 ```
 
-```{r verbosity_by_character}
-said  %>%
-  filter(speaker %in% characters) %>%
+This gives us the `r nrow(top_speakers)` characters with the most lines of dialog. Now we can filter for them before we group our lines by lines and speaker so we can plot their distribution.
+
+```{r verbosity_by_speaker}
+lines_by_speaker <- said  %>%
+  # Filter for top speakers by number of lines
+  filter(speaker %in% top_speakers$speaker) %>%
+  # Group by line and speaker
   group_by(line, speaker) %>%
-  summarize(words = mean(words), .groups = "drop") %>%
+  summarize(words = mean(words), .groups = "drop")
+```
+
+```{r speakers_plot, echo=FALSE}
+lines_by_speaker %>%
   ggplot(mapping = aes(
-    y = reorder(speaker, words, FUN = median),
-    x = words
+    x = reorder(speaker, -line, FUN = sum),
+    y = words
     )
   ) +
-    geom_boxplot() +
-    coord_cartesian(xlim = c(0, 125)) +
+    geom_violin() +
+    #coord_cartesian(ylim = c(0, 80)) +
     labs(
-      title = "Verbosity by Main Character",
-      y = NULL,
-      x = "Number of words per line of dialog"
+      title = "Verbosity of Characters with the Most Lines of Dialog",
+      x = NULL,
+      y = "Number of words per line of dialog"
     )
 ```
 
-Eureka's median word count per line is highest, but Mycroft has some extreme outliers, as high as 350 words for one line of dialog off the right edge of that chart. Who could be on the receiving end of such prolixity?
+Mycroft really stands out from the others. 300+ words per line of dialog? Which of the characters he speaks to could be on the receiving end of such prolixity?
 
-```{r verbosity_Mycroft}
-said  %>%
+To generate a list of characters Mycroft speaks to the most, we must:
+
+  1. Filter for lines that Mycroft speaks,
+  1. Group & summarize by line and addressee to get one row per line and addressee,
+  1. Group & summarize again by addressee and keep the count, and
+  1. Arrange by count and keep the top ones..
+
+The pattern should start to look familiar by now, no?
+
+```{r Mycroft_addressees}
+top_Mycroft_addressees <- said  %>%
+  # Keep just Mycroft's lines of dialog
+  filter(speaker == "#Mycroft") %>%
+  # Group by line AND by addressee to deduplicate lines
+  group_by(line, addressee) %>%
+  summarize(.groups = "drop") %>%
+  # Group by addressee and count
+  group_by(addressee) %>%
+  summarize(count = n()) %>%
+  # Arrange by count and keep only the top
+  arrange(desc(count)) %>%
+  head(5)
+```
+
+That gives us the top `r nrow(top_Mycroft_addressees)` characters Mycroft speaks to by lines of dialog. Now we can filter for them as addressees and for Mycroft as speaker before we generate our distribution plot.
+
+```{r verbosity_by_Mycroft_addressee}
+lines_by_Mycroft_addressee <- said  %>%
+  # Filter for lines between Mycroft and his top addressees
   filter(
     speaker == "#Mycroft",
-    addressee %in% characters | addressee == "#reader",
+    addressee %in% top_Mycroft_addressees$addressee
   ) %>%
+  # Groub by line and addressee
   group_by(line, addressee) %>%
-  summarize(words = mean(words), .groups = "drop") %>%
+  summarize(words = mean(words), .groups = "drop")
+```
+
+```{r Mycroft_plot, echo=FALSE}
+lines_by_Mycroft_addressee  %>%
   ggplot(mapping = aes(
-    y = reorder(addressee, words, FUN = median),
-    x = words
+    x = reorder(addressee, -line, FUN = sum),
+    y = words
     )
   ) +
-    geom_boxplot() +
-    coord_cartesian(xlim = c(0, 250)) +
+    geom_violin() +
+    #coord_cartesian(ylim = c(0, 250)) +
     labs(
       title = "Mycroft's Verbosity by Addressee",
-      y = NULL,
-      x = "Number of words per line of dialog"
+      x = NULL,
+      y = "Number of words per line of dialog"
     )
 ```
 
-Ah, of course. Mycroft is much more verbose in his historical & philosophical asides to the reader. By contrast he's almost monosyllabic with the Major. How does Mycroft's verbosity compare to the others if we exclude the reader?
+Ah, of course. Mycroft is much more verbose in his historical & philosophical asides to the reader. Also, notice how Mycroft's number of words per line shows that bulge near the top when speaking to certain people? It's particularly marked with Ando & Danaë and may explain the similar bulge we saw in the distribution for Mitsubishi Japanese.
 
-```{r verbosity_wo_reader, preview=TRUE}
-said  %>%
+In any case, how does Mycroft's verbosity compare to the others if we exclude his asides to the reader?
+
+```{r verbosity_by_speaker_wo_reader}
+lines_by_speaker <- said  %>%
+  # Filter for top speakers by number of lines
+  # but drop the asides to the reader this time
   filter(
-    speaker %in% characters,
-    addressee != "#reader",
+    speaker %in% top_speakers$speaker,
+    addressee != "#reader"
   ) %>%
+  # Group by line and speaker
   group_by(line, speaker) %>%
-  summarize(words = mean(words), .groups = "drop") %>%
+  summarize(words = mean(words), .groups = "drop")
+```
+
+```{r speakers_plot_wo_reader, preview=TRUE, echo=FALSE}
+lines_by_speaker %>%
   ggplot(mapping = aes(
-    y = reorder(speaker, words, FUN = median),
-    x = words
+    x = reorder(speaker, -line, FUN = sum),
+    y = words
     )
   ) +
-    geom_boxplot() +
-    coord_cartesian(xlim = c(0, 50)) +
+    geom_violin() +
+    #coord_cartesian(ylim = c(0, 80)) +
     labs(
-      title = "Verbosity by Main Character",
-      subtitle = "excluding asides to the reader",
-      y = NULL,
-      x = "Number of words per line of dialog"
+      title = "Verbosity of Characters with the Most Lines of Dialog",
+      subtitle = "Excluding asides to the reader",
+      x = NULL,
+      y = "Number of words per line of dialog"
     )
 ```
 
-Mycroft is still in the top three but without his asides to the reader his verbosity is much more like the others'.
+Mycroft is still in the top `r nrow(top_speakers)` but without his asides to the reader his verbosity distribution looks much more like the others'.
