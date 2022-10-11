@@ -104,7 +104,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <meta property="og:type" content="article"/>
 <meta property="og:description" content="A few visualizations based on the `speaker` and `addressee` columns."/>
 <meta property="og:url" content="https://syvwlch.github.io/Data-Ignota/viz/2022-10-11-who-talks-to-whom/"/>
-<meta property="og:image" content="https://syvwlch.github.io/Data-Ignota/viz/2022-10-11-who-talks-to-whom/who-talks-to-whom_files/figure-html5/plot_characters-1.png"/>
+<meta property="og:image" content="https://syvwlch.github.io/Data-Ignota/viz/2022-10-11-who-talks-to-whom/who-talks-to-whom_files/figure-html5/bar_characters-1.png"/>
 <meta property="og:image:width" content="1248"/>
 <meta property="og:image:height" content="768"/>
 <meta property="og:locale" content="en_US"/>
@@ -115,7 +115,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <meta property="twitter:title" content="Data Ignota: Who Talks to Whom?"/>
 <meta property="twitter:description" content="A few visualizations based on the `speaker` and `addressee` columns."/>
 <meta property="twitter:url" content="https://syvwlch.github.io/Data-Ignota/viz/2022-10-11-who-talks-to-whom/"/>
-<meta property="twitter:image" content="https://syvwlch.github.io/Data-Ignota/viz/2022-10-11-who-talks-to-whom/who-talks-to-whom_files/figure-html5/plot_characters-1.png"/>
+<meta property="twitter:image" content="https://syvwlch.github.io/Data-Ignota/viz/2022-10-11-who-talks-to-whom/who-talks-to-whom_files/figure-html5/bar_characters-1.png"/>
 <meta property="twitter:image:width" content="1248"/>
 <meta property="twitter:image:height" content="768"/>
 
@@ -134,7 +134,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--/radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-resource-manifest">
-  {"type":"character","attributes":{},"value":["who-talks-to-whom_files/anchor-4.2.2/anchor.min.js","who-talks-to-whom_files/bowser-1.9.3/bowser.min.js","who-talks-to-whom_files/distill-2.2.21/template.v2.js","who-talks-to-whom_files/figure-html5/plot_characters-1.png","who-talks-to-whom_files/header-attrs-2.16/header-attrs.js","who-talks-to-whom_files/jquery-3.6.0/jquery-3.6.0.js","who-talks-to-whom_files/jquery-3.6.0/jquery-3.6.0.min.js","who-talks-to-whom_files/jquery-3.6.0/jquery-3.6.0.min.map","who-talks-to-whom_files/popper-2.6.0/popper.min.js","who-talks-to-whom_files/tippy-6.2.7/tippy-bundle.umd.min.js","who-talks-to-whom_files/tippy-6.2.7/tippy-light-border.css","who-talks-to-whom_files/tippy-6.2.7/tippy.css","who-talks-to-whom_files/tippy-6.2.7/tippy.umd.min.js","who-talks-to-whom_files/webcomponents-2.0.0/webcomponents.js"]}
+  {"type":"character","attributes":{},"value":["who-talks-to-whom_files/anchor-4.2.2/anchor.min.js","who-talks-to-whom_files/bowser-1.9.3/bowser.min.js","who-talks-to-whom_files/distill-2.2.21/template.v2.js","who-talks-to-whom_files/figure-html5/bar_characters-1.png","who-talks-to-whom_files/figure-html5/fill_characters-1.png","who-talks-to-whom_files/figure-html5/plot_characters-1.png","who-talks-to-whom_files/header-attrs-2.16/header-attrs.js","who-talks-to-whom_files/jquery-3.6.0/jquery-3.6.0.js","who-talks-to-whom_files/jquery-3.6.0/jquery-3.6.0.min.js","who-talks-to-whom_files/jquery-3.6.0/jquery-3.6.0.min.map","who-talks-to-whom_files/popper-2.6.0/popper.min.js","who-talks-to-whom_files/tippy-6.2.7/tippy-bundle.umd.min.js","who-talks-to-whom_files/tippy-6.2.7/tippy-light-border.css","who-talks-to-whom_files/tippy-6.2.7/tippy.css","who-talks-to-whom_files/tippy-6.2.7/tippy.umd.min.js","who-talks-to-whom_files/webcomponents-2.0.0/webcomponents.js"]}
   </script>
   <!--radix_placeholder_navigation_in_header-->
 <meta name="distill:offset" content="../.."/>
@@ -2182,9 +2182,14 @@ RSS
 <ul>
 <li><a href="#top-speakers" id="toc-top-speakers">Top Speakers</a></li>
 <li><a href="#top-addressees" id="toc-top-addressees">Top Addressees</a></li>
-<li><a href="#characters-engaged-in-dialog" id="toc-characters-engaged-in-dialog">Characters Engaged in Dialog</a></li>
+<li><a href="#top-conversationalists" id="toc-top-conversationalists">Top Conversationalists</a></li>
+<li><a href="#does-anyone-hog-the-conversation" id="toc-does-anyone-hog-the-conversation">Does Anyone Hog the Conversation?</a></li>
 </ul></li>
-<li><a href="#does-anyone-speak-more-often-than-they-are-spoken-to" id="toc-does-anyone-speak-more-often-than-they-are-spoken-to">Does Anyone Speak More Often Than They Are Spoken To?</a></li>
+<li><a href="#who-speaks-to-whom" id="toc-who-speaks-to-whom">Who Speaks to Whom?</a>
+<ul>
+<li><a href="#listing-all-the-conversations" id="toc-listing-all-the-conversations">Listing All the Conversations</a></li>
+<li><a href="#building-a-map-of-the-larger-conversation" id="toc-building-a-map-of-the-larger-conversation">Building a Map of the Larger Conversation</a></li>
+</ul></li>
 </ul>
 </nav>
 </div>
@@ -2233,12 +2238,12 @@ RSS
 </div>
 <p>Here are the top five out of 38 speakers:</p>
 <div class="layout-chunk" data-layout="l-body">
-<div id="tjbbhjvrrq" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="mkcpuemcpx" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#tjbbhjvrrq .gt_table {
+#mkcpuemcpx .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2263,7 +2268,7 @@ RSS
   border-left-color: #D3D3D3;
 }
 
-#tjbbhjvrrq .gt_heading {
+#mkcpuemcpx .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2275,7 +2280,7 @@ RSS
   border-right-color: #D3D3D3;
 }
 
-#tjbbhjvrrq .gt_title {
+#mkcpuemcpx .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2287,7 +2292,7 @@ RSS
   border-bottom-width: 0;
 }
 
-#tjbbhjvrrq .gt_subtitle {
+#mkcpuemcpx .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2299,13 +2304,13 @@ RSS
   border-top-width: 0;
 }
 
-#tjbbhjvrrq .gt_bottom_border {
+#mkcpuemcpx .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#tjbbhjvrrq .gt_col_headings {
+#mkcpuemcpx .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2320,7 +2325,7 @@ RSS
   border-right-color: #D3D3D3;
 }
 
-#tjbbhjvrrq .gt_col_heading {
+#mkcpuemcpx .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2340,7 +2345,7 @@ RSS
   overflow-x: hidden;
 }
 
-#tjbbhjvrrq .gt_column_spanner_outer {
+#mkcpuemcpx .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2352,15 +2357,15 @@ RSS
   padding-right: 4px;
 }
 
-#tjbbhjvrrq .gt_column_spanner_outer:first-child {
+#mkcpuemcpx .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#tjbbhjvrrq .gt_column_spanner_outer:last-child {
+#mkcpuemcpx .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#tjbbhjvrrq .gt_column_spanner {
+#mkcpuemcpx .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2372,7 +2377,7 @@ RSS
   width: 100%;
 }
 
-#tjbbhjvrrq .gt_group_heading {
+#mkcpuemcpx .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2397,7 +2402,7 @@ RSS
   vertical-align: middle;
 }
 
-#tjbbhjvrrq .gt_empty_group_heading {
+#mkcpuemcpx .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2412,15 +2417,15 @@ RSS
   vertical-align: middle;
 }
 
-#tjbbhjvrrq .gt_from_md > :first-child {
+#mkcpuemcpx .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#tjbbhjvrrq .gt_from_md > :last-child {
+#mkcpuemcpx .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#tjbbhjvrrq .gt_row {
+#mkcpuemcpx .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2439,7 +2444,7 @@ RSS
   overflow-x: hidden;
 }
 
-#tjbbhjvrrq .gt_stub {
+#mkcpuemcpx .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2452,7 +2457,7 @@ RSS
   padding-right: 5px;
 }
 
-#tjbbhjvrrq .gt_stub_row_group {
+#mkcpuemcpx .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2466,11 +2471,11 @@ RSS
   vertical-align: top;
 }
 
-#tjbbhjvrrq .gt_row_group_first td {
+#mkcpuemcpx .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#tjbbhjvrrq .gt_summary_row {
+#mkcpuemcpx .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2480,16 +2485,16 @@ RSS
   padding-right: 5px;
 }
 
-#tjbbhjvrrq .gt_first_summary_row {
+#mkcpuemcpx .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#tjbbhjvrrq .gt_first_summary_row.thick {
+#mkcpuemcpx .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#tjbbhjvrrq .gt_last_summary_row {
+#mkcpuemcpx .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2499,7 +2504,7 @@ RSS
   border-bottom-color: #D3D3D3;
 }
 
-#tjbbhjvrrq .gt_grand_summary_row {
+#mkcpuemcpx .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2509,7 +2514,7 @@ RSS
   padding-right: 5px;
 }
 
-#tjbbhjvrrq .gt_first_grand_summary_row {
+#mkcpuemcpx .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2519,11 +2524,11 @@ RSS
   border-top-color: #D3D3D3;
 }
 
-#tjbbhjvrrq .gt_striped {
+#mkcpuemcpx .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#tjbbhjvrrq .gt_table_body {
+#mkcpuemcpx .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2532,7 +2537,7 @@ RSS
   border-bottom-color: #D3D3D3;
 }
 
-#tjbbhjvrrq .gt_footnotes {
+#mkcpuemcpx .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2546,7 +2551,7 @@ RSS
   border-right-color: #D3D3D3;
 }
 
-#tjbbhjvrrq .gt_footnote {
+#mkcpuemcpx .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -2555,7 +2560,7 @@ RSS
   padding-right: 5px;
 }
 
-#tjbbhjvrrq .gt_sourcenotes {
+#mkcpuemcpx .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2569,7 +2574,7 @@ RSS
   border-right-color: #D3D3D3;
 }
 
-#tjbbhjvrrq .gt_sourcenote {
+#mkcpuemcpx .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2577,64 +2582,64 @@ RSS
   padding-right: 5px;
 }
 
-#tjbbhjvrrq .gt_left {
+#mkcpuemcpx .gt_left {
   text-align: left;
 }
 
-#tjbbhjvrrq .gt_center {
+#mkcpuemcpx .gt_center {
   text-align: center;
 }
 
-#tjbbhjvrrq .gt_right {
+#mkcpuemcpx .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#tjbbhjvrrq .gt_font_normal {
+#mkcpuemcpx .gt_font_normal {
   font-weight: normal;
 }
 
-#tjbbhjvrrq .gt_font_bold {
+#mkcpuemcpx .gt_font_bold {
   font-weight: bold;
 }
 
-#tjbbhjvrrq .gt_font_italic {
+#mkcpuemcpx .gt_font_italic {
   font-style: italic;
 }
 
-#tjbbhjvrrq .gt_super {
+#mkcpuemcpx .gt_super {
   font-size: 65%;
 }
 
-#tjbbhjvrrq .gt_footnote_marks {
+#mkcpuemcpx .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#tjbbhjvrrq .gt_asterisk {
+#mkcpuemcpx .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#tjbbhjvrrq .gt_indent_1 {
+#mkcpuemcpx .gt_indent_1 {
   text-indent: 5px;
 }
 
-#tjbbhjvrrq .gt_indent_2 {
+#mkcpuemcpx .gt_indent_2 {
   text-indent: 10px;
 }
 
-#tjbbhjvrrq .gt_indent_3 {
+#mkcpuemcpx .gt_indent_3 {
   text-indent: 15px;
 }
 
-#tjbbhjvrrq .gt_indent_4 {
+#mkcpuemcpx .gt_indent_4 {
   text-indent: 20px;
 }
 
-#tjbbhjvrrq .gt_indent_5 {
+#mkcpuemcpx .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2685,12 +2690,12 @@ RSS
 </div>
 <p>Here are the top five out of 50 addressees:</p>
 <div class="layout-chunk" data-layout="l-body">
-<div id="unovfikefv" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="idsnxvmjmq" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#unovfikefv .gt_table {
+#idsnxvmjmq .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2715,7 +2720,7 @@ RSS
   border-left-color: #D3D3D3;
 }
 
-#unovfikefv .gt_heading {
+#idsnxvmjmq .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2727,7 +2732,7 @@ RSS
   border-right-color: #D3D3D3;
 }
 
-#unovfikefv .gt_title {
+#idsnxvmjmq .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2739,7 +2744,7 @@ RSS
   border-bottom-width: 0;
 }
 
-#unovfikefv .gt_subtitle {
+#idsnxvmjmq .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2751,13 +2756,13 @@ RSS
   border-top-width: 0;
 }
 
-#unovfikefv .gt_bottom_border {
+#idsnxvmjmq .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#unovfikefv .gt_col_headings {
+#idsnxvmjmq .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2772,7 +2777,7 @@ RSS
   border-right-color: #D3D3D3;
 }
 
-#unovfikefv .gt_col_heading {
+#idsnxvmjmq .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2792,7 +2797,7 @@ RSS
   overflow-x: hidden;
 }
 
-#unovfikefv .gt_column_spanner_outer {
+#idsnxvmjmq .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2804,15 +2809,15 @@ RSS
   padding-right: 4px;
 }
 
-#unovfikefv .gt_column_spanner_outer:first-child {
+#idsnxvmjmq .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#unovfikefv .gt_column_spanner_outer:last-child {
+#idsnxvmjmq .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#unovfikefv .gt_column_spanner {
+#idsnxvmjmq .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2824,7 +2829,7 @@ RSS
   width: 100%;
 }
 
-#unovfikefv .gt_group_heading {
+#idsnxvmjmq .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2849,7 +2854,7 @@ RSS
   vertical-align: middle;
 }
 
-#unovfikefv .gt_empty_group_heading {
+#idsnxvmjmq .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2864,15 +2869,15 @@ RSS
   vertical-align: middle;
 }
 
-#unovfikefv .gt_from_md > :first-child {
+#idsnxvmjmq .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#unovfikefv .gt_from_md > :last-child {
+#idsnxvmjmq .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#unovfikefv .gt_row {
+#idsnxvmjmq .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2891,7 +2896,7 @@ RSS
   overflow-x: hidden;
 }
 
-#unovfikefv .gt_stub {
+#idsnxvmjmq .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2904,7 +2909,7 @@ RSS
   padding-right: 5px;
 }
 
-#unovfikefv .gt_stub_row_group {
+#idsnxvmjmq .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2918,11 +2923,11 @@ RSS
   vertical-align: top;
 }
 
-#unovfikefv .gt_row_group_first td {
+#idsnxvmjmq .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#unovfikefv .gt_summary_row {
+#idsnxvmjmq .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2932,16 +2937,16 @@ RSS
   padding-right: 5px;
 }
 
-#unovfikefv .gt_first_summary_row {
+#idsnxvmjmq .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#unovfikefv .gt_first_summary_row.thick {
+#idsnxvmjmq .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#unovfikefv .gt_last_summary_row {
+#idsnxvmjmq .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2951,7 +2956,7 @@ RSS
   border-bottom-color: #D3D3D3;
 }
 
-#unovfikefv .gt_grand_summary_row {
+#idsnxvmjmq .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2961,7 +2966,7 @@ RSS
   padding-right: 5px;
 }
 
-#unovfikefv .gt_first_grand_summary_row {
+#idsnxvmjmq .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2971,11 +2976,11 @@ RSS
   border-top-color: #D3D3D3;
 }
 
-#unovfikefv .gt_striped {
+#idsnxvmjmq .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#unovfikefv .gt_table_body {
+#idsnxvmjmq .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2984,7 +2989,7 @@ RSS
   border-bottom-color: #D3D3D3;
 }
 
-#unovfikefv .gt_footnotes {
+#idsnxvmjmq .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2998,7 +3003,7 @@ RSS
   border-right-color: #D3D3D3;
 }
 
-#unovfikefv .gt_footnote {
+#idsnxvmjmq .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -3007,7 +3012,7 @@ RSS
   padding-right: 5px;
 }
 
-#unovfikefv .gt_sourcenotes {
+#idsnxvmjmq .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3021,7 +3026,7 @@ RSS
   border-right-color: #D3D3D3;
 }
 
-#unovfikefv .gt_sourcenote {
+#idsnxvmjmq .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3029,64 +3034,64 @@ RSS
   padding-right: 5px;
 }
 
-#unovfikefv .gt_left {
+#idsnxvmjmq .gt_left {
   text-align: left;
 }
 
-#unovfikefv .gt_center {
+#idsnxvmjmq .gt_center {
   text-align: center;
 }
 
-#unovfikefv .gt_right {
+#idsnxvmjmq .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#unovfikefv .gt_font_normal {
+#idsnxvmjmq .gt_font_normal {
   font-weight: normal;
 }
 
-#unovfikefv .gt_font_bold {
+#idsnxvmjmq .gt_font_bold {
   font-weight: bold;
 }
 
-#unovfikefv .gt_font_italic {
+#idsnxvmjmq .gt_font_italic {
   font-style: italic;
 }
 
-#unovfikefv .gt_super {
+#idsnxvmjmq .gt_super {
   font-size: 65%;
 }
 
-#unovfikefv .gt_footnote_marks {
+#idsnxvmjmq .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#unovfikefv .gt_asterisk {
+#idsnxvmjmq .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#unovfikefv .gt_indent_1 {
+#idsnxvmjmq .gt_indent_1 {
   text-indent: 5px;
 }
 
-#unovfikefv .gt_indent_2 {
+#idsnxvmjmq .gt_indent_2 {
   text-indent: 10px;
 }
 
-#unovfikefv .gt_indent_3 {
+#idsnxvmjmq .gt_indent_3 {
   text-indent: 15px;
 }
 
-#unovfikefv .gt_indent_4 {
+#idsnxvmjmq .gt_indent_4 {
   text-indent: 20px;
 }
 
-#unovfikefv .gt_indent_5 {
+#idsnxvmjmq .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -3115,25 +3120,502 @@ RSS
 </table>
 </div>
 </div>
-<h3 id="characters-engaged-in-dialog">Characters Engaged in Dialog</h3>
-<p>We can now combine the two lists using a join<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> by the <code>character</code> column and add a <code>total_lines</code> column for lines of dialog going in either direction.</p>
+<h3 id="top-conversationalists">Top Conversationalists</h3>
+<p>We can now combine the two lists using a join<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> by the <code>character</code> column.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>characters</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate-joins.html'>inner_join</a></span><span class='op'>(</span></span>
 <span>  <span class='va'>top_speakers</span>,</span>
 <span>  <span class='va'>top_addressees</span>,</span>
 <span>  by <span class='op'>=</span> <span class='st'>"character"</span></span>
-<span>  <span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>total_lines <span class='op'>=</span> <span class='va'>speaks</span> <span class='op'>+</span> <span class='va'>spokenTo</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/arrange.html'>arrange</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/desc.html'>desc</a></span><span class='op'>(</span><span class='va'>total_lines</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+<span>  <span class='op'>)</span></span></code></pre>
 </div>
 </div>
 <p>Tables are nice and all, but this seems like a good time for a graph. Here are the top 20 out of 37 characters by lines of dialog:</p>
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="who-talks-to-whom_files/figure-html5/plot_characters-1.png" width="624" /></p>
+<p><img src="who-talks-to-whom_files/figure-html5/bar_characters-1.png" width="624" /></p>
 </div>
 <p>No real surprise there, Carlyle and Mycroft are our two chatter boxes, even when we remove the reader from the conversation, and it falls off pretty fast after that. Another <em>Power Law Distribution</em>?</p>
-<h2 id="does-anyone-speak-more-often-than-they-are-spoken-to">Does Anyone Speak More Often Than They Are Spoken To?</h2>
+<h3 id="does-anyone-hog-the-conversation">Does Anyone Hog the Conversation?</h3>
+<p>It looks like some characters speaks more or less than they are spoken to. Anyone stand out in particular?</p>
+<div class="layout-chunk" data-layout="l-body">
+<p><img src="who-talks-to-whom_files/figure-html5/fill_characters-1.png" width="624" /></p>
+</div>
+<p>Looks like MASON speaks less than he is spoken to. This probably reflects how much ’splaining Ganymede and Andō have to do once he arrives on stage. At the other extreme, the Major speaks much more than he is spoken to. He can be rather intimidating, after all!</p>
+<h2 id="who-speaks-to-whom">Who Speaks to Whom?</h2>
+<p>Ok, looking at the <code>speaker</code> and <code>addressee</code> columns separately is nice, and so is comparing their totals per character… but we can do more than that, right?</p>
+<p>What happens if we look at pairs of characters speaking to each other?</p>
+<h3 id="listing-all-the-conversations">Listing All the Conversations</h3>
+<p>Let’s build a list of the pairs of speakers and addressees with at least one line of dialog. We’ll also keep track of total line and word count.</p>
+<ol type="1">
+<li>Group by line, words, speaker, and addressee, then</li>
+<li>summarize to drop dupes relevant for other columns, and</li>
+<li>Group again by speaker and addressee,</li>
+<li>then summarize and calculate the line and word counts.</li>
+</ol>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>edge_list</span> <span class='op'>&lt;-</span> <span class='va'>said</span>  <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span>  <span class='co'># Group by line, speaker AND addressee to deduplicate lines</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>line</span>, <span class='va'>speaker</span>, <span class='va'>addressee</span>, <span class='va'>words</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>.groups <span class='op'>=</span> <span class='st'>"drop"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span>  <span class='co'># Group by speaker and count</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>speaker</span>, <span class='va'>addressee</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>lines <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span><span class='op'>(</span><span class='op'>)</span>, words <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>words</span><span class='op'>)</span>, .groups <span class='op'>=</span> <span class='st'>"drop"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span>  <span class='co'># Arrange by count</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/arrange.html'>arrange</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/desc.html'>desc</a></span><span class='op'>(</span><span class='va'>lines</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+</div>
+</div>
+<p>That’s it, it’s that easy!</p>
+<p>Here are the top five directed pairs by number of lines, out of 208:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div id="oluokulzwe" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#oluokulzwe .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#oluokulzwe .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#oluokulzwe .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#oluokulzwe .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#oluokulzwe .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#oluokulzwe .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#oluokulzwe .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#oluokulzwe .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#oluokulzwe .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#oluokulzwe .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#oluokulzwe .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#oluokulzwe .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#oluokulzwe .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#oluokulzwe .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#oluokulzwe .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#oluokulzwe .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#oluokulzwe .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#oluokulzwe .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#oluokulzwe .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#oluokulzwe .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#oluokulzwe .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#oluokulzwe .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#oluokulzwe .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#oluokulzwe .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#oluokulzwe .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#oluokulzwe .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#oluokulzwe .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#oluokulzwe .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#oluokulzwe .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#oluokulzwe .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#oluokulzwe .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#oluokulzwe .gt_left {
+  text-align: left;
+}
+
+#oluokulzwe .gt_center {
+  text-align: center;
+}
+
+#oluokulzwe .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#oluokulzwe .gt_font_normal {
+  font-weight: normal;
+}
+
+#oluokulzwe .gt_font_bold {
+  font-weight: bold;
+}
+
+#oluokulzwe .gt_font_italic {
+  font-style: italic;
+}
+
+#oluokulzwe .gt_super {
+  font-size: 65%;
+}
+
+#oluokulzwe .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#oluokulzwe .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#oluokulzwe .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#oluokulzwe .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#oluokulzwe .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#oluokulzwe .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#oluokulzwe .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">speaker</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">addressee</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">lines</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">words</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">#Carlyle</td>
+<td class="gt_row gt_left">#Bridger</td>
+<td class="gt_row gt_right">72</td>
+<td class="gt_row gt_right">1864</td></tr>
+    <tr><td class="gt_row gt_left">#Bridger</td>
+<td class="gt_row gt_left">#Carlyle</td>
+<td class="gt_row gt_right">71</td>
+<td class="gt_row gt_right">965</td></tr>
+    <tr><td class="gt_row gt_left">#Mycroft</td>
+<td class="gt_row gt_left">#reader</td>
+<td class="gt_row gt_right">64</td>
+<td class="gt_row gt_right">6349</td></tr>
+    <tr><td class="gt_row gt_left">#Carlyle</td>
+<td class="gt_row gt_left">#Mycroft</td>
+<td class="gt_row gt_right">63</td>
+<td class="gt_row gt_right">745</td></tr>
+    <tr><td class="gt_row gt_left">#Mycroft</td>
+<td class="gt_row gt_left">#Carlyle</td>
+<td class="gt_row gt_right">63</td>
+<td class="gt_row gt_right">1520</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
+<p>Note how by numbers of lines of dialog, the conversation between Carlyle and Bridger is a little ‘bigger’, but by word count Mycroft’s asides to the reader completely dominates.</p>
+<p>Also notice that between Carlyle &amp; Bridger and between Mycroft &amp; Carlyle the conversations are balanced by line count but not by word count? It’s more like two-to-one, reflecting how one character is explaining things and answering questions for the other.</p>
+<h3 id="building-a-map-of-the-larger-conversation">Building a Map of the Larger Conversation</h3>
+<p>So we have a list of pairs of characters engaged in dialog with a few different measures of how much dialog it was… that’s all we need to build a directed, weighted network graph.</p>
+<p>Let’s build a map of the larger conversation!</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <section class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr />
