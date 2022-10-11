@@ -96,7 +96,7 @@ top_addressees %>%
   gt()
 ```
 
-### Characters Engaged in Dialog
+### Top Conversationalists
 
 We can now combine the two lists using a join^[If we use a `inner_join()` any characters that are not on both lists will be dropped.] by the `character` column.
 
@@ -110,7 +110,7 @@ characters <- inner_join(
 
 Tables are nice and all, but this seems like a good time for a graph. Here are the top 20 out of `r nrow(characters)` characters by lines of dialog:
 
-```{r plot_characters, echo=FALSE}
+```{r bar_characters, echo=FALSE}
 characters %>%
   head(20) %>%
   gather(speaks, spokenTo, key = "Role", value = lines) %>%
@@ -118,11 +118,11 @@ characters %>%
     mapping = aes(
       y = reorder(character, lines),
       x = lines,
-      fill = Role)) +
+      fill = Role)
+    ) +
   geom_bar(position = "stack", stat="identity") +
   labs(
-      title = "Top Twenty Characters",
-      subtitle = "with a speaking part",
+      title = "Top Twenty Conversationalists",
       x = "Lines of dialog",
       y = NULL,
     ) +
@@ -131,6 +131,80 @@ characters %>%
 
 No real surprise there, Carlyle and Mycroft are our two chatter boxes, even when we remove the reader from the conversation, and it falls off pretty fast after that. Another _Power Law Distribution_?
 
-## Does Anyone Speak More Often Than They Are Spoken To?
+### Does Anyone Hog the Conversation?
+
+It looks like some characters speaks more or less than they are spoken to. Anyone stand out in particular?
+
+```{r fill_characters, echo=FALSE}
+characters %>%
+  head(20) %>%
+  mutate(ratio = speaks / spokenTo) %>%
+  gather(speaks, spokenTo, key = "Role", value = lines) %>%
+  ggplot(
+    mapping = aes(
+      y = reorder(character, -ratio),
+      x = lines,
+      fill = Role)
+    ) +
+  geom_bar(position = "fill", stat="identity") +
+  labs(
+      title = "Top Twenty Characters",
+      subtitle = "with a speaking part",
+      x = NULL,
+      y = NULL,
+    ) +
+  scale_x_continuous(labels = scales::percent) +
+  theme(legend.position = c(0.8, 0.25))
+  
+```
+
+Looks like MASON speaks less than he is spoken to. This probably reflects how much 'splaining Ganymede and Andō have to do once he arrives on stage. At the other extreme, the Major speaks much more than he is spoken to. He can be rather intimidating, after all!
+
+## Who Speaks to Whom?
+
+Ok, looking at the `speaker` and `addressee` columns separately is nice, and so is comparing their totals per character... but we can do more than that, right?
+
+What happens if we look at pairs of characters speaking to each other? 
+ 
+### Listing All the Conversations
+ 
+Let's build a list of the pairs of speakers and addressees with at least one line of dialog. We'll also keep track of total line and word count.
+ 
+  1. Group by line, words, speaker, and addressee, then 
+  1. summarize to drop dupes relevant for other columns, and
+  1. Group again by speaker and addressee, 
+  1. then summarize and calculate the line and word counts.
+ 
+```{r edge_list}
+edge_list <- said  %>%
+  # Group by line, speaker AND addressee to deduplicate lines
+  group_by(line, speaker, addressee, words) %>%
+  summarize(.groups = "drop") %>%
+  # Group by speaker and count
+  group_by(speaker, addressee) %>%
+  summarize(lines = n(), words = sum(words), .groups = "drop") %>%
+  # Arrange by count
+  arrange(desc(lines))
+```
+
+That's it, it's that easy! 
+
+Here are the top five directed pairs by number of lines, out of `r nrow(edge_list)`:
+
+```{r show_top_pairs, echo=FALSE}
+edge_list %>%
+  head(5) %>%
+  gt()
+```
+
+Note how by numbers of lines of dialog, the conversation between Carlyle and Bridger is a little 'bigger', but by word count Mycroft's asides to the reader completely dominates. 
+
+Also notice that between Carlyle & Bridger and between Mycroft & Carlyle the conversations are balanced by line count but not by word count? It's more like two-to-one, reflecting how one character is explaining things and answering questions for the other.
+
+### Building a Map of the Larger Conversation
+
+So we have a list of pairs of characters engaged in dialog with a few different measures of how much dialog it was... that's all we need to build a directed, weighted network graph.
+
+Let's build a map of the larger conversation!
 
 
