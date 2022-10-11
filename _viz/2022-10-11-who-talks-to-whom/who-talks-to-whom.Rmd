@@ -1,0 +1,138 @@
+---
+title: "Who Talks to Whom?"
+description: |
+  A few visualizations based on the `speaker` and `addressee` columns.
+author:
+  - name: Mathieu Glachant
+    url: {}
+date: 2022-10-11
+output:
+  distill::distill_article:
+    self_contained: false
+    toc: true
+    toc_depth: 3
+---
+
+Our `said.csv` data file contains information about who said a line of dialog, and to whom. 
+
+What can we do with this data for the chapters edited to date, i.e. the first twelve?
+
+```{r setup}
+library(tidyverse)
+library(gt)
+
+PATH_TO_SAID <- "../../data/said.csv"
+
+said <- read.csv(PATH_TO_SAID) %>%
+  filter(
+    book == 1,
+    chapter <= 12
+  )
+```
+
+## Who Speaks? Who Listens?
+
+### Top Speakers
+
+Let's build a list of characters with a speaking part.
+
+We need to:
+
+  - remove the asides to the reader and their rants to Mycroft,
+  - eliminate duplicate rows that are not relevant, and 
+  - rank them by number of lines of dialog.
+
+```{r top_speakers}
+top_speakers <- said  %>%
+  # Remove the reader from either side of the conversation
+  filter(
+    speaker != "#reader",
+    addressee != "#reader",
+  ) %>%
+  # Group by line AND by speaker to deduplicate lines
+  group_by(line, speaker) %>%
+  summarize(.groups = "drop") %>%
+  # Group by speaker and count
+  group_by(character = speaker) %>%
+  summarize(speaks = n()) %>%
+  # Arrange by count
+  arrange(desc(speaks))
+```
+
+Here are the top five out of `r nrow(top_speakers)` speakers:
+
+```{r show_top_speakers, echo=FALSE}
+top_speakers %>%
+  head(5) %>%
+  gt()
+```
+
+### Top Addressees
+
+We can do the same for characters who are directly addressed.
+
+```{r top_addressees}
+top_addressees <- said  %>%
+  # Remove the reader from either side of the conversation
+  filter(
+    speaker != "#reader",
+    addressee != "#reader",
+  ) %>%
+  # Group by line AND by addressee to deduplicate lines
+  group_by(line, addressee) %>%
+  summarize(.groups = "drop") %>%
+  # Group by addressee and count
+  group_by(character = addressee) %>%
+  summarize(spokenTo = n()) %>%
+  # Arrange by count
+  arrange(desc(spokenTo))
+```
+
+Here are the top five out of `r nrow(top_addressees)` addressees:
+
+```{r show_top_addressees, echo=FALSE}
+top_addressees %>%
+  head(5) %>%
+  gt()
+```
+
+### Characters Engaged in Dialog
+
+We can now combine the two lists using a join^[If we use a `inner_join()` any characters that are not on both lists will be dropped.] by the `character` column and add a `total_lines` column for lines of dialog going in either direction.
+
+```{r characters}
+characters <- inner_join(
+  top_speakers,
+  top_addressees,
+  by = "character"
+  ) %>%
+  mutate(total_lines = speaks + spokenTo) %>%
+  arrange(desc(total_lines))
+```
+
+Tables are nice and all, but this seems like a good time for a graph. Here are the top 20 out of `r nrow(characters)` characters by lines of dialog:
+
+```{r plot_characters, echo=FALSE}
+characters %>%
+  head(20) %>%
+  gather(speaks, spokenTo, key = "Role", value = lines) %>%
+  ggplot(
+    mapping = aes(
+      y = reorder(character, lines),
+      x = lines,
+      fill = Role)) +
+  geom_bar(position = "stack", stat="identity") +
+  labs(
+      title = "Top Twenty Characters",
+      subtitle = "with a speaking part",
+      x = "Lines of dialog",
+      y = NULL,
+    ) +
+  theme(legend.position = c(0.8, 0.25))
+```
+
+No real surprise there, Carlyle and Mycroft are our two chatter boxes, even when we remove the reader from the conversation, and it falls off pretty fast after that. Another _Power Law Distribution_?
+
+## Does Anyone Speak More Often Than They Are Spoken To?
+
+
