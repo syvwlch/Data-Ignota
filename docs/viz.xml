@@ -7,7 +7,16 @@
     <description>A data-driven exploration of Ada Palmer's Terra Ignota series.
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Sun, 09 Oct 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 11 Oct 2022 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Who Talks to Whom?</title>
+      <dc:creator>Mathieu Glachant</dc:creator>
+      <link>https://syvwlch.github.io/Data-Ignota/viz/2022-10-11-who-talks-to-whom</link>
+      <description>A few visualizations based on the `speaker` and `addressee` columns.</description>
+      <guid>https://syvwlch.github.io/Data-Ignota/viz/2022-10-11-who-talks-to-whom</guid>
+      <pubDate>Tue, 11 Oct 2022 00:00:00 +0000</pubDate>
+      <media:content url="https://syvwlch.github.io/Data-Ignota/viz/2022-10-11-who-talks-to-whom/who-talks-to-whom_files/figure-html5/plot_characters-1.png" medium="image" type="image/png" width="1248" height="768"/>
+    </item>
     <item>
       <title>Exploring Verbosity</title>
       <dc:creator>Mathieu Glachant</dc:creator>
