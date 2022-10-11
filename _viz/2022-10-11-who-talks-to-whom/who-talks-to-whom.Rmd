@@ -98,16 +98,14 @@ top_addressees %>%
 
 ### Characters Engaged in Dialog
 
-We can now combine the two lists using a join^[If we use a `inner_join()` any characters that are not on both lists will be dropped.] by the `character` column and add a `total_lines` column for lines of dialog going in either direction.
+We can now combine the two lists using a join^[If we use a `inner_join()` any characters that are not on both lists will be dropped.] by the `character` column.
 
 ```{r characters}
 characters <- inner_join(
   top_speakers,
   top_addressees,
   by = "character"
-  ) %>%
-  mutate(total_lines = speaks + spokenTo) %>%
-  arrange(desc(total_lines))
+  )
 ```
 
 Tables are nice and all, but this seems like a good time for a graph. Here are the top 20 out of `r nrow(characters)` characters by lines of dialog:
