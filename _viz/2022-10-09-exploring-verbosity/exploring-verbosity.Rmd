@@ -8,6 +8,8 @@ date: 2022-10-09
 output:
   distill::distill_article:
     self_contained: false
+    toc: true
+    toc_depth: 3
 ---
 
 Let's define, for now, verbosity as the tendency to use lots of words each time a character communicates with another. 
