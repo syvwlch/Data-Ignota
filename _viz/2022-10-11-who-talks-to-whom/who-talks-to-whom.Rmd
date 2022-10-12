@@ -201,6 +201,41 @@ Note how by numbers of lines of dialog, the conversation between Carlyle and Bri
 
 Also notice that between Carlyle & Bridger and between Mycroft & Carlyle the conversations are balanced by line count but not by word count? It's more like two-to-one, reflecting how one character is explaining things and answering questions for the other.
 
+### Radar Plots
+
+We can draw some radar plots showing the total word count our top four speakers direct at our top six addressees:
+
+```{r radar_plot, echo=FALSE}
+edge_list %>%
+  filter(
+    speaker %in% head(top_speakers, 4)$character,
+    addressee %in% head(top_addressees)$character,
+  ) %>%
+  ggplot(
+    aes(
+      x = reorder(addressee, -words),
+      y = lines, 
+      fill = addressee
+    )
+  ) +
+    geom_col() +
+    coord_polar() +
+    facet_wrap(vars(speaker)) +
+    theme(
+      legend.position="none",
+      axis.text.y=element_blank(),
+      axis.ticks.y=element_blank()
+    ) +
+    labs(
+      title = "",
+      x = NULL,
+      y = NULL
+    )
+    
+```
+
+Everybody speaks to Carlyle, but Carlyle mostly speaks to Mycroft and Bridger. Only Mycroft speaks to the outside world.
+
 ### Building a Map of the Larger Conversation
 
 So we have a list of pairs of characters engaged in dialog with a few different measures of how much dialog it was... that's all we need to build a directed, weighted network graph.
