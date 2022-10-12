@@ -19,7 +19,9 @@ What can we do with this data for the chapters edited to date, i.e. the first tw
 
 ```{r setup}
 library(tidyverse)
-library(gt)
+library(gt) # For pretty tables
+library(tidygraph) # For network graphs
+library(ggraph) # To plot the network graphs
 
 PATH_TO_SAID <- "../../data/said.csv"
 
@@ -98,14 +100,14 @@ top_addressees %>%
 
 ### Top Conversationalists
 
-We can now combine the two lists using a join^[If we use a `inner_join()` any characters that are not on both lists will be dropped.] by the `character` column.
+We can now combine the two lists using a join^[If we use a `full_join()` any characters that are not on both lists will be kept, but with an _NA_ for the missing count.] by the `character` column.
 
 ```{r characters}
-characters <- inner_join(
+characters <- full_join(
   top_speakers,
   top_addressees,
   by = "character"
-  )
+)
 ```
 
 Tables are nice and all, but this seems like a good time for a graph. Here are the top 20 out of `r nrow(characters)` characters by lines of dialog:
@@ -119,13 +121,13 @@ characters %>%
       y = reorder(character, lines),
       x = lines,
       fill = Role)
-    ) +
+  ) +
   geom_bar(position = "stack", stat="identity") +
   labs(
       title = "Top Twenty Conversationalists",
       x = "Lines of dialog",
       y = NULL,
-    ) +
+  ) +
   theme(legend.position = c(0.8, 0.25))
 ```
 
@@ -145,14 +147,14 @@ characters %>%
       y = reorder(character, -ratio),
       x = lines,
       fill = Role)
-    ) +
+  ) +
   geom_bar(position = "fill", stat="identity") +
   labs(
       title = "Top Twenty Characters",
       subtitle = "with a speaking part",
       x = NULL,
       y = NULL,
-    ) +
+  ) +
   scale_x_continuous(labels = scales::percent) +
   theme(legend.position = c(0.8, 0.25))
   
@@ -175,12 +177,17 @@ Let's build a list of the pairs of speakers and addressees with at least one lin
   1. Group again by speaker and addressee, 
   1. then summarize and calculate the line and word counts.
  
-```{r edge_list}
-edge_list <- said  %>%
+```{r pair_list}
+pair_list <- said  %>%
+  # Remove the reader from either side of the conversation
+  filter(
+    speaker != "#reader",
+    addressee != "#reader",
+  ) %>%
   # Group by line, speaker AND addressee to deduplicate lines
   group_by(line, speaker, addressee, words) %>%
   summarize(.groups = "drop") %>%
-  # Group by speaker and count
+  # Group by speaker and addressee, and add line and word counts
   group_by(speaker, addressee) %>%
   summarize(lines = n(), words = sum(words), .groups = "drop") %>%
   # Arrange by count
@@ -189,24 +196,22 @@ edge_list <- said  %>%
 
 That's it, it's that easy! 
 
-Here are the top five directed pairs by number of lines, out of `r nrow(edge_list)`:
+Here are the top two directed pairs by number of lines, out of `r nrow(pair_list)`:
 
 ```{r show_top_pairs, echo=FALSE}
-edge_list %>%
-  head(5) %>%
+pair_list %>%
+  head(4) %>%
   gt()
 ```
 
-Note how by numbers of lines of dialog, the conversation between Carlyle and Bridger is a little 'bigger', but by word count Mycroft's asides to the reader completely dominates. 
-
-Also notice that between Carlyle & Bridger and between Mycroft & Carlyle the conversations are balanced by line count but not by word count? It's more like two-to-one, reflecting how one character is explaining things and answering questions for the other.
+Note that both conversations are balanced by line count but not by word count? It's more like two-to-one, reflecting how one character is explaining things and answering questions for the other.
 
 ### Radar Plots
 
 We can draw some radar plots showing the total word count our top four speakers direct at our top six addressees:
 
 ```{r radar_plot, echo=FALSE}
-edge_list %>%
+pair_list %>%
   filter(
     speaker %in% head(top_speakers, 4)$character,
     addressee %in% head(top_addressees)$character,
@@ -236,10 +241,36 @@ edge_list %>%
 
 Everybody speaks to Carlyle, but Carlyle mostly speaks to Mycroft and Bridger. Only Mycroft speaks to the outside world.
 
-### Building a Map of the Larger Conversation
+This works pretty well for small groups of characters but it won't scale well to the `r nrow(top_speakers)` speaking parts we have so far, which is only going to grow as we add chapters.
 
-So we have a list of pairs of characters engaged in dialog with a few different measures of how much dialog it was... that's all we need to build a directed, weighted network graph.
+### Network Graph
 
-Let's build a map of the larger conversation!
+We have a list of pairs of characters engaged in dialog with a few different measures of how much dialog it was... that's all we need to build a directed, weighted network graph, but we'll also pass in our list of characters for convenience.
 
+```{r network}
+network_graph <- tbl_graph(
+  edges = pair_list,
+  nodes = characters,
+)
+```
 
+That's all it takes to make network graph, which we can then plot various visualizations of, e.g. a hairball of characters with at least fifteen spoken lines of dialog:
+
+```{r network_plot, echo=FALSE, preview=TRUE}
+network_graph %>%
+  activate(nodes) %>%
+  filter(speaks > 15) %>%
+  ggraph(layout = 'kk', maxiter = 1000) + 
+    geom_edge_fan(
+      aes(alpha = words),
+      arrow = arrow(length = unit(3, 'mm')), 
+      end_cap = circle(8, 'mm')
+    ) +
+    geom_node_label(
+      aes(
+        label = character,
+        size = speaks,
+      )
+    ) +
+    theme(legend.position="none")
+```
