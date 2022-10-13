@@ -76,3 +76,8 @@ d-appendix {
 /*-- Additional custom styles --*/
 /* Add any additional CSS rules below                      */
 
+/* Remove padding between <li> elements */
+d-article li {
+    margin-bottom: 0;
+}
+
