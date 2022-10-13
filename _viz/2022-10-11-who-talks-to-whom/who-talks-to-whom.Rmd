@@ -13,9 +13,7 @@ output:
     toc_depth: 3
 ---
 
-Our `said.csv` data file contains information about who said a line of dialog, and to whom. 
-
-What can we do with this data for the chapters edited to date, i.e. the first twelve?
+Our `said.csv` data file contains information about who said a line of dialog, and to whom. What can we do with this data for the chapters edited to date, i.e. the first twelve?
 
 ```{r setup}
 library(tidyverse)
@@ -49,10 +47,12 @@ We need to:
 
 ```{r top_speakers}
 top_speakers <- said %>%
-  # Group & summarize to remove rows not relevant to `speaker`
+  # Group & summarize
+  # to drop rows irrelevant to `speaker`
   group_by(line, speaker) %>%
   summarize(.groups = "drop") %>%
-  # Group & summarize to count lines spoken by character
+  # Group & summarize 
+  # to count lines spoken by character
   group_by(character = speaker) %>%
   summarize(speaks = n()) %>%
   # Arrange by count
@@ -73,10 +73,12 @@ We can do the same for characters who are directly addressed.
 
 ```{r top_addressees}
 top_addressees <- said  %>%
-  # Group & summarize to remove rows not relevant to `addressee`
+  # Group & summarize
+  # to drop rows irrelevant to `addressee`
   group_by(line, addressee) %>%
   summarize(.groups = "drop") %>%
-  # Group & summarize to count lines addressed to character
+  # Group & summarize
+  # to count lines addressed to character
   group_by(character = addressee) %>%
   summarize(spokenTo = n()) %>%
   # Arrange by count
@@ -172,19 +174,25 @@ Let's build a list of the pairs of speakers and addressees with at least one lin
  
 ```{r pair_list}
 pair_list <- said  %>%
-  # Group & summarize to remove rows not relevant to speaker or addressee
+  # Group & summarize
+  # to drop rows irrelevant to speaker or addressee
   group_by(line, speaker, addressee, words) %>%
   summarize(.groups = "drop") %>%
-  # Group & summarize to add line and word counts
+  # Group & summarize
+  # to add line and word counts
   group_by(speaker, addressee) %>%
-  summarize(lines = n(), words = sum(words), .groups = "drop") %>%
+  summarize(
+    lines = n(), 
+    words = sum(words), 
+    .groups = "drop"
+  ) %>%
   # Arrange by count
   arrange(desc(lines))
 ```
 
 That's it, it's that easy! 
 
-Here are the top two directed pairs by number of lines, out of `r nrow(pair_list)`:
+Here are the top four directed pairs by number of lines, out of `r nrow(pair_list)`:
 
 ```{r show_top_pairs, echo=FALSE}
 pair_list %>%
@@ -248,7 +256,7 @@ That's all it takes to make network graph, which we can then plot various visual
 network_graph %>%
   activate(nodes) %>%
   filter(speaks > 15) %>%
-  ggraph(layout = 'kk', maxiter = 1000) + 
+  ggraph(layout = 'kk') + 
     geom_edge_fan(
       aes(alpha = words),
       arrow = arrow(length = unit(3, 'mm')), 
@@ -262,3 +270,5 @@ network_graph %>%
     ) +
     theme(legend.position="none")
 ```
+
+Mycroft is the hinge between several conversations, one dominated by Carlyle currently taking place at the Saneer-Weeksbooth bash'house, another one over at Ganymede's palace during the Renunciation Day party, and some more isolated pairs around the periphery, like Ockham and Martin or Dominic and Lesley.
