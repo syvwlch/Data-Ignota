@@ -1,5 +1,22 @@
 [
   {
+    "path": "posts/2022-10-13-visualizing-dialog/",
+    "title": "Visualizing Dialog",
+    "description": "Mostly working on the dialog visualization",
+    "author": [
+      {
+        "name": "Mathieu Glachant",
+        "url": "https://github.com/syvwlch"
+      }
+    ],
+    "date": "2022-10-13",
+    "categories": [],
+    "contents": "\nA few days of work, with some site cleanup and readability but mostly a new visualization post. Pretty happy with how the radar and network graphs turned out in particular.\nI’m struggling with two things in ggplot2:\nUsing emojis on the plots, and\nExpanding the draw area to avoid text levels being clipped.\nThere are solutions online, but I don’t understand them well enough to generalize to what I want to do. Just need to focus on this to solve it but I think I’m going to pivot to work on more upstream issues, like adding more data files for joins, or adding scenes to the Digital Edition itself, instead.\nWhat It Took to Get Here\nEnhancements:\nA new visualization post ‘Who Talks to Whom’ from said.csv data:\nList of speakers, addresses, conversationalists,\nList of pairs, with line & word count, and from that:\nDrew Some Radar Plots,\nDrew a Network Graph\n\nRefactored so we remove the reader in setup chunk\nAdd a link/CTA to issues tracker on every page\nAdd a theme CSS file to the site\nRemove padding between list items\nTry Ridgeline Plots but for the existing posts, the violin plots work better.\n\nLessons Learned\nIt is good practice to ungroup() after every group() but since summarize() ungroups one level of grouping so far I have not needed to. Still, good to know.\nThis group & summarize pattern is starting to make intuitive sense to me.\n\n\n\n",
+    "preview": {},
+    "last_modified": "2022-10-13T17:17:26-04:00",
+    "input_file": {}
+  },
+  {
     "path": "posts/2022-10-10-refactoring-verbosity/",
     "title": "Refactoring Verbosity",
     "description": "A short description of the post.",
