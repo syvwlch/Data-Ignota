@@ -3,6 +3,8 @@ title: "Data Ignota"
 description: |
   A data-driven exploration of Ada Palmer's Terra Ignota series.
 base_url : https://syvwlch.github.io/Data-Ignota/
+repository_url: https://github.com/syvwlch/Data-Ignota
+theme: site.css
 output_dir: "docs"
 navbar:
   right:

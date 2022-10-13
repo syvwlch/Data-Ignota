@@ -2096,6 +2096,321 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </script>
 
+<style type="text/css">
+/* base variables */
+
+/* Edit the CSS properties in this file to create a custom
+   Distill theme. Only edit values in the right column
+   for each row; values shown are the CSS defaults.
+   To return any property to the default,
+   you may set its value to: unset
+   All rows must end with a semi-colon.                      */
+
+/* Optional: embed custom fonts here with `@import`          */
+/* This must remain at the top of this file.                 */
+
+
+
+html {
+  /*-- Main font sizes --*/
+  --title-size:      50px;
+  --body-size:       1.06rem;
+  --code-size:       14px;
+  --aside-size:      12px;
+  --fig-cap-size:    13px;
+  /*-- Main font colors --*/
+  --title-color:     #000000;
+  --header-color:    rgba(0, 0, 0, 0.8);
+  --body-color:      rgba(0, 0, 0, 0.8);
+  --aside-color:     rgba(0, 0, 0, 0.6);
+  --fig-cap-color:   rgba(0, 0, 0, 0.6);
+  /*-- Specify custom fonts ~~~ must be imported above   --*/
+  --heading-font:    sans-serif;
+  --mono-font:       monospace;
+  --body-font:       sans-serif;
+  --navbar-font:     sans-serif;  /* websites + blogs only */
+}
+
+/*-- ARTICLE METADATA --*/
+d-byline {
+  --heading-size:    0.6rem;
+  --heading-color:   rgba(0, 0, 0, 0.5);
+  --body-size:       0.8rem;
+  --body-color:      rgba(0, 0, 0, 0.8);
+}
+
+/*-- ARTICLE TABLE OF CONTENTS --*/
+.d-contents {
+  --heading-size:    18px;
+  --contents-size:   13px;
+}
+
+/*-- ARTICLE APPENDIX --*/
+d-appendix {
+  --heading-size:    15px;
+  --heading-color:   rgba(0, 0, 0, 0.65);
+  --text-size:       0.8em;
+  --text-color:      rgba(0, 0, 0, 0.5);
+}
+
+/*-- WEBSITE HEADER + FOOTER --*/
+/* These properties only apply to Distill sites and blogs  */
+
+.distill-site-header {
+  --title-size:       18px;
+  --text-color:       rgba(255, 255, 255, 0.8);
+  --text-size:        15px;
+  --hover-color:      white;
+  --bkgd-color:       #0F2E3D;
+}
+
+.distill-site-footer {
+  --text-color:       rgba(255, 255, 255, 0.8);
+  --text-size:        15px;
+  --hover-color:      white;
+  --bkgd-color:       #0F2E3D;
+}
+
+/*-- Additional custom styles --*/
+/* Add any additional CSS rules below                      */
+</style>
+<style type="text/css">
+/* base variables */
+
+/* Edit the CSS properties in this file to create a custom
+   Distill theme. Only edit values in the right column
+   for each row; values shown are the CSS defaults.
+   To return any property to the default,
+   you may set its value to: unset
+   All rows must end with a semi-colon.                      */
+
+/* Optional: embed custom fonts here with `@import`          */
+/* This must remain at the top of this file.                 */
+
+
+
+html {
+  /*-- Main font sizes --*/
+  --title-size:      50px;
+  --body-size:       1.06rem;
+  --code-size:       14px;
+  --aside-size:      12px;
+  --fig-cap-size:    13px;
+  /*-- Main font colors --*/
+  --title-color:     #000000;
+  --header-color:    rgba(0, 0, 0, 0.8);
+  --body-color:      rgba(0, 0, 0, 0.8);
+  --aside-color:     rgba(0, 0, 0, 0.6);
+  --fig-cap-color:   rgba(0, 0, 0, 0.6);
+  /*-- Specify custom fonts ~~~ must be imported above   --*/
+  --heading-font:    sans-serif;
+  --mono-font:       monospace;
+  --body-font:       sans-serif;
+  --navbar-font:     sans-serif;  /* websites + blogs only */
+}
+
+/*-- ARTICLE METADATA --*/
+d-byline {
+  --heading-size:    0.6rem;
+  --heading-color:   rgba(0, 0, 0, 0.5);
+  --body-size:       0.8rem;
+  --body-color:      rgba(0, 0, 0, 0.8);
+}
+
+/*-- ARTICLE TABLE OF CONTENTS --*/
+.d-contents {
+  --heading-size:    18px;
+  --contents-size:   13px;
+}
+
+/*-- ARTICLE APPENDIX --*/
+d-appendix {
+  --heading-size:    15px;
+  --heading-color:   rgba(0, 0, 0, 0.65);
+  --text-size:       0.8em;
+  --text-color:      rgba(0, 0, 0, 0.5);
+}
+
+/*-- WEBSITE HEADER + FOOTER --*/
+/* These properties only apply to Distill sites and blogs  */
+
+.distill-site-header {
+  --title-size:       18px;
+  --text-color:       rgba(255, 255, 255, 0.8);
+  --text-size:        15px;
+  --hover-color:      white;
+  --bkgd-color:       #0F2E3D;
+}
+
+.distill-site-footer {
+  --text-color:       rgba(255, 255, 255, 0.8);
+  --text-size:        15px;
+  --hover-color:      white;
+  --bkgd-color:       #0F2E3D;
+}
+
+/*-- Additional custom styles --*/
+/* Add any additional CSS rules below                      */
+
+/* Remove padding between <li> elements */
+d-article li {
+    margin-bottom: 0;
+}
+</style>
+<style type="text/css">
+/* base style */
+
+/* FONT FAMILIES */
+
+:root {
+  --heading-default: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono-default: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  --body-default: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+body,
+.posts-list .post-preview p,
+.posts-list .description p {
+  font-family: var(--body-font), var(--body-default);
+}
+
+h1, h2, h3, h4, h5, h6,
+.posts-list .post-preview h2,
+.posts-list .description h2 {
+  font-family: var(--heading-font), var(--heading-default);
+}
+
+d-article div.sourceCode code,
+d-article pre code {
+  font-family: var(--mono-font), var(--mono-default);
+}
+
+
+/*-- TITLE --*/
+d-title h1,
+.posts-list > h1 {
+  color: var(--title-color, black);
+}
+
+d-title h1 {
+  font-size: var(--title-size, 50px);
+}
+
+/*-- HEADERS --*/
+d-article h1,
+d-article h2,
+d-article h3,
+d-article h4,
+d-article h5,
+d-article h6 {
+  color: var(--header-color, rgba(0, 0, 0, 0.8));
+}
+
+/*-- BODY --*/
+d-article > p,  /* only text inside of <p> tags */
+d-article > ul, /* lists */
+d-article > ol {
+  color: var(--body-color, rgba(0, 0, 0, 0.8));
+  font-size: var(--body-size, 1.06rem);
+}
+
+
+/*-- CODE --*/
+d-article div.sourceCode code,
+d-article pre code {
+  font-size: var(--code-size, 14px);
+}
+
+/*-- ASIDE --*/
+d-article aside {
+  font-size: var(--aside-size, 12px);
+  color: var(--aside-color, rgba(0, 0, 0, 0.6));
+}
+
+/*-- FIGURE CAPTIONS --*/
+figure .caption,
+figure figcaption,
+.figure .caption {
+  font-size: var(--fig-cap-size, 13px);
+  color: var(--fig-cap-color, rgba(0, 0, 0, 0.6));
+}
+
+/*-- METADATA --*/
+d-byline h3 {
+  font-size: var(--heading-size, 0.6rem);
+  color: var(--heading-color, rgba(0, 0, 0, 0.5));
+}
+
+d-byline {
+  font-size: var(--body-size, 0.8rem);
+  color: var(--body-color, rgba(0, 0, 0, 0.8));
+}
+
+d-byline a,
+d-article d-byline a {
+  color: var(--body-color, rgba(0, 0, 0, 0.8));
+}
+
+/*-- TABLE OF CONTENTS --*/
+.d-contents nav h3 {
+  font-size: var(--heading-size, 18px);
+}
+
+.d-contents nav a {
+  font-size: var(--contents-size, 13px);
+}
+
+/*-- APPENDIX --*/
+d-appendix h3 {
+  font-size: var(--heading-size, 15px);
+  color: var(--heading-color, rgba(0, 0, 0, 0.65));
+}
+
+d-appendix {
+  font-size: var(--text-size, 0.8em);
+  color: var(--text-color, rgba(0, 0, 0, 0.5));
+}
+
+d-appendix d-footnote-list a.footnote-backlink {
+  color: var(--text-color, rgba(0, 0, 0, 0.5));
+}
+
+/*-- WEBSITE HEADER + FOOTER --*/
+.distill-site-header .title {
+  font-size: var(--title-size, 18px);
+  font-family: var(--navbar-font), var(--heading-default);
+}
+
+.distill-site-header a,
+.nav-dropdown .nav-dropbtn {
+  font-family: var(--navbar-font), var(--heading-default);
+}
+
+.nav-dropdown .nav-dropbtn {
+  color: var(--text-color, rgba(255, 255, 255, 0.8));
+  font-size: var(--text-size, 15px);
+}
+
+.distill-site-header a:hover,
+.nav-dropdown:hover .nav-dropbtn {
+  color: var(--hover-color, white);
+}
+
+.distill-site-header {
+  font-size: var(--text-size, 15px);
+  color: var(--text-color, rgba(255, 255, 255, 0.8));
+  background-color: var(--bkgd-color, #0F2E3D);
+}
+
+.distill-site-footer {
+  font-size: var(--text-size, 15px);
+  color: var(--text-color, rgba(255, 255, 255, 0.8));
+  background-color: var(--bkgd-color, #0F2E3D);
+}
+
+.distill-site-footer a:hover {
+  color: var(--hover-color, white);
+}</style>
 <!--/radix_placeholder_distill-->
   <script src="../../site_libs/header-attrs-2.16/header-attrs.js"></script>
   <script src="../../site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -2194,8 +2509,7 @@ RSS
 </ul>
 </nav>
 </div>
-<p>Our <code>said.csv</code> data file contains information about who said a line of dialog, and to whom.</p>
-<p>What can we do with this data for the chapters edited to date, i.e. the first twelve?</p>
+<p>Our <code>said.csv</code> data file contains information about who said a line of dialog, and to whom. What can we do with this data for the chapters edited to date, i.e. the first twelve?</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
@@ -2208,7 +2522,10 @@ RSS
 <span><span class='va'>said</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span><span class='op'>(</span><span class='va'>PATH_TO_SAID</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span></span>
 <span>    <span class='va'>book</span> <span class='op'>==</span> <span class='fl'>1</span>,</span>
-<span>    <span class='va'>chapter</span> <span class='op'>&lt;=</span> <span class='fl'>12</span></span>
+<span>    <span class='va'>chapter</span> <span class='op'>&lt;=</span> <span class='fl'>12</span>,</span>
+<span>    <span class='co'># Let's remove the asides to the reader from this analysis</span></span>
+<span>    <span class='va'>speaker</span> <span class='op'>!=</span> <span class='st'>"#reader"</span>,</span>
+<span>    <span class='va'>addressee</span> <span class='op'>!=</span> <span class='st'>"#reader"</span>,</span>
 <span>  <span class='op'>)</span></span></code></pre>
 </div>
 </div>
@@ -2223,16 +2540,13 @@ RSS
 </ul>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>top_speakers</span> <span class='op'>&lt;-</span> <span class='va'>said</span>  <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
-<span>  <span class='co'># Remove the reader from either side of the conversation</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span></span>
-<span>    <span class='va'>speaker</span> <span class='op'>!=</span> <span class='st'>"#reader"</span>,</span>
-<span>    <span class='va'>addressee</span> <span class='op'>!=</span> <span class='st'>"#reader"</span>,</span>
-<span>  <span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
-<span>  <span class='co'># Group by line AND by speaker to deduplicate lines</span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>top_speakers</span> <span class='op'>&lt;-</span> <span class='va'>said</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span>  <span class='co'># Group &amp; summarize</span></span>
+<span>  <span class='co'># to drop rows irrelevant to `speaker`</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>line</span>, <span class='va'>speaker</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>.groups <span class='op'>=</span> <span class='st'>"drop"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
-<span>  <span class='co'># Group by speaker and count</span></span>
+<span>  <span class='co'># Group &amp; summarize </span></span>
+<span>  <span class='co'># to count lines spoken by character</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span>character <span class='op'>=</span> <span class='va'>speaker</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>speaks <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
 <span>  <span class='co'># Arrange by count</span></span>
@@ -2241,12 +2555,12 @@ RSS
 </div>
 <p>Here are the top five out of 38 speakers:</p>
 <div class="layout-chunk" data-layout="l-body">
-<div id="jesukdwzjp" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="gxzmuzxwrf" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#jesukdwzjp .gt_table {
+#gxzmuzxwrf .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2271,7 +2585,7 @@ RSS
   border-left-color: #D3D3D3;
 }
 
-#jesukdwzjp .gt_heading {
+#gxzmuzxwrf .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2283,7 +2597,7 @@ RSS
   border-right-color: #D3D3D3;
 }
 
-#jesukdwzjp .gt_title {
+#gxzmuzxwrf .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2295,7 +2609,7 @@ RSS
   border-bottom-width: 0;
 }
 
-#jesukdwzjp .gt_subtitle {
+#gxzmuzxwrf .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2307,13 +2621,13 @@ RSS
   border-top-width: 0;
 }
 
-#jesukdwzjp .gt_bottom_border {
+#gxzmuzxwrf .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#jesukdwzjp .gt_col_headings {
+#gxzmuzxwrf .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2328,7 +2642,7 @@ RSS
   border-right-color: #D3D3D3;
 }
 
-#jesukdwzjp .gt_col_heading {
+#gxzmuzxwrf .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2348,7 +2662,7 @@ RSS
   overflow-x: hidden;
 }
 
-#jesukdwzjp .gt_column_spanner_outer {
+#gxzmuzxwrf .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2360,15 +2674,15 @@ RSS
   padding-right: 4px;
 }
 
-#jesukdwzjp .gt_column_spanner_outer:first-child {
+#gxzmuzxwrf .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jesukdwzjp .gt_column_spanner_outer:last-child {
+#gxzmuzxwrf .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jesukdwzjp .gt_column_spanner {
+#gxzmuzxwrf .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2380,7 +2694,7 @@ RSS
   width: 100%;
 }
 
-#jesukdwzjp .gt_group_heading {
+#gxzmuzxwrf .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2405,7 +2719,7 @@ RSS
   vertical-align: middle;
 }
 
-#jesukdwzjp .gt_empty_group_heading {
+#gxzmuzxwrf .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2420,15 +2734,15 @@ RSS
   vertical-align: middle;
 }
 
-#jesukdwzjp .gt_from_md > :first-child {
+#gxzmuzxwrf .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jesukdwzjp .gt_from_md > :last-child {
+#gxzmuzxwrf .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jesukdwzjp .gt_row {
+#gxzmuzxwrf .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2447,7 +2761,7 @@ RSS
   overflow-x: hidden;
 }
 
-#jesukdwzjp .gt_stub {
+#gxzmuzxwrf .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2460,7 +2774,7 @@ RSS
   padding-right: 5px;
 }
 
-#jesukdwzjp .gt_stub_row_group {
+#gxzmuzxwrf .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2474,11 +2788,11 @@ RSS
   vertical-align: top;
 }
 
-#jesukdwzjp .gt_row_group_first td {
+#gxzmuzxwrf .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#jesukdwzjp .gt_summary_row {
+#gxzmuzxwrf .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2488,16 +2802,16 @@ RSS
   padding-right: 5px;
 }
 
-#jesukdwzjp .gt_first_summary_row {
+#gxzmuzxwrf .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#jesukdwzjp .gt_first_summary_row.thick {
+#gxzmuzxwrf .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#jesukdwzjp .gt_last_summary_row {
+#gxzmuzxwrf .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2507,7 +2821,7 @@ RSS
   border-bottom-color: #D3D3D3;
 }
 
-#jesukdwzjp .gt_grand_summary_row {
+#gxzmuzxwrf .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2517,7 +2831,7 @@ RSS
   padding-right: 5px;
 }
 
-#jesukdwzjp .gt_first_grand_summary_row {
+#gxzmuzxwrf .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2527,11 +2841,11 @@ RSS
   border-top-color: #D3D3D3;
 }
 
-#jesukdwzjp .gt_striped {
+#gxzmuzxwrf .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#jesukdwzjp .gt_table_body {
+#gxzmuzxwrf .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2540,7 +2854,7 @@ RSS
   border-bottom-color: #D3D3D3;
 }
 
-#jesukdwzjp .gt_footnotes {
+#gxzmuzxwrf .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2554,7 +2868,7 @@ RSS
   border-right-color: #D3D3D3;
 }
 
-#jesukdwzjp .gt_footnote {
+#gxzmuzxwrf .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -2563,7 +2877,7 @@ RSS
   padding-right: 5px;
 }
 
-#jesukdwzjp .gt_sourcenotes {
+#gxzmuzxwrf .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2577,7 +2891,7 @@ RSS
   border-right-color: #D3D3D3;
 }
 
-#jesukdwzjp .gt_sourcenote {
+#gxzmuzxwrf .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2585,64 +2899,64 @@ RSS
   padding-right: 5px;
 }
 
-#jesukdwzjp .gt_left {
+#gxzmuzxwrf .gt_left {
   text-align: left;
 }
 
-#jesukdwzjp .gt_center {
+#gxzmuzxwrf .gt_center {
   text-align: center;
 }
 
-#jesukdwzjp .gt_right {
+#gxzmuzxwrf .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jesukdwzjp .gt_font_normal {
+#gxzmuzxwrf .gt_font_normal {
   font-weight: normal;
 }
 
-#jesukdwzjp .gt_font_bold {
+#gxzmuzxwrf .gt_font_bold {
   font-weight: bold;
 }
 
-#jesukdwzjp .gt_font_italic {
+#gxzmuzxwrf .gt_font_italic {
   font-style: italic;
 }
 
-#jesukdwzjp .gt_super {
+#gxzmuzxwrf .gt_super {
   font-size: 65%;
 }
 
-#jesukdwzjp .gt_footnote_marks {
+#gxzmuzxwrf .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#jesukdwzjp .gt_asterisk {
+#gxzmuzxwrf .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#jesukdwzjp .gt_indent_1 {
+#gxzmuzxwrf .gt_indent_1 {
   text-indent: 5px;
 }
 
-#jesukdwzjp .gt_indent_2 {
+#gxzmuzxwrf .gt_indent_2 {
   text-indent: 10px;
 }
 
-#jesukdwzjp .gt_indent_3 {
+#gxzmuzxwrf .gt_indent_3 {
   text-indent: 15px;
 }
 
-#jesukdwzjp .gt_indent_4 {
+#gxzmuzxwrf .gt_indent_4 {
   text-indent: 20px;
 }
 
-#jesukdwzjp .gt_indent_5 {
+#gxzmuzxwrf .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2676,15 +2990,12 @@ RSS
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>top_addressees</span> <span class='op'>&lt;-</span> <span class='va'>said</span>  <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
-<span>  <span class='co'># Remove the reader from either side of the conversation</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span></span>
-<span>    <span class='va'>speaker</span> <span class='op'>!=</span> <span class='st'>"#reader"</span>,</span>
-<span>    <span class='va'>addressee</span> <span class='op'>!=</span> <span class='st'>"#reader"</span>,</span>
-<span>  <span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
-<span>  <span class='co'># Group by line AND by addressee to deduplicate lines</span></span>
+<span>  <span class='co'># Group &amp; summarize</span></span>
+<span>  <span class='co'># to drop rows irrelevant to `addressee`</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>line</span>, <span class='va'>addressee</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>.groups <span class='op'>=</span> <span class='st'>"drop"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
-<span>  <span class='co'># Group by addressee and count</span></span>
+<span>  <span class='co'># Group &amp; summarize</span></span>
+<span>  <span class='co'># to count lines addressed to character</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span>character <span class='op'>=</span> <span class='va'>addressee</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>spokenTo <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
 <span>  <span class='co'># Arrange by count</span></span>
@@ -2693,12 +3004,12 @@ RSS
 </div>
 <p>Here are the top five out of 50 addressees:</p>
 <div class="layout-chunk" data-layout="l-body">
-<div id="lkigxajpox" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="bwtidcsfxg" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#lkigxajpox .gt_table {
+#bwtidcsfxg .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2723,7 +3034,7 @@ RSS
   border-left-color: #D3D3D3;
 }
 
-#lkigxajpox .gt_heading {
+#bwtidcsfxg .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2735,7 +3046,7 @@ RSS
   border-right-color: #D3D3D3;
 }
 
-#lkigxajpox .gt_title {
+#bwtidcsfxg .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2747,7 +3058,7 @@ RSS
   border-bottom-width: 0;
 }
 
-#lkigxajpox .gt_subtitle {
+#bwtidcsfxg .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2759,13 +3070,13 @@ RSS
   border-top-width: 0;
 }
 
-#lkigxajpox .gt_bottom_border {
+#bwtidcsfxg .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#lkigxajpox .gt_col_headings {
+#bwtidcsfxg .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2780,7 +3091,7 @@ RSS
   border-right-color: #D3D3D3;
 }
 
-#lkigxajpox .gt_col_heading {
+#bwtidcsfxg .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2800,7 +3111,7 @@ RSS
   overflow-x: hidden;
 }
 
-#lkigxajpox .gt_column_spanner_outer {
+#bwtidcsfxg .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2812,15 +3123,15 @@ RSS
   padding-right: 4px;
 }
 
-#lkigxajpox .gt_column_spanner_outer:first-child {
+#bwtidcsfxg .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lkigxajpox .gt_column_spanner_outer:last-child {
+#bwtidcsfxg .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lkigxajpox .gt_column_spanner {
+#bwtidcsfxg .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2832,7 +3143,7 @@ RSS
   width: 100%;
 }
 
-#lkigxajpox .gt_group_heading {
+#bwtidcsfxg .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2857,7 +3168,7 @@ RSS
   vertical-align: middle;
 }
 
-#lkigxajpox .gt_empty_group_heading {
+#bwtidcsfxg .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2872,15 +3183,15 @@ RSS
   vertical-align: middle;
 }
 
-#lkigxajpox .gt_from_md > :first-child {
+#bwtidcsfxg .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lkigxajpox .gt_from_md > :last-child {
+#bwtidcsfxg .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lkigxajpox .gt_row {
+#bwtidcsfxg .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2899,7 +3210,7 @@ RSS
   overflow-x: hidden;
 }
 
-#lkigxajpox .gt_stub {
+#bwtidcsfxg .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2912,7 +3223,7 @@ RSS
   padding-right: 5px;
 }
 
-#lkigxajpox .gt_stub_row_group {
+#bwtidcsfxg .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2926,11 +3237,11 @@ RSS
   vertical-align: top;
 }
 
-#lkigxajpox .gt_row_group_first td {
+#bwtidcsfxg .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#lkigxajpox .gt_summary_row {
+#bwtidcsfxg .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2940,16 +3251,16 @@ RSS
   padding-right: 5px;
 }
 
-#lkigxajpox .gt_first_summary_row {
+#bwtidcsfxg .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#lkigxajpox .gt_first_summary_row.thick {
+#bwtidcsfxg .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#lkigxajpox .gt_last_summary_row {
+#bwtidcsfxg .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2959,7 +3270,7 @@ RSS
   border-bottom-color: #D3D3D3;
 }
 
-#lkigxajpox .gt_grand_summary_row {
+#bwtidcsfxg .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2969,7 +3280,7 @@ RSS
   padding-right: 5px;
 }
 
-#lkigxajpox .gt_first_grand_summary_row {
+#bwtidcsfxg .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2979,11 +3290,11 @@ RSS
   border-top-color: #D3D3D3;
 }
 
-#lkigxajpox .gt_striped {
+#bwtidcsfxg .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#lkigxajpox .gt_table_body {
+#bwtidcsfxg .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2992,7 +3303,7 @@ RSS
   border-bottom-color: #D3D3D3;
 }
 
-#lkigxajpox .gt_footnotes {
+#bwtidcsfxg .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3006,7 +3317,7 @@ RSS
   border-right-color: #D3D3D3;
 }
 
-#lkigxajpox .gt_footnote {
+#bwtidcsfxg .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -3015,7 +3326,7 @@ RSS
   padding-right: 5px;
 }
 
-#lkigxajpox .gt_sourcenotes {
+#bwtidcsfxg .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3029,7 +3340,7 @@ RSS
   border-right-color: #D3D3D3;
 }
 
-#lkigxajpox .gt_sourcenote {
+#bwtidcsfxg .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3037,64 +3348,64 @@ RSS
   padding-right: 5px;
 }
 
-#lkigxajpox .gt_left {
+#bwtidcsfxg .gt_left {
   text-align: left;
 }
 
-#lkigxajpox .gt_center {
+#bwtidcsfxg .gt_center {
   text-align: center;
 }
 
-#lkigxajpox .gt_right {
+#bwtidcsfxg .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lkigxajpox .gt_font_normal {
+#bwtidcsfxg .gt_font_normal {
   font-weight: normal;
 }
 
-#lkigxajpox .gt_font_bold {
+#bwtidcsfxg .gt_font_bold {
   font-weight: bold;
 }
 
-#lkigxajpox .gt_font_italic {
+#bwtidcsfxg .gt_font_italic {
   font-style: italic;
 }
 
-#lkigxajpox .gt_super {
+#bwtidcsfxg .gt_super {
   font-size: 65%;
 }
 
-#lkigxajpox .gt_footnote_marks {
+#bwtidcsfxg .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#lkigxajpox .gt_asterisk {
+#bwtidcsfxg .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#lkigxajpox .gt_indent_1 {
+#bwtidcsfxg .gt_indent_1 {
   text-indent: 5px;
 }
 
-#lkigxajpox .gt_indent_2 {
+#bwtidcsfxg .gt_indent_2 {
   text-indent: 10px;
 }
 
-#lkigxajpox .gt_indent_3 {
+#bwtidcsfxg .gt_indent_3 {
   text-indent: 15px;
 }
 
-#lkigxajpox .gt_indent_4 {
+#bwtidcsfxg .gt_indent_4 {
   text-indent: 20px;
 }
 
-#lkigxajpox .gt_indent_5 {
+#bwtidcsfxg .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -3159,30 +3470,31 @@ RSS
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>pair_list</span> <span class='op'>&lt;-</span> <span class='va'>said</span>  <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
-<span>  <span class='co'># Remove the reader from either side of the conversation</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span></span>
-<span>    <span class='va'>speaker</span> <span class='op'>!=</span> <span class='st'>"#reader"</span>,</span>
-<span>    <span class='va'>addressee</span> <span class='op'>!=</span> <span class='st'>"#reader"</span>,</span>
-<span>  <span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
-<span>  <span class='co'># Group by line, speaker AND addressee to deduplicate lines</span></span>
+<span>  <span class='co'># Group &amp; summarize</span></span>
+<span>  <span class='co'># to drop rows irrelevant to speaker or addressee</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>line</span>, <span class='va'>speaker</span>, <span class='va'>addressee</span>, <span class='va'>words</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>.groups <span class='op'>=</span> <span class='st'>"drop"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
-<span>  <span class='co'># Group by speaker and addressee, and add line and word counts</span></span>
+<span>  <span class='co'># Group &amp; summarize</span></span>
+<span>  <span class='co'># to add line and word counts</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>speaker</span>, <span class='va'>addressee</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>lines <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span><span class='op'>(</span><span class='op'>)</span>, words <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>words</span><span class='op'>)</span>, .groups <span class='op'>=</span> <span class='st'>"drop"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span></span>
+<span>    lines <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span><span class='op'>(</span><span class='op'>)</span>, </span>
+<span>    words <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='va'>words</span><span class='op'>)</span>, </span>
+<span>    .groups <span class='op'>=</span> <span class='st'>"drop"</span></span>
+<span>  <span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
 <span>  <span class='co'># Arrange by count</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/arrange.html'>arrange</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/desc.html'>desc</a></span><span class='op'>(</span><span class='va'>lines</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
 </div>
 </div>
 <p>That’s it, it’s that easy!</p>
-<p>Here are the top two directed pairs by number of lines, out of 206:</p>
+<p>Here are the top four directed pairs by number of lines, out of 206:</p>
 <div class="layout-chunk" data-layout="l-body">
-<div id="emhkfnsszp" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="lgcwwpdcxt" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#emhkfnsszp .gt_table {
+#lgcwwpdcxt .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -3207,7 +3519,7 @@ RSS
   border-left-color: #D3D3D3;
 }
 
-#emhkfnsszp .gt_heading {
+#lgcwwpdcxt .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3219,7 +3531,7 @@ RSS
   border-right-color: #D3D3D3;
 }
 
-#emhkfnsszp .gt_title {
+#lgcwwpdcxt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3231,7 +3543,7 @@ RSS
   border-bottom-width: 0;
 }
 
-#emhkfnsszp .gt_subtitle {
+#lgcwwpdcxt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3243,13 +3555,13 @@ RSS
   border-top-width: 0;
 }
 
-#emhkfnsszp .gt_bottom_border {
+#lgcwwpdcxt .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#emhkfnsszp .gt_col_headings {
+#lgcwwpdcxt .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3264,7 +3576,7 @@ RSS
   border-right-color: #D3D3D3;
 }
 
-#emhkfnsszp .gt_col_heading {
+#lgcwwpdcxt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3284,7 +3596,7 @@ RSS
   overflow-x: hidden;
 }
 
-#emhkfnsszp .gt_column_spanner_outer {
+#lgcwwpdcxt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3296,15 +3608,15 @@ RSS
   padding-right: 4px;
 }
 
-#emhkfnsszp .gt_column_spanner_outer:first-child {
+#lgcwwpdcxt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#emhkfnsszp .gt_column_spanner_outer:last-child {
+#lgcwwpdcxt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#emhkfnsszp .gt_column_spanner {
+#lgcwwpdcxt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3316,7 +3628,7 @@ RSS
   width: 100%;
 }
 
-#emhkfnsszp .gt_group_heading {
+#lgcwwpdcxt .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3341,7 +3653,7 @@ RSS
   vertical-align: middle;
 }
 
-#emhkfnsszp .gt_empty_group_heading {
+#lgcwwpdcxt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3356,15 +3668,15 @@ RSS
   vertical-align: middle;
 }
 
-#emhkfnsszp .gt_from_md > :first-child {
+#lgcwwpdcxt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#emhkfnsszp .gt_from_md > :last-child {
+#lgcwwpdcxt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#emhkfnsszp .gt_row {
+#lgcwwpdcxt .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3383,7 +3695,7 @@ RSS
   overflow-x: hidden;
 }
 
-#emhkfnsszp .gt_stub {
+#lgcwwpdcxt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3396,7 +3708,7 @@ RSS
   padding-right: 5px;
 }
 
-#emhkfnsszp .gt_stub_row_group {
+#lgcwwpdcxt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3410,11 +3722,11 @@ RSS
   vertical-align: top;
 }
 
-#emhkfnsszp .gt_row_group_first td {
+#lgcwwpdcxt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#emhkfnsszp .gt_summary_row {
+#lgcwwpdcxt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3424,16 +3736,16 @@ RSS
   padding-right: 5px;
 }
 
-#emhkfnsszp .gt_first_summary_row {
+#lgcwwpdcxt .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#emhkfnsszp .gt_first_summary_row.thick {
+#lgcwwpdcxt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#emhkfnsszp .gt_last_summary_row {
+#lgcwwpdcxt .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3443,7 +3755,7 @@ RSS
   border-bottom-color: #D3D3D3;
 }
 
-#emhkfnsszp .gt_grand_summary_row {
+#lgcwwpdcxt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3453,7 +3765,7 @@ RSS
   padding-right: 5px;
 }
 
-#emhkfnsszp .gt_first_grand_summary_row {
+#lgcwwpdcxt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3463,11 +3775,11 @@ RSS
   border-top-color: #D3D3D3;
 }
 
-#emhkfnsszp .gt_striped {
+#lgcwwpdcxt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#emhkfnsszp .gt_table_body {
+#lgcwwpdcxt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3476,7 +3788,7 @@ RSS
   border-bottom-color: #D3D3D3;
 }
 
-#emhkfnsszp .gt_footnotes {
+#lgcwwpdcxt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3490,7 +3802,7 @@ RSS
   border-right-color: #D3D3D3;
 }
 
-#emhkfnsszp .gt_footnote {
+#lgcwwpdcxt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -3499,7 +3811,7 @@ RSS
   padding-right: 5px;
 }
 
-#emhkfnsszp .gt_sourcenotes {
+#lgcwwpdcxt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3513,7 +3825,7 @@ RSS
   border-right-color: #D3D3D3;
 }
 
-#emhkfnsszp .gt_sourcenote {
+#lgcwwpdcxt .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3521,64 +3833,64 @@ RSS
   padding-right: 5px;
 }
 
-#emhkfnsszp .gt_left {
+#lgcwwpdcxt .gt_left {
   text-align: left;
 }
 
-#emhkfnsszp .gt_center {
+#lgcwwpdcxt .gt_center {
   text-align: center;
 }
 
-#emhkfnsszp .gt_right {
+#lgcwwpdcxt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#emhkfnsszp .gt_font_normal {
+#lgcwwpdcxt .gt_font_normal {
   font-weight: normal;
 }
 
-#emhkfnsszp .gt_font_bold {
+#lgcwwpdcxt .gt_font_bold {
   font-weight: bold;
 }
 
-#emhkfnsszp .gt_font_italic {
+#lgcwwpdcxt .gt_font_italic {
   font-style: italic;
 }
 
-#emhkfnsszp .gt_super {
+#lgcwwpdcxt .gt_super {
   font-size: 65%;
 }
 
-#emhkfnsszp .gt_footnote_marks {
+#lgcwwpdcxt .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#emhkfnsszp .gt_asterisk {
+#lgcwwpdcxt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#emhkfnsszp .gt_indent_1 {
+#lgcwwpdcxt .gt_indent_1 {
   text-indent: 5px;
 }
 
-#emhkfnsszp .gt_indent_2 {
+#lgcwwpdcxt .gt_indent_2 {
   text-indent: 10px;
 }
 
-#emhkfnsszp .gt_indent_3 {
+#lgcwwpdcxt .gt_indent_3 {
   text-indent: 15px;
 }
 
-#emhkfnsszp .gt_indent_4 {
+#lgcwwpdcxt .gt_indent_4 {
   text-indent: 20px;
 }
 
-#emhkfnsszp .gt_indent_5 {
+#lgcwwpdcxt .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -3637,6 +3949,7 @@ RSS
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="who-talks-to-whom_files/figure-html5/network_plot-1.png" width="624" data-distill-preview=1 /></p>
 </div>
+<p>Mycroft is the hinge between several conversations, one dominated by Carlyle currently taking place at the Saneer-Weeksbooth bash’house, another one over at Ganymede’s palace during the Renunciation Day party, and some more isolated pairs around the periphery, like Ockham and Martin or Dominic and Lesley.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <section class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr />
@@ -3656,6 +3969,8 @@ RSS
 <!--/radix_placeholder_site_after_body-->
 <!--radix_placeholder_appendices-->
 <div class="appendix-bottom">
+  <h3 id="updates-and-corrections">Corrections</h3>
+  <p>If you see mistakes or want to suggest changes, please <a href="https://github.com/syvwlch/Data-Ignota/issues/new">create an issue</a> on the source repository.</p>
   <h3 id="citation">Citation</h3>
   <p>For attribution, please cite this work as</p>
   <pre class="citation-appendix short">Glachant (2022, Oct. 11). Data Ignota: Who Talks to Whom?. Retrieved from https://syvwlch.github.io/Data-Ignota/viz/2022-10-11-who-talks-to-whom/</pre>
