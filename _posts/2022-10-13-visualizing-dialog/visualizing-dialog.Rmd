@@ -1,0 +1,42 @@
+---
+title: "Visualizing Dialog"
+description: |
+  Mostly working on the dialog visualization
+author:
+  - name: Mathieu Glachant
+    url: https://github.com/syvwlch
+date: 2022-10-13
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+A few days of work, with some site cleanup and readability but mostly a new visualization post. Pretty happy with how the radar and network graphs turned out in particular.
+
+I'm struggling with two things in `ggplot2`:
+
+  - Using emojis on the plots, and
+  - Expanding the draw area to avoid text levels being clipped.
+  
+There are solutions online, but I don't understand them well enough to generalize to what I want to do. Just need to focus on this to solve it but I think I'm going to pivot to work on more upstream issues, like adding more data files for joins, or adding scenes to the Digital Edition itself, instead.
+
+## What It Took to Get Here
+
+Enhancements:
+
+- A new visualization post 'Who Talks to Whom' from `said.csv` data:
+	- List of speakers, addresses, conversationalists,
+	- List of pairs, with line & word count, and from that:
+	  - [Drew Some Radar Plots](https://github.com/syvwlch/Data-Ignota/issues/34),
+	  - [Drew a Network Graph](https://github.com/syvwlch/Data-Ignota/issues/47)
+	- Refactored so we [remove the reader in setup chunk](https://github.com/syvwlch/Data-Ignota/issues/50)
+  - [Add a link/CTA to issues tracker on every page](https://github.com/syvwlch/Data-Ignota/issues/52)
+  - [Add a theme CSS file to the site](https://github.com/syvwlch/Data-Ignota/issues/53)
+  - [Remove padding between list items](https://github.com/syvwlch/Data-Ignota/issues/49)
+  - [Try Ridgeline Plots](https://github.com/syvwlch/Data-Ignota/issues/45) but for the existing posts, the violin plots work better.
+
+## Lessons Learned
+
+It is good practice to `ungroup()` after every `group()` but since `summarize()` ungroups one level of grouping so far I have not needed to. Still, good to know.
+
+This group & summarize pattern is starting to make intuitive sense to me.
