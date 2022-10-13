@@ -28,7 +28,10 @@ PATH_TO_SAID <- "../../data/said.csv"
 said <- read.csv(PATH_TO_SAID) %>%
   filter(
     book == 1,
-    chapter <= 12
+    chapter <= 12,
+    # Let's remove the asides to the reader from this analysis
+    speaker != "#reader",
+    addressee != "#reader",
   )
 ```
 
@@ -45,16 +48,11 @@ We need to:
   - rank them by number of lines of dialog.
 
 ```{r top_speakers}
-top_speakers <- said  %>%
-  # Remove the reader from either side of the conversation
-  filter(
-    speaker != "#reader",
-    addressee != "#reader",
-  ) %>%
-  # Group by line AND by speaker to deduplicate lines
+top_speakers <- said %>%
+  # Group & summarize to remove rows not relevant to `speaker`
   group_by(line, speaker) %>%
   summarize(.groups = "drop") %>%
-  # Group by speaker and count
+  # Group & summarize to count lines spoken by character
   group_by(character = speaker) %>%
   summarize(speaks = n()) %>%
   # Arrange by count
@@ -75,15 +73,10 @@ We can do the same for characters who are directly addressed.
 
 ```{r top_addressees}
 top_addressees <- said  %>%
-  # Remove the reader from either side of the conversation
-  filter(
-    speaker != "#reader",
-    addressee != "#reader",
-  ) %>%
-  # Group by line AND by addressee to deduplicate lines
+  # Group & summarize to remove rows not relevant to `addressee`
   group_by(line, addressee) %>%
   summarize(.groups = "drop") %>%
-  # Group by addressee and count
+  # Group & summarize to count lines addressed to character
   group_by(character = addressee) %>%
   summarize(spokenTo = n()) %>%
   # Arrange by count
@@ -179,15 +172,10 @@ Let's build a list of the pairs of speakers and addressees with at least one lin
  
 ```{r pair_list}
 pair_list <- said  %>%
-  # Remove the reader from either side of the conversation
-  filter(
-    speaker != "#reader",
-    addressee != "#reader",
-  ) %>%
-  # Group by line, speaker AND addressee to deduplicate lines
+  # Group & summarize to remove rows not relevant to speaker or addressee
   group_by(line, speaker, addressee, words) %>%
   summarize(.groups = "drop") %>%
-  # Group by speaker and addressee, and add line and word counts
+  # Group & summarize to add line and word counts
   group_by(speaker, addressee) %>%
   summarize(lines = n(), words = sum(words), .groups = "drop") %>%
   # Arrange by count
