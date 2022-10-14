@@ -17,6 +17,14 @@
       <pubDate>Fri, 14 Oct 2022 00:00:00 +0000</pubDate>
     </item>
     <item>
+      <title>Chapters</title>
+      <dc:creator>Mathieu Glachant</dc:creator>
+      <link>https://syvwlch.github.io/Data-Ignota/tei/chapters</link>
+      <description>The chapters, useful for joins to get titles, etc...</description>
+      <guid>https://syvwlch.github.io/Data-Ignota/tei/chapters</guid>
+      <pubDate>Fri, 14 Oct 2022 00:00:00 +0000</pubDate>
+    </item>
+    <item>
       <title>`&lt;said&gt;` Element</title>
       <dc:creator>Mathieu Glachant</dc:creator>
       <link>https://syvwlch.github.io/Data-Ignota/tei/said-element</link>
