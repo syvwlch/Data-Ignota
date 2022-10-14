@@ -55,7 +55,7 @@ A line between Mycroft and Dominic would be encoded thus:
 
 Note that the narration part of that paragraph is always left outside of the node. 
 
-The [data dictionary](#making-sense-of-the-data) below maps each piece of information available for the line, e.g. book, chapter, and page or who is speaking, to whom, about what, etc...
+The [data dictionary](#data-dictionary) below maps each piece of information available for the line, e.g. book, chapter, and page or who is speaking, to whom, about what, etc...
 
 ## Get the Data
 
