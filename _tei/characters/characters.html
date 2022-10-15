@@ -7,7 +7,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
   <meta name="generator" content="distill" />
-  <link rel="alternate" type="application/rss+xml" href="https://syvwlch.github.io/Data-Ignota/tei.xml" />
 
   <style type="text/css">
   /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
@@ -89,638 +88,39 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 
   <!--radix_placeholder_meta_tags-->
-  <title>Data Ignota: Data Files</title>
+  <title>Characters</title>
 
-  <meta property="description" itemprop="description" content="Each post provides a data file for download and explains its contents"/>
+  <meta property="description" itemprop="description" content="The characters in the series, useful for joins to get names, emojis, etc..."/>
 
 
+  <!--  https://schema.org/Article -->
+  <meta property="article:published" itemprop="datePublished" content="2022-10-15"/>
+  <meta property="article:created" itemprop="dateCreated" content="2022-10-15"/>
+  <meta name="article:author" content="Mathieu Glachant"/>
 
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Data Ignota: Data Files"/>
+  <meta property="og:title" content="Characters"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="Each post provides a data file for download and explains its contents"/>
+  <meta property="og:description" content="The characters in the series, useful for joins to get names, emojis, etc..."/>
   <meta property="og:locale" content="en_US"/>
-  <meta property="og:site_name" content="Data Ignota"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
-  <meta property="twitter:title" content="Data Ignota: Data Files"/>
-  <meta property="twitter:description" content="Each post provides a data file for download and explains its contents"/>
+  <meta property="twitter:title" content="Characters"/>
+  <meta property="twitter:description" content="The characters in the series, useful for joins to get names, emojis, etc..."/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","listing"]}},"value":[{"type":"character","attributes":{},"value":["Data Files"]},{"type":"character","attributes":{},"value":["Each post provides a data file for download and explains its contents\n"]},{"type":"character","attributes":{},"value":["tei"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Characters"]},{"type":"character","attributes":{},"value":["The characters in the series, useful for joins to get names, emojis, etc...\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Mathieu Glachant"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":[]}},"value":[]}]}]},{"type":"character","attributes":{},"value":["2022-10-15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","toc","toc_depth"]}},"value":[{"type":"logical","attributes":{},"value":[false]},{"type":"logical","attributes":{},"value":[true]},{"type":"integer","attributes":{},"value":[3]}]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
+  
+  <script type="text/json" id="radix-resource-manifest">
+  {"type":"character","attributes":{},"value":["characters_files/anchor-4.2.2/anchor.min.js","characters_files/bowser-1.9.3/bowser.min.js","characters_files/distill-2.2.21/template.v2.js","characters_files/header-attrs-2.16/header-attrs.js","characters_files/jquery-3.6.0/jquery-3.6.0.js","characters_files/jquery-3.6.0/jquery-3.6.0.min.js","characters_files/jquery-3.6.0/jquery-3.6.0.min.map","characters_files/popper-2.6.0/popper.min.js","characters_files/tippy-6.2.7/tippy-bundle.umd.min.js","characters_files/tippy-6.2.7/tippy-light-border.css","characters_files/tippy-6.2.7/tippy.css","characters_files/tippy-6.2.7/tippy.umd.min.js","characters_files/webcomponents-2.0.0/webcomponents.js"]}
+  </script>
   <!--radix_placeholder_navigation_in_header-->
-  <meta name="distill:offset" content=""/>
-
-  <script type="application/javascript">
-
-    window.headroom_prevent_pin = false;
-
-    window.document.addEventListener("DOMContentLoaded", function (event) {
-
-      // initialize headroom for banner
-      var header = $('header').get(0);
-      var headerHeight = header.offsetHeight;
-      var headroom = new Headroom(header, {
-        tolerance: 5,
-        onPin : function() {
-          if (window.headroom_prevent_pin) {
-            window.headroom_prevent_pin = false;
-            headroom.unpin();
-          }
-        }
-      });
-      headroom.init();
-      if(window.location.hash)
-        headroom.unpin();
-      $(header).addClass('headroom--transition');
-
-      // offset scroll location for banner on hash change
-      // (see: https://github.com/WickyNilliams/headroom.js/issues/38)
-      window.addEventListener("hashchange", function(event) {
-        window.scrollTo(0, window.pageYOffset - (headerHeight + 25));
-      });
-
-      // responsive menu
-      $('.distill-site-header').each(function(i, val) {
-        var topnav = $(this);
-        var toggle = topnav.find('.nav-toggle');
-        toggle.on('click', function() {
-          topnav.toggleClass('responsive');
-        });
-      });
-
-      // nav dropdowns
-      $('.nav-dropbtn').click(function(e) {
-        $(this).next('.nav-dropdown-content').toggleClass('nav-dropdown-active');
-        $(this).parent().siblings('.nav-dropdown')
-           .children('.nav-dropdown-content').removeClass('nav-dropdown-active');
-      });
-      $("body").click(function(e){
-        $('.nav-dropdown-content').removeClass('nav-dropdown-active');
-      });
-      $(".nav-dropdown").click(function(e){
-        e.stopPropagation();
-      });
-    });
-  </script>
-
-  <style type="text/css">
-
-  /* Theme (user-documented overrideables for nav appearance) */
-
-  .distill-site-nav {
-    color: rgba(255, 255, 255, 0.8);
-    background-color: #0F2E3D;
-    font-size: 15px;
-    font-weight: 300;
-  }
-
-  .distill-site-nav a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  .distill-site-nav a:hover {
-    color: white;
-  }
-
-  @media print {
-    .distill-site-nav {
-      display: none;
-    }
-  }
-
-  .distill-site-header {
-
-  }
-
-  .distill-site-footer {
-
-  }
-
-
-  /* Site Header */
-
-  .distill-site-header {
-    width: 100%;
-    box-sizing: border-box;
-    z-index: 3;
-  }
-
-  .distill-site-header .nav-left {
-    display: inline-block;
-    margin-left: 8px;
-  }
-
-  @media screen and (max-width: 768px) {
-    .distill-site-header .nav-left {
-      margin-left: 0;
-    }
-  }
-
-
-  .distill-site-header .nav-right {
-    float: right;
-    margin-right: 8px;
-  }
-
-  .distill-site-header a,
-  .distill-site-header .title {
-    display: inline-block;
-    text-align: center;
-    padding: 14px 10px 14px 10px;
-  }
-
-  .distill-site-header .title {
-    font-size: 18px;
-    min-width: 150px;
-  }
-
-  .distill-site-header .logo {
-    padding: 0;
-  }
-
-  .distill-site-header .logo img {
-    display: none;
-    max-height: 20px;
-    width: auto;
-    margin-bottom: -4px;
-  }
-
-  .distill-site-header .nav-image img {
-    max-height: 18px;
-    width: auto;
-    display: inline-block;
-    margin-bottom: -3px;
-  }
-
-
-
-  @media screen and (min-width: 1000px) {
-    .distill-site-header .logo img {
-      display: inline-block;
-    }
-    .distill-site-header .nav-left {
-      margin-left: 20px;
-    }
-    .distill-site-header .nav-right {
-      margin-right: 20px;
-    }
-    .distill-site-header .title {
-      padding-left: 12px;
-    }
-  }
-
-
-  .distill-site-header .nav-toggle {
-    display: none;
-  }
-
-  .nav-dropdown {
-    display: inline-block;
-    position: relative;
-  }
-
-  .nav-dropdown .nav-dropbtn {
-    border: none;
-    outline: none;
-    color: rgba(255, 255, 255, 0.8);
-    padding: 16px 10px;
-    background-color: transparent;
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: inherit;
-    margin: 0;
-    margin-top: 1px;
-    z-index: 2;
-  }
-
-  .nav-dropdown-content {
-    display: none;
-    position: absolute;
-    background-color: white;
-    min-width: 200px;
-    border: 1px solid rgba(0,0,0,0.15);
-    border-radius: 4px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.1);
-    z-index: 1;
-    margin-top: 2px;
-    white-space: nowrap;
-    padding-top: 4px;
-    padding-bottom: 4px;
-  }
-
-  .nav-dropdown-content hr {
-    margin-top: 4px;
-    margin-bottom: 4px;
-    border: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-  }
-
-  .nav-dropdown-active {
-    display: block;
-  }
-
-  .nav-dropdown-content a, .nav-dropdown-content .nav-dropdown-header {
-    color: black;
-    padding: 6px 24px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-  }
-
-  .nav-dropdown-content .nav-dropdown-header {
-    display: block;
-    padding: 5px 24px;
-    padding-bottom: 0;
-    text-transform: uppercase;
-    font-size: 14px;
-    color: #999999;
-    white-space: nowrap;
-  }
-
-  .nav-dropdown:hover .nav-dropbtn {
-    color: white;
-  }
-
-  .nav-dropdown-content a:hover {
-    background-color: #ddd;
-    color: black;
-  }
-
-  .nav-right .nav-dropdown-content {
-    margin-left: -45%;
-    right: 0;
-  }
-
-  @media screen and (max-width: 768px) {
-    .distill-site-header a, .distill-site-header .nav-dropdown  {display: none;}
-    .distill-site-header a.nav-toggle {
-      float: right;
-      display: block;
-    }
-    .distill-site-header .title {
-      margin-left: 0;
-    }
-    .distill-site-header .nav-right {
-      margin-right: 0;
-    }
-    .distill-site-header {
-      overflow: hidden;
-    }
-    .nav-right .nav-dropdown-content {
-      margin-left: 0;
-    }
-  }
-
-
-  @media screen and (max-width: 768px) {
-    .distill-site-header.responsive {position: relative; min-height: 500px; }
-    .distill-site-header.responsive a.nav-toggle {
-      position: absolute;
-      right: 0;
-      top: 0;
-    }
-    .distill-site-header.responsive a,
-    .distill-site-header.responsive .nav-dropdown {
-      display: block;
-      text-align: left;
-    }
-    .distill-site-header.responsive .nav-left,
-    .distill-site-header.responsive .nav-right {
-      width: 100%;
-    }
-    .distill-site-header.responsive .nav-dropdown {float: none;}
-    .distill-site-header.responsive .nav-dropdown-content {position: relative;}
-    .distill-site-header.responsive .nav-dropdown .nav-dropbtn {
-      display: block;
-      width: 100%;
-      text-align: left;
-    }
-  }
-
-  /* Site Footer */
-
-  .distill-site-footer {
-    width: 100%;
-    overflow: hidden;
-    box-sizing: border-box;
-    z-index: 3;
-    margin-top: 30px;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    text-align: center;
-  }
-
-  /* Headroom */
-
-  d-title {
-    padding-top: 6rem;
-  }
-
-  @media print {
-    d-title {
-      padding-top: 4rem;
-    }
-  }
-
-  .headroom {
-    z-index: 1000;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-  }
-
-  .headroom--transition {
-    transition: all .4s ease-in-out;
-  }
-
-  .headroom--unpinned {
-    top: -100px;
-  }
-
-  .headroom--pinned {
-    top: 0;
-  }
-
-  /* adjust viewport for navbar height */
-  /* helps vertically center bootstrap (non-distill) content */
-  .min-vh-100 {
-    min-height: calc(100vh - 100px) !important;
-  }
-
-  </style>
-
-  <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-  <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet"/>
-  <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet"/>
-  <script src="site_libs/headroom-0.9.4/headroom.min.js"></script>
-  <script src="site_libs/autocomplete-0.37.1/autocomplete.min.js"></script>
-  <script src="site_libs/fuse-6.4.1/fuse.min.js"></script>
-
-  <script type="application/javascript">
-
-  function getMeta(metaName) {
-    var metas = document.getElementsByTagName('meta');
-    for (let i = 0; i < metas.length; i++) {
-      if (metas[i].getAttribute('name') === metaName) {
-        return metas[i].getAttribute('content');
-      }
-    }
-    return '';
-  }
-
-  function offsetURL(url) {
-    var offset = getMeta('distill:offset');
-    return offset ? offset + '/' + url : url;
-  }
-
-  function createFuseIndex() {
-
-    // create fuse index
-    var options = {
-      keys: [
-        { name: 'title', weight: 20 },
-        { name: 'categories', weight: 15 },
-        { name: 'description', weight: 10 },
-        { name: 'contents', weight: 5 },
-      ],
-      ignoreLocation: true,
-      threshold: 0
-    };
-    var fuse = new window.Fuse([], options);
-
-    // fetch the main search.json
-    return fetch(offsetURL('search.json'))
-      .then(function(response) {
-        if (response.status == 200) {
-          return response.json().then(function(json) {
-            // index main articles
-            json.articles.forEach(function(article) {
-              fuse.add(article);
-            });
-            // download collections and index their articles
-            return Promise.all(json.collections.map(function(collection) {
-              return fetch(offsetURL(collection)).then(function(response) {
-                if (response.status === 200) {
-                  return response.json().then(function(articles) {
-                    articles.forEach(function(article) {
-                      fuse.add(article);
-                    });
-                  })
-                } else {
-                  return Promise.reject(
-                    new Error('Unexpected status from search index request: ' +
-                              response.status)
-                  );
-                }
-              });
-            })).then(function() {
-              return fuse;
-            });
-          });
-
-        } else {
-          return Promise.reject(
-            new Error('Unexpected status from search index request: ' +
-                        response.status)
-          );
-        }
-      });
-  }
-
-  window.document.addEventListener("DOMContentLoaded", function (event) {
-
-    // get search element (bail if we don't have one)
-    var searchEl = window.document.getElementById('distill-search');
-    if (!searchEl)
-      return;
-
-    createFuseIndex()
-      .then(function(fuse) {
-
-        // make search box visible
-        searchEl.classList.remove('hidden');
-
-        // initialize autocomplete
-        var options = {
-          autoselect: true,
-          hint: false,
-          minLength: 2,
-        };
-        window.autocomplete(searchEl, options, [{
-          source: function(query, callback) {
-            const searchOptions = {
-              isCaseSensitive: false,
-              shouldSort: true,
-              minMatchCharLength: 2,
-              limit: 10,
-            };
-            var results = fuse.search(query, searchOptions);
-            callback(results
-              .map(function(result) { return result.item; })
-            );
-          },
-          templates: {
-            suggestion: function(suggestion) {
-              var img = suggestion.preview && Object.keys(suggestion.preview).length > 0
-                ? `<img src="${offsetURL(suggestion.preview)}"</img>`
-                : '';
-              var html = `
-                <div class="search-item">
-                  <h3>${suggestion.title}</h3>
-                  <div class="search-item-description">
-                    ${suggestion.description || ''}
-                  </div>
-                  <div class="search-item-preview">
-                    ${img}
-                  </div>
-                </div>
-              `;
-              return html;
-            }
-          }
-        }]).on('autocomplete:selected', function(event, suggestion) {
-          window.location.href = offsetURL(suggestion.path);
-        });
-        // remove inline display style on autocompleter (we want to
-        // manage responsive display via css)
-        $('.algolia-autocomplete').css("display", "");
-      })
-      .catch(function(error) {
-        console.log(error);
-      });
-
-  });
-
-  </script>
-
-  <style type="text/css">
-
-  .nav-search {
-    font-size: x-small;
-  }
-
-  /* Algolioa Autocomplete */
-
-  .algolia-autocomplete {
-    display: inline-block;
-    margin-left: 10px;
-    vertical-align: sub;
-    background-color: white;
-    color: black;
-    padding: 6px;
-    padding-top: 8px;
-    padding-bottom: 0;
-    border-radius: 6px;
-    border: 1px #0F2E3D solid;
-    width: 180px;
-  }
-
-
-  @media screen and (max-width: 768px) {
-    .distill-site-nav .algolia-autocomplete {
-      display: none;
-      visibility: hidden;
-    }
-    .distill-site-nav.responsive .algolia-autocomplete {
-      display: inline-block;
-      visibility: visible;
-    }
-    .distill-site-nav.responsive .algolia-autocomplete .aa-dropdown-menu {
-      margin-left: 0;
-      width: 400px;
-      max-height: 400px;
-    }
-  }
-
-  .algolia-autocomplete .aa-input, .algolia-autocomplete .aa-hint {
-    width: 90%;
-    outline: none;
-    border: none;
-  }
-
-  .algolia-autocomplete .aa-hint {
-    color: #999;
-  }
-  .algolia-autocomplete .aa-dropdown-menu {
-    width: 550px;
-    max-height: 70vh;
-    overflow-x: visible;
-    overflow-y: scroll;
-    padding: 5px;
-    margin-top: 3px;
-    margin-left: -150px;
-    background-color: #fff;
-    border-radius: 5px;
-    border: 1px solid #999;
-    border-top: none;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion {
-    cursor: pointer;
-    padding: 5px 4px;
-    border-bottom: 1px solid #eee;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion:last-of-type {
-    border-bottom: none;
-    margin-bottom: 2px;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item {
-    overflow: hidden;
-    font-size: 0.8em;
-    line-height: 1.4em;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item h3 {
-    font-size: 1rem;
-    margin-block-start: 0;
-    margin-block-end: 5px;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-description {
-    display: inline-block;
-    overflow: hidden;
-    height: 2.8em;
-    width: 80%;
-    margin-right: 4%;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview {
-    display: inline-block;
-    width: 15%;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img {
-    height: 3em;
-    width: auto;
-    display: none;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion .search-item-preview img[src] {
-    display: initial;
-  }
-
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion.aa-cursor {
-    background-color: #eee;
-  }
-  .algolia-autocomplete .aa-dropdown-menu .aa-suggestion em {
-    font-weight: bold;
-    font-style: normal;
-  }
-
-  </style>
-
-
   <!--/radix_placeholder_navigation_in_header-->
   <!--radix_placeholder_distill-->
 
@@ -2074,619 +1474,228 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
   </script>
 
-  <style type="text/css">
-  /* base variables */
-
-  /* Edit the CSS properties in this file to create a custom
-     Distill theme. Only edit values in the right column
-     for each row; values shown are the CSS defaults.
-     To return any property to the default,
-     you may set its value to: unset
-     All rows must end with a semi-colon.                      */
-
-  /* Optional: embed custom fonts here with `@import`          */
-  /* This must remain at the top of this file.                 */
-
-
-
-  html {
-    /*-- Main font sizes --*/
-    --title-size:      50px;
-    --body-size:       1.06rem;
-    --code-size:       14px;
-    --aside-size:      12px;
-    --fig-cap-size:    13px;
-    /*-- Main font colors --*/
-    --title-color:     #000000;
-    --header-color:    rgba(0, 0, 0, 0.8);
-    --body-color:      rgba(0, 0, 0, 0.8);
-    --aside-color:     rgba(0, 0, 0, 0.6);
-    --fig-cap-color:   rgba(0, 0, 0, 0.6);
-    /*-- Specify custom fonts ~~~ must be imported above   --*/
-    --heading-font:    sans-serif;
-    --mono-font:       monospace;
-    --body-font:       sans-serif;
-    --navbar-font:     sans-serif;  /* websites + blogs only */
-  }
-
-  /*-- ARTICLE METADATA --*/
-  d-byline {
-    --heading-size:    0.6rem;
-    --heading-color:   rgba(0, 0, 0, 0.5);
-    --body-size:       0.8rem;
-    --body-color:      rgba(0, 0, 0, 0.8);
-  }
-
-  /*-- ARTICLE TABLE OF CONTENTS --*/
-  .d-contents {
-    --heading-size:    18px;
-    --contents-size:   13px;
-  }
-
-  /*-- ARTICLE APPENDIX --*/
-  d-appendix {
-    --heading-size:    15px;
-    --heading-color:   rgba(0, 0, 0, 0.65);
-    --text-size:       0.8em;
-    --text-color:      rgba(0, 0, 0, 0.5);
-  }
-
-  /*-- WEBSITE HEADER + FOOTER --*/
-  /* These properties only apply to Distill sites and blogs  */
-
-  .distill-site-header {
-    --title-size:       18px;
-    --text-color:       rgba(255, 255, 255, 0.8);
-    --text-size:        15px;
-    --hover-color:      white;
-    --bkgd-color:       #0F2E3D;
-  }
-
-  .distill-site-footer {
-    --text-color:       rgba(255, 255, 255, 0.8);
-    --text-size:        15px;
-    --hover-color:      white;
-    --bkgd-color:       #0F2E3D;
-  }
-
-  /*-- Additional custom styles --*/
-  /* Add any additional CSS rules below                      */
-  </style>
-  <style type="text/css">
-  /* base variables */
-
-  /* Edit the CSS properties in this file to create a custom
-     Distill theme. Only edit values in the right column
-     for each row; values shown are the CSS defaults.
-     To return any property to the default,
-     you may set its value to: unset
-     All rows must end with a semi-colon.                      */
-
-  /* Optional: embed custom fonts here with `@import`          */
-  /* This must remain at the top of this file.                 */
-
-
-
-  html {
-    /*-- Main font sizes --*/
-    --title-size:      50px;
-    --body-size:       1.06rem;
-    --code-size:       14px;
-    --aside-size:      12px;
-    --fig-cap-size:    13px;
-    /*-- Main font colors --*/
-    --title-color:     #000000;
-    --header-color:    rgba(0, 0, 0, 0.8);
-    --body-color:      rgba(0, 0, 0, 0.8);
-    --aside-color:     rgba(0, 0, 0, 0.6);
-    --fig-cap-color:   rgba(0, 0, 0, 0.6);
-    /*-- Specify custom fonts ~~~ must be imported above   --*/
-    --heading-font:    sans-serif;
-    --mono-font:       monospace;
-    --body-font:       sans-serif;
-    --navbar-font:     sans-serif;  /* websites + blogs only */
-  }
-
-  /*-- ARTICLE METADATA --*/
-  d-byline {
-    --heading-size:    0.6rem;
-    --heading-color:   rgba(0, 0, 0, 0.5);
-    --body-size:       0.8rem;
-    --body-color:      rgba(0, 0, 0, 0.8);
-  }
-
-  /*-- ARTICLE TABLE OF CONTENTS --*/
-  .d-contents {
-    --heading-size:    18px;
-    --contents-size:   13px;
-  }
-
-  /*-- ARTICLE APPENDIX --*/
-  d-appendix {
-    --heading-size:    15px;
-    --heading-color:   rgba(0, 0, 0, 0.65);
-    --text-size:       0.8em;
-    --text-color:      rgba(0, 0, 0, 0.5);
-  }
-
-  /*-- WEBSITE HEADER + FOOTER --*/
-  /* These properties only apply to Distill sites and blogs  */
-
-  .distill-site-header {
-    --title-size:       18px;
-    --text-color:       rgba(255, 255, 255, 0.8);
-    --text-size:        15px;
-    --hover-color:      white;
-    --bkgd-color:       #0F2E3D;
-  }
-
-  .distill-site-footer {
-    --text-color:       rgba(255, 255, 255, 0.8);
-    --text-size:        15px;
-    --hover-color:      white;
-    --bkgd-color:       #0F2E3D;
-  }
-
-  /*-- Additional custom styles --*/
-  /* Add any additional CSS rules below                      */
-
-  /* Remove padding between <li> elements */
-  d-article li {
-      margin-bottom: 0;
-  }
-  </style>
-  <style type="text/css">
-  /* base style */
-
-  /* FONT FAMILIES */
-
-  :root {
-    --heading-default: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
-    --mono-default: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-    --body-default: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
-  }
-
-  body,
-  .posts-list .post-preview p,
-  .posts-list .description p {
-    font-family: var(--body-font), var(--body-default);
-  }
-
-  h1, h2, h3, h4, h5, h6,
-  .posts-list .post-preview h2,
-  .posts-list .description h2 {
-    font-family: var(--heading-font), var(--heading-default);
-  }
-
-  d-article div.sourceCode code,
-  d-article pre code {
-    font-family: var(--mono-font), var(--mono-default);
-  }
-
-
-  /*-- TITLE --*/
-  d-title h1,
-  .posts-list > h1 {
-    color: var(--title-color, black);
-  }
-
-  d-title h1 {
-    font-size: var(--title-size, 50px);
-  }
-
-  /*-- HEADERS --*/
-  d-article h1,
-  d-article h2,
-  d-article h3,
-  d-article h4,
-  d-article h5,
-  d-article h6 {
-    color: var(--header-color, rgba(0, 0, 0, 0.8));
-  }
-
-  /*-- BODY --*/
-  d-article > p,  /* only text inside of <p> tags */
-  d-article > ul, /* lists */
-  d-article > ol {
-    color: var(--body-color, rgba(0, 0, 0, 0.8));
-    font-size: var(--body-size, 1.06rem);
-  }
-
-
-  /*-- CODE --*/
-  d-article div.sourceCode code,
-  d-article pre code {
-    font-size: var(--code-size, 14px);
-  }
-
-  /*-- ASIDE --*/
-  d-article aside {
-    font-size: var(--aside-size, 12px);
-    color: var(--aside-color, rgba(0, 0, 0, 0.6));
-  }
-
-  /*-- FIGURE CAPTIONS --*/
-  figure .caption,
-  figure figcaption,
-  .figure .caption {
-    font-size: var(--fig-cap-size, 13px);
-    color: var(--fig-cap-color, rgba(0, 0, 0, 0.6));
-  }
-
-  /*-- METADATA --*/
-  d-byline h3 {
-    font-size: var(--heading-size, 0.6rem);
-    color: var(--heading-color, rgba(0, 0, 0, 0.5));
-  }
-
-  d-byline {
-    font-size: var(--body-size, 0.8rem);
-    color: var(--body-color, rgba(0, 0, 0, 0.8));
-  }
-
-  d-byline a,
-  d-article d-byline a {
-    color: var(--body-color, rgba(0, 0, 0, 0.8));
-  }
-
-  /*-- TABLE OF CONTENTS --*/
-  .d-contents nav h3 {
-    font-size: var(--heading-size, 18px);
-  }
-
-  .d-contents nav a {
-    font-size: var(--contents-size, 13px);
-  }
-
-  /*-- APPENDIX --*/
-  d-appendix h3 {
-    font-size: var(--heading-size, 15px);
-    color: var(--heading-color, rgba(0, 0, 0, 0.65));
-  }
-
-  d-appendix {
-    font-size: var(--text-size, 0.8em);
-    color: var(--text-color, rgba(0, 0, 0, 0.5));
-  }
-
-  d-appendix d-footnote-list a.footnote-backlink {
-    color: var(--text-color, rgba(0, 0, 0, 0.5));
-  }
-
-  /*-- WEBSITE HEADER + FOOTER --*/
-  .distill-site-header .title {
-    font-size: var(--title-size, 18px);
-    font-family: var(--navbar-font), var(--heading-default);
-  }
-
-  .distill-site-header a,
-  .nav-dropdown .nav-dropbtn {
-    font-family: var(--navbar-font), var(--heading-default);
-  }
-
-  .nav-dropdown .nav-dropbtn {
-    color: var(--text-color, rgba(255, 255, 255, 0.8));
-    font-size: var(--text-size, 15px);
-  }
-
-  .distill-site-header a:hover,
-  .nav-dropdown:hover .nav-dropbtn {
-    color: var(--hover-color, white);
-  }
-
-  .distill-site-header {
-    font-size: var(--text-size, 15px);
-    color: var(--text-color, rgba(255, 255, 255, 0.8));
-    background-color: var(--bkgd-color, #0F2E3D);
-  }
-
-  .distill-site-footer {
-    font-size: var(--text-size, 15px);
-    color: var(--text-color, rgba(255, 255, 255, 0.8));
-    background-color: var(--bkgd-color, #0F2E3D);
-  }
-
-  .distill-site-footer a:hover {
-    color: var(--hover-color, white);
-  }</style>
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.16/header-attrs.js"></script>
-  <script src="site_libs/popper-2.6.0/popper.min.js"></script>
-  <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
-  <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
-  <script src="site_libs/tippy-6.2.7/tippy.umd.min.js"></script>
-  <script src="site_libs/anchor-4.2.2/anchor.min.js"></script>
-  <script src="site_libs/bowser-1.9.3/bowser.min.js"></script>
-  <script src="site_libs/webcomponents-2.0.0/webcomponents.js"></script>
-  <script src="site_libs/distill-2.2.21/template.v2.js"></script>
+  <script src="characters_files/header-attrs-2.16/header-attrs.js"></script>
+  <script src="characters_files/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+  <script src="characters_files/popper-2.6.0/popper.min.js"></script>
+  <link href="characters_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="characters_files/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="characters_files/tippy-6.2.7/tippy.umd.min.js"></script>
+  <script src="characters_files/anchor-4.2.2/anchor.min.js"></script>
+  <script src="characters_files/bowser-1.9.3/bowser.min.js"></script>
+  <script src="characters_files/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="characters_files/distill-2.2.21/template.v2.js"></script>
   <!--radix_placeholder_site_in_header-->
   <!--/radix_placeholder_site_in_header-->
 
 
 </head>
 
-<body class="layout-listing">
+<body>
 
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Data Files","description":"Each post provides a data file for download and explains its contents","authors":[]}
+{"title":"Characters","description":"The characters in the series, useful for joins to get names, emojis, etc...","authors":[{"author":"Mathieu Glachant","authorURL":{},"affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2022-10-15T00:00:00.000-04:00","citationText":"Glachant, 2022"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
 <!--radix_placeholder_navigation_before_body-->
-<header class="header header--fixed" role="banner">
-<nav class="distill-site-nav distill-site-header">
-<div class="nav-left">
-<a href="index.html" class="title">Data Ignota</a>
-<input id="distill-search" class="nav-search hidden" type="text" placeholder="Search..."/>
-</div>
-<div class="nav-right">
-<a href="index.html">
-<i class="fa fa-home" aria-hidden="true"></i>
-</a>
-<a href="viz.html">Visualizations</a>
-<a href="tei.html">Data</a>
-<a href="devlog.html">Dev Log</a>
-<a href="about.html">About</a>
-<a href="https://github.com/syvwlch/Data-Ignota">
-<i class="fa fa-github" aria-hidden="true"></i>
-</a>
-<div class="nav-dropdown">
-<button class="nav-dropbtn">
-RSS
- 
-<span class="down-arrow">&#x25BE;</span>
-</button>
-<div class="nav-dropdown-content">
-<a href="viz.xml">Visualization Feed</a>
-<a href="tei.xml">Digital Edition Feed</a>
-<a href="devlog.xml">Dev Log Feed</a>
-</div>
-</div>
-<a href="javascript:void(0);" class="nav-toggle">&#9776;</a>
-</div>
-</nav>
-</header>
 <!--/radix_placeholder_navigation_before_body-->
 <!--radix_placeholder_site_before_body-->
 <!--/radix_placeholder_site_before_body-->
-<!--radix_placeholder_article_listing-->
-
-
-<script type="application/javascript">
-
-function init_posts_list() {
-
-  function load_image(img) {
-    var src = $(img).attr('data-src');
-    if (src) {
-      $(img).attr('src', src);
-      $(img).on("load", function() {
-        img.removeAttribute('data-src');
-      });
-    }
-  }
-
-  function set_posts_visible(posts, visible) {
-    if (visible) {
-
-      // show bottom border by default
-      $(posts).removeClass('post-preview-last');
-
-      // apply limits if need be
-      var max_posts = 25;
-      var apply_limits = $('.posts-container').hasClass('posts-apply-limit');
-      if (apply_limits && posts.length > max_posts) {
-        posts = $(posts).slice(0, max_posts);
-      } else {
-        $('.posts-more a').addClass('hidden');
-      }
-
-      // apply last style
-      $(posts.slice(-1)[0]).addClass('post-preview-last');
-
-      $(posts).removeClass('hidden');
-      $(posts).find('img[data-src]').each(function(i, img) {
-        load_image(img);
-      });
-    } else {
-      $(posts).addClass('hidden');
-    }
-  }
-
-  function apply_hash_filter() {
-
-    // clear active state
-    $('.categories .active').removeClass('active');
-
-    // mark all posts invisible to start
-    set_posts_visible($('.posts-list').children('a'), false);
-
-    // if we have a hash filter
-    if (window.location.hash && window.location.hash.startsWith("#category:")) {
-
-      // mark posts that match the category visible
-      var page_category = window.location.hash.replace(/^#category:/, "");
-      page_category = decodeURIComponent(page_category)
-      var posts = $('.post-metadata').map(function(idx, script) {
-        var metadata = $.parseJSON($(script).html());
-        var post = null;
-        $.each(metadata.categories, function(idx, category) {
-          category = category.replace(/ /g,"_");
-          if ((page_category || '').toLowerCase() === "articles" || category === page_category) {
-            post = $(script).parent().get();
-            return false;
-          }
-        });
-        return post;
-      });
-      set_posts_visible(posts, true);
-
-      // mark the hash active
-      $('.categories li>a[href="' + decodeURIComponent(window.location.hash) + '"]').addClass('active');
-
-      // update the list_caption
-      var list_caption = $('.posts-list-caption');
-      var caption = (page_category || '').toLowerCase() === "articles"
-        ? list_caption.attr('data-caption')
-        : ('Category: ' + page_category.replace(/_/g," "));
-      list_caption.text(caption);
-
-    } else {
-
-      // no hash filter, make all posts visible (subject to max display)
-      set_posts_visible($('.posts-list').children(), true);
-
-      // reset list caption
-      var list_caption = $('.posts-list-caption');
-      list_caption.text(list_caption.attr('data-caption'));
-
-
-    }
-  }
-
-  // more articles
-  function apply_post_limits(apply) {
-    if (apply) {
-      $('.posts-container').addClass('posts-apply-limit');
-      $('.posts-more a').removeClass('hidden');
-    } else {
-      $('.posts-container').removeClass('posts-apply-limit');
-      $('.posts-more a').addClass('hidden');
-    }
-  }
-
-  // click handling for tags
-  $('.dt-tag').click(function(ev) {
-    window.location.hash = '#category:' + $(this).text().replace(/ /g, "_");
-    return false;
-  })
-
-  // hash filter handling
-  apply_hash_filter();
-  $(window).on('hashchange',function() {
-    apply_post_limits(true);
-    apply_hash_filter();
-  });
-
-  // more articles link
-  $('.posts-more a').click(function(e) {
-    e.preventDefault();
-    apply_post_limits(false);
-    apply_hash_filter();
-    return false;
-  });
-
-}
-
-</script>
-
-
-
-<div class="posts-container posts-apply-limit l-page">
-<div class="posts-list">
-<h1 class="posts-list-caption" data-caption="Data Files">Data Files</h1>
-<a href="tei/characters/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":[]}</script>
-<div class="metadata">
-<div class="publishedDate">Oct. 15, 2022</div>
-<div class="dt-authors">
-<div class="dt-author">Mathieu Glachant</div>
-</div>
-</div>
-<div class="thumbnail"></div>
-<div class="description">
-<h2>Characters</h2>
-<div class="dt-tags"></div>
-<p>The characters in the series, useful for joins to get names, emojis, etc...</p>
-</div>
-</a>
-<a href="tei/books/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":[]}</script>
-<div class="metadata">
-<div class="publishedDate">Oct. 14, 2022</div>
-<div class="dt-authors">
-<div class="dt-author">Mathieu Glachant</div>
-</div>
-</div>
-<div class="thumbnail">
-<img/>
-</div>
-<div class="description">
-<h2>Books</h2>
-<div class="dt-tags"></div>
-<p>The books in the series, useful for joins to get title, etc...</p>
-</div>
-</a>
-<a href="tei/chapters/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":[]}</script>
-<div class="metadata">
-<div class="publishedDate">Oct. 14, 2022</div>
-<div class="dt-authors">
-<div class="dt-author">Mathieu Glachant</div>
-</div>
-</div>
-<div class="thumbnail">
-<img/>
-</div>
-<div class="description">
-<h2>Chapters</h2>
-<div class="dt-tags"></div>
-<p>The chapters, useful for joins to get titles, etc...</p>
-</div>
-</a>
-<a href="tei/said-element/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":[]}</script>
-<div class="metadata">
-<div class="publishedDate">Oct. 4, 2022</div>
-<div class="dt-authors">
-<div class="dt-author">Mathieu Glachant</div>
-</div>
-</div>
-<div class="thumbnail">
-<img/>
-</div>
-<div class="description">
-<h2>`&lt;said&gt;` Element</h2>
-<div class="dt-tags"></div>
-<p>Who says what and to whom...</p>
-</div>
-</a>
-<a href="tei/tei-structure/" class="post-preview">
-<script class="post-metadata" type="text/json">{"categories":[]}</script>
-<div class="metadata">
-<div class="publishedDate">Oct. 2, 2022</div>
-<div class="dt-authors">
-<div class="dt-author">Mathieu Glachant</div>
-</div>
-</div>
-<div class="thumbnail">
-<img/>
-</div>
-<div class="description">
-<h2>TEI - High Level Structure</h2>
-<div class="dt-tags"></div>
-<p>A map of where all this data comes from...</p>
-</div>
-</a>
-</div>
-<div class="posts-more">
-<a href="#">More articles &raquo;</a>
-</div>
-</div>
-<!--/radix_placeholder_article_listing-->
 
 <div class="d-title">
-<h1>Data Files</h1>
+<h1>Characters</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p><p>Each post provides a data file for download and explains its contents</p></p>
+<p><p>The characters in the series, useful for joins to get names, emojis, etc…</p></p>
 </div>
 
+<div class="d-byline">
+  Mathieu Glachant true 
+  
+<br/>2022-10-15
+</div>
 
 <div class="d-article">
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="d-contents d-contents-float">
+<nav class="l-text toc figcaption" id="TOC">
+<h3>Contents</h3>
+<ul>
+<li><a href="#origins-of-this-data" id="toc-origins-of-this-data">Origins of This Data</a>
+<ul>
+<li><a href="#what-are-person-nodes-for" id="toc-what-are-person-nodes-for">What Are <code>&lt;person&gt;</code> Nodes For?</a></li>
+<li><a href="#example-nodes" id="toc-example-nodes">Example Nodes</a></li>
+</ul></li>
+<li><a href="#get-the-data" id="toc-get-the-data">Get the Data</a>
+<ul>
+<li><a href="#download-link" id="toc-download-link">Download Link</a></li>
+<li><a href="#last-updated" id="toc-last-updated">Last Updated</a></li>
+</ul></li>
+<li><a href="#raw-data-generation" id="toc-raw-data-generation">Raw Data Generation</a>
+<ul>
+<li><a href="#xquery-script" id="toc-xquery-script">Xquery Script</a></li>
+<li><a href="#xml-output-file" id="toc-xml-output-file">XML Output File</a></li>
+</ul></li>
+<li><a href="#data-prep" id="toc-data-prep">Data Prep</a>
+<ul>
+<li><a href="#clean-fix-na-values" id="toc-clean-fix-na-values">Clean: Fix <em>NA</em> Values</a></li>
+</ul></li>
+<li><a href="#editing-progress" id="toc-editing-progress">Editing Progress</a>
+<ul>
+<li><a href="#names" id="toc-names">Names</a></li>
+<li><a href="#emojis" id="toc-emojis">Emojis</a></li>
+</ul></li>
+<li><a href="#data-dictionary" id="toc-data-dictionary">Data Dictionary</a>
+<ul>
+<li><a href="#id" id="toc-id"><code>id</code></a></li>
+<li><a href="#emoji" id="toc-emoji"><code>emoji</code></a></li>
+<li><a href="#name" id="toc-name"><code>name</code></a></li>
+<li><a href="#fullname" id="toc-fullname"><code>fullName</code></a></li>
+</ul></li>
+</ul>
+</nav>
+</div>
+<h2 id="origins-of-this-data">Origins of This Data</h2>
+<p>This data is generated by extracting all <strong>TEI</strong> <code>&lt;person&gt;</code> descendant nodes of a <code>&lt;listPerson type="characters"&gt;</code> node in the <code>&lt;standOff&gt;</code> node of the Digital Edition of <em>Terra Ignota</em>.</p>
+<h3 id="what-are-person-nodes-for">What Are <code>&lt;person&gt;</code> Nodes For?</h3>
+<p>These <code>&lt;person&gt;</code> nodes contain information about characters in the series. This is metadata added by the editor<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, like everything else in <code>&lt;standOff&gt;</code>.</p>
+<p>The <code>&lt;listPerson type="characters"&gt;</code> node lists persons who are present in the text, “on stage” as it were. This list has sub-lists for convenience in editing, e.g. the Saneer-Weeksbooth ’bash or Danaë’s brood, hence the need to include all descendant <code>&lt;person&gt;</code> nodes, not just children.</p>
+<p>Note that there are other lists of persons in the metadata, e.g. which contain fictional people added as part of world-building or actual historical people referenced in the text. These lists are siblings of the list of characters within <code>&lt;standOff&gt;</code>.</p>
+<h3 id="example-nodes">Example Nodes</h3>
+<p>Here’s a simplified view of what these nodes look like:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">standOff</span>&gt;</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">listPerson</span><span class="ot"> type=</span><span class="st">&quot;characters&quot;</span>&gt;</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    &lt;<span class="kw">person</span><span class="ot"> xml:id=</span><span class="st">&quot;Mycroft&quot;</span>&gt;</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">persName</span><span class="ot"> type=</span><span class="st">&quot;emoji&quot;</span>&gt;✍&lt;/<span class="kw">persName</span>&gt;</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">persName</span><span class="ot"> type=</span><span class="st">&quot;short&quot;</span>&gt;Mycroft&lt;/<span class="kw">persName</span>&gt;</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">persName</span><span class="ot"> type=</span><span class="st">&quot;primary&quot;</span>&gt;</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">forename</span>&gt;Mycroft&lt;/<span class="kw">forename</span>&gt;</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        &lt;<span class="kw">surname</span>&gt;Canner&lt;/<span class="kw">surname</span>&gt;</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>      &lt;/<span class="kw">persName</span>&gt;</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    &lt;/<span class="kw">person</span>&gt;</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">listPerson</span>&gt;</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  ...</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">standOff</span>&gt;</span></code></pre></div>
+<p>The <a href="#data-dictionary">data dictionary</a> below maps the information above to a column in the data file.</p>
+<h2 id="get-the-data">Get the Data</h2>
+<p>The data extracted from these <code>&lt;person&gt;</code> nodes is available as a CSV file.</p>
+<h3 id="download-link">Download Link</h3>
+<div style="text-align: right">
+<a href="../../data/characters.csv">Download the data</a><br>
+</div>
+<h3 id="last-updated">Last Updated</h3>
+<p>This file was last updated on 2022-10-15.</p>
+<h2 id="raw-data-generation">Raw Data Generation</h2>
+<p>The raw data is first extracted from the <code>&lt;person&gt;</code> nodes using an Xquery script.</p>
+<h3 id="xquery-script">Xquery Script</h3>
+<p>For easy ingestion with the <code>XML</code> package in R, the script’s output has a <code>&lt;records&gt;</code> root node and one <code>&lt;character&gt;</code> node per character in the original text.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>xquery version &quot;3.1&quot;;</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>declare namespace tei = &quot;http://www.tei-c.org/ns/1.0&quot;;</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>declare variable $doc := doc(&quot;PATH_TO_TEI_FILE&quot;);</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">records</span>&gt;</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  for $character in $doc//tei:listPerson[@type = &quot;characters&quot;]//tei:person</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  return </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">character</span>&gt;</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    A node per column in the output file, see below for details</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">character</span>&gt;</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">records</span>&gt;</span></code></pre></div>
+<h3 id="xml-output-file">XML Output File</h3>
+<p>The Xquery script outputs an XML output file of the form:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;?xml</span><span class="ot"> version=</span><span class="st">&quot;1.0&quot;</span><span class="ot"> encoding=</span><span class="st">&quot;UTF-8&quot;</span><span class="fu">?&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">records</span>&gt;</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>   &lt;<span class="kw">character</span>&gt;</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">id</span>&gt;#Mycroft&lt;/<span class="kw">id</span>&gt;</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">emoji</span>&gt;✍&lt;/<span class="kw">emoji</span>&gt;</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">name</span>&gt;Mycroft&lt;/<span class="kw">name</span>&gt;</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">fullName</span>&gt;Mycroft Canner&lt;/<span class="kw">fullName</span>&gt;</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>   &lt;/<span class="kw">character</span>&gt;</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>   ...</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">records</span>&gt;</span></code></pre></div>
+<h2 id="data-prep">Data Prep</h2>
+<p>This XML output file must then be cleaned before being saved to the csv file provided above.</p>
+<h3 id="clean-fix-na-values">Clean: Fix <em>NA</em> Values</h3>
+<p>First, missing values set to <em>NA</em>. This is very easy using the <code>XML</code> and <code>tidyverse</code> packages.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>characters</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/XML/man/xmlToDataFrame.html'>xmlToDataFrame</a></span><span class='op'>(</span><span class='va'>xml_path</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span></span>
+<span>    <span class='co'># Missing values must be _NA_</span></span>
+<span>    id <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/na_if.html'>na_if</a></span><span class='op'>(</span><span class='va'>id</span>, <span class='st'>"NA"</span><span class='op'>)</span>,</span>
+<span>    emoji <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/na_if.html'>na_if</a></span><span class='op'>(</span><span class='va'>emoji</span>, <span class='st'>"NA"</span><span class='op'>)</span>,</span>
+<span>    name <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/na_if.html'>na_if</a></span><span class='op'>(</span><span class='va'>name</span>, <span class='st'>"NA"</span><span class='op'>)</span>,</span>
+<span>    fullName <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/na_if.html'>na_if</a></span><span class='op'>(</span><span class='va'>fullName</span>, <span class='st'>"NA"</span><span class='op'>)</span>,</span>
+<span>  <span class='op'>)</span></span></code></pre>
+</div>
+</div>
+<p>NB: Luckily for you, when you read in this data as a CSV file the <code>readr</code> package is smart enough to correctly guess on all of this.</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<h2 id="editing-progress">Editing Progress</h2>
+<h3 id="names">Names</h3>
+<p>Names are required and there are currently 0 character(s) without one.</p>
+<h3 id="emojis">Emojis</h3>
+<p>Emojis are optional and there are currently 31 characters with one.</p>
+<h2 id="data-dictionary">Data Dictionary</h2>
+<p>List of the columns in the data file explaining what they mean and how they were generated.</p>
+<h3 id="id"><code>id</code></h3>
+<p>A unique identifier used within the Digital Edition.</p>
+<p>Required, unique, must conform to <code>xml:id</code> requirements, e.g. can’t start with a number.</p>
+<p>Derived from parameter <code>xml:id</code> of the <code>&lt;person&gt;</code> node itself, with the <code>#</code> tagged onto the front to match the <code>ref</code> attribute syntax used when pointing to this characters, e.g. in a line of dialog.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">id</span>&gt;</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  #{data($character/@xml:id)}</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">id</span>&gt;</span></code></pre></div>
+<h3 id="emoji"><code>emoji</code></h3>
+<p>An emoji evocative of the character, used for visualizations where space is at a premium.</p>
+<p>Optional, unique when it exists.</p>
+<p>Derived from the <code>&lt;persName type="emoji"&gt;</code> child node of the <code>&lt;person&gt;</code> node itself.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">emoji</span>&gt;</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  if ($character/tei:persName[@type = &quot;emoji&quot;]) </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  then normalize-space(data($character/tei:persName[@type = &quot;emoji&quot;]))</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  else &quot;NA&quot;</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">emoji</span>&gt;</span></code></pre></div>
+<h3 id="name"><code>name</code></h3>
+<p>A short name for the character, attested in the text.</p>
+<p>Alphanumeric, required. <em>NA</em> means the character has neither short nor full name in the metadata, an omission by the editor.</p>
+<p>Derived from the <code>&lt;persName type="short"&gt;</code> child node of the <code>&lt;person&gt;</code> node itself, or if it does not exist, the full name (see below).</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">name</span>&gt;</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  if ($character/tei:persName[@type = &quot;short&quot;]) </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  then normalize-space(data($character/tei:persName[@type = &quot;short&quot;]))</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  else if ($character/tei:persName[@type = &quot;primary&quot;]) </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  then normalize-space(data($character/tei:persName[@type = &quot;primary&quot;]))</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  else &quot;NA&quot;</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">name</span>&gt;</span></code></pre></div>
+<h3 id="fullname"><code>fullName</code></h3>
+<p>A full name for the character, attested in the book.</p>
+<p>Alphanumeric, required. <em>NA</em> means the character has no full name in the metadata, an omission by the editor.</p>
+<p>Derived from the <code>&lt;persName type="primary"&gt;</code> child node of the <code>&lt;person&gt;</code> node itself.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">fullName</span>&gt;</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  if ($character/tei:persName[@type = &quot;primary&quot;]) </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  then normalize-space(data($character/tei:persName[@type = &quot;primary&quot;]))</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  else &quot;NA&quot;</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">fullName</span>&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<section class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>i.e. yours truly.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
@@ -2698,10 +1707,7 @@ function init_posts_list() {
 <!--radix_placeholder_site_after_body-->
 <!--/radix_placeholder_site_after_body-->
 <!--radix_placeholder_appendices-->
-<div class="appendix-bottom">
-<h3 id="updates-and-corrections">Corrections</h3>
-<p>If you see mistakes or want to suggest changes, please <a href="https://github.com/syvwlch/Data-Ignota/issues/new">create an issue</a> on the source repository.</p>
-</div>
+<div class="appendix-bottom"></div>
 <!--/radix_placeholder_appendices-->
 <!--radix_placeholder_navigation_after_body-->
 <!--/radix_placeholder_navigation_after_body-->
