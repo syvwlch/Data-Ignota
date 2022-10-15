@@ -1,0 +1,46 @@
+---
+title: "Added Some Data Files"
+description: |
+  Useful lists for joins to add book or chapter titles, or character names...
+author:
+  - name: Mathieu Glachant
+    url: https://github.com/syvwlch
+date: 2022-10-15
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+It took more effort to explain the files here on the website than to generate them via Xquery from the Digital Edition itself... but decent documentation is not a nice-to-have it's a must-have.
+
+## What It Took to Get Here
+
+Enhancements:
+
+- Added a `book` data file.
+- Added a `chapter` data file.
+- Added a `character` data file.
+
+[For all three](https://github.com/syvwlch/Data-Ignota/issues/51), that meant:
+
+1. Write an Xquery script, which
+1. Generates an XML output file, which
+1. An __Rmarkdown__ post here, which
+  a. Grabs, cleans, and saves this output to a `*.csv` file, 
+  a. Provides the download link, 
+  a. Displays some stats on the contents, 
+  a. Explains the origin of the data, and
+  a. Provides a data dictionary explaining each column in the data.
+
+
+## Lessons Learned
+
+While it's tempting to put data about chapters in the books file, or about pages in both, with tidy data that would add a ton of rows, cleaner to have a separate file with the pages, and have those point up to books and chapters.
+
+## Open Questions?
+
+The only time it makes sense to have multiple rows per unit of observation is when the relationship is inherently many-to-many, I think?
+
+The current structure of the `said.csv` file, for example, might be warranted, or it might be better to have a file for speakers, another for addressee, and certainly for mentions of persons or orgs (since those can happen outside quoted speech) and have those point to `said.csv`.
+
+To be revisited once I have a sturdy unique reference structure for the lines that isn't generated on the fly when building `said.csv`.
