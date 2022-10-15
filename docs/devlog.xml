@@ -7,7 +7,15 @@
     <description>A data-driven exploration of Ada Palmer's Terra Ignota series.
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Thu, 13 Oct 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 15 Oct 2022 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Added Some Data Files</title>
+      <dc:creator>Mathieu Glachant</dc:creator>
+      <link>https://syvwlch.github.io/Data-Ignota/posts/2022-10-15-added-some-data-files</link>
+      <description>Useful lists for joins to add book or chapter titles, or character names...</description>
+      <guid>https://syvwlch.github.io/Data-Ignota/posts/2022-10-15-added-some-data-files</guid>
+      <pubDate>Sat, 15 Oct 2022 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>Visualizing Dialog</title>
       <dc:creator>Mathieu Glachant</dc:creator>
