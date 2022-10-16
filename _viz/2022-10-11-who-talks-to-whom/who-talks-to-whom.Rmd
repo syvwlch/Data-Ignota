@@ -15,13 +15,17 @@ output:
 
 Our `said.csv` data file contains information about who said a line of dialog, and to whom. What can we do with this data for the chapters edited to date, i.e. the first twelve?
 
+EDIT 2022-10-16: Let's also use the new `characters.csv` file to pull in names and emojis for characters.
+
 ```{r setup}
+knitr::opts_chunk$set(dev = "ragg_png") # Use Ragg device so emojis work
 library(tidyverse)
 library(gt) # For pretty tables
 library(tidygraph) # For network graphs
 library(ggraph) # To plot the network graphs
 
 PATH_TO_SAID <- "../../data/said.csv"
+PATH_TO_CHARACTERS <- "../../data/characters.csv"
 
 said <- read.csv(PATH_TO_SAID) %>%
   filter(
@@ -31,6 +35,9 @@ said <- read.csv(PATH_TO_SAID) %>%
     speaker != "#reader",
     addressee != "#reader",
   )
+
+dram_pers <- read.csv(PATH_TO_CHARACTERS) %>%
+  select(-fullName)
 ```
 
 ## Who Speaks? Who Listens?
@@ -42,7 +49,7 @@ Let's build a list of characters with a speaking part.
 We need to:
 
   - remove the asides to the reader and their rants to Mycroft,
-  - eliminate duplicate rows that are not relevant, and 
+  - eliminate duplicate rows that are not relevant, and
   - rank them by number of lines of dialog.
 
 ```{r top_speakers}
@@ -53,7 +60,7 @@ top_speakers <- said %>%
   summarize(.groups = "drop") %>%
   # Group & summarize 
   # to count lines spoken by character
-  group_by(character = speaker) %>%
+  group_by(id = speaker) %>%
   summarize(speaks = n()) %>%
   # Arrange by count
   arrange(desc(speaks))
@@ -63,6 +70,9 @@ Here are the top five out of `r nrow(top_speakers)` speakers:
 
 ```{r show_top_speakers, echo=FALSE}
 top_speakers %>%
+  # Left join to retrieve names
+  left_join(dram_pers, by = "id") %>%
+  select(Name = name, Emoji = emoji, speaks) %>%
   head(5) %>%
   gt()
 ```
@@ -79,7 +89,7 @@ top_addressees <- said  %>%
   summarize(.groups = "drop") %>%
   # Group & summarize
   # to count lines addressed to character
-  group_by(character = addressee) %>%
+  group_by(id = addressee) %>%
   summarize(spokenTo = n()) %>%
   # Arrange by count
   arrange(desc(spokenTo))
@@ -89,6 +99,9 @@ Here are the top five out of `r nrow(top_addressees)` addressees:
 
 ```{r show_top_addressees, echo=FALSE}
 top_addressees %>%
+  # Left join to retrieve names
+  left_join(dram_pers, by = "id") %>%
+  select(Name = name, Emoji = emoji, spokenTo) %>%
   head(5) %>%
   gt()
 ```
@@ -101,8 +114,10 @@ We can now combine the two lists using a join^[If we use a `full_join()` any cha
 characters <- full_join(
   top_speakers,
   top_addressees,
-  by = "character"
-)
+  by = "id"
+  ) %>%
+   # Join to retrieve names
+  left_join(dram_pers, by = "id")
 ```
 
 Tables are nice and all, but this seems like a good time for a graph. Here are the top 20 out of `r nrow(characters)` characters by lines of dialog:
@@ -113,7 +128,7 @@ characters %>%
   gather(speaks, spokenTo, key = "Role", value = lines) %>%
   ggplot(
     mapping = aes(
-      y = reorder(character, lines),
+      y = reorder(name, lines),
       x = lines,
       fill = Role)
   ) +
@@ -139,7 +154,7 @@ characters %>%
   gather(speaks, spokenTo, key = "Role", value = lines) %>%
   ggplot(
     mapping = aes(
-      y = reorder(character, -ratio),
+      y = reorder(name, -ratio),
       x = lines,
       fill = Role)
   ) +
@@ -196,6 +211,16 @@ Here are the top four directed pairs by number of lines, out of `r nrow(pair_lis
 
 ```{r show_top_pairs, echo=FALSE}
 pair_list %>%
+  left_join(dram_pers, by = c("speaker" = "id")) %>%
+  rename(s_emoji = emoji, s_name = name) %>%
+  left_join(dram_pers, by = c("addressee" = "id")) %>%
+  rename(a_emoji = emoji, a_name = name) %>%
+  select(
+    Speaker = s_name,
+    Addressee = a_name,
+    Lines = lines,
+    Words = words,
+  ) %>%
   head(4) %>%
   gt()
 ```
@@ -209,19 +234,30 @@ We can draw some radar plots showing the total word count our top four speakers 
 ```{r radar_plot, echo=FALSE}
 pair_list %>%
   filter(
-    speaker %in% head(top_speakers, 4)$character,
-    addressee %in% head(top_addressees)$character,
+    speaker %in% head(top_speakers, 4)$id,
+    addressee %in% head(top_addressees)$id,
+  ) %>%
+  left_join(dram_pers, by = c("speaker" = "id")) %>%
+  rename(s_emoji = emoji, s_name = name) %>%
+  left_join(dram_pers, by = c("addressee" = "id")) %>%
+  rename(a_emoji = emoji, a_name = name) %>%
+  select(
+    Speaker = s_name,
+    Addressee = a_name,
+    Emoji = a_emoji,
+    Lines = lines,
+    Words = words,
   ) %>%
   ggplot(
     aes(
-      x = reorder(addressee, -words),
-      y = lines, 
-      fill = addressee
+      x = reorder(Emoji, -Words),
+      y = Lines, 
+      fill = Addressee
     )
   ) +
     geom_col() +
     coord_polar() +
-    facet_wrap(vars(speaker)) +
+    facet_wrap(vars(Speaker)) +
     theme(
       legend.position="none",
       axis.text.y=element_blank(),
@@ -235,6 +271,8 @@ pair_list %>%
     
 ```
 
+See [below](#emoji-to-character-mapping) for the emoji mapping for the addressees. We are missing an emoji for Martin at 11 o'clock.
+
 Everybody speaks to Carlyle, but Carlyle mostly speaks to Mycroft and Bridger. Only Mycroft speaks to the outside world.
 
 This works pretty well for small groups of characters but it won't scale well to the `r nrow(top_speakers)` speaking parts we have so far, which is only going to grow as we add chapters.
@@ -247,12 +285,13 @@ We have a list of pairs of characters engaged in dialog with a few different mea
 network_graph <- tbl_graph(
   edges = pair_list,
   nodes = characters,
+  node_key = "id",
 )
 ```
 
-That's all it takes to make network graph, which we can then plot various visualizations of, e.g. a hairball of characters with at least fifteen spoken lines of dialog:
+That's all it takes to make a network graph, which we can then visualize in various ways, e.g. a hairball of characters with at least fifteen spoken lines of dialog:
 
-```{r network_plot, echo=FALSE, preview=TRUE}
+```{r network_plot, echo=FALSE, warning=FALSE, preview=TRUE}
 network_graph %>%
   activate(nodes) %>%
   filter(speaks > 15) %>%
@@ -260,15 +299,23 @@ network_graph %>%
     geom_edge_fan(
       aes(alpha = words),
       arrow = arrow(length = unit(3, 'mm')), 
-      end_cap = circle(8, 'mm')
+      end_cap = circle(6, 'mm')
     ) +
-    geom_node_label(
-      aes(
-        label = character,
-        size = speaks,
-      )
-    ) +
+    geom_node_point(color = "white", size = 12) +
+    geom_node_text(aes(label = emoji), size = 6) +
     theme(legend.position="none")
 ```
 
+See [below](#emoji-to-character-mapping) for the emoji mapping for the other characters. We are missing emojis for Lesley, Martin, and Su-Hyeon, going from left to right. 
+
 Mycroft is the hinge between several conversations, one dominated by Carlyle currently taking place at the Saneer-Weeksbooth bash'house, another one over at Ganymede's palace during the Renunciation Day party, and some more isolated pairs around the periphery, like Ockham and Martin or Dominic and Lesley.
+
+### Emoji-to-Character Mapping
+
+```{r emoji-key, echo=FALSE}
+top_speakers %>%
+  filter(speaks > 15) %>%
+  left_join(dram_pers, by = "id") %>%
+  select(Emoji = emoji, Name = name) %>%
+  gt()
+```

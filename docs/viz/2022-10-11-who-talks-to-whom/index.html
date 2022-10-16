@@ -2505,19 +2505,23 @@ RSS
 <li><a href="#listing-all-the-conversations" id="toc-listing-all-the-conversations">Listing All the Conversations</a></li>
 <li><a href="#radar-plots" id="toc-radar-plots">Radar Plots</a></li>
 <li><a href="#network-graph" id="toc-network-graph">Network Graph</a></li>
+<li><a href="#emoji-to-character-mapping" id="toc-emoji-to-character-mapping">Emoji-to-Character Mapping</a></li>
 </ul></li>
 </ul>
 </nav>
 </div>
 <p>Our <code>said.csv</code> data file contains information about who said a line of dialog, and to whom. What can we do with this data for the chapters edited to date, i.e. the first twelve?</p>
+<p>EDIT 2022-10-16: Let’s also use the new <code>characters.csv</code> file to pull in names and emojis for characters.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'>knitr</span><span class='fu'>::</span><span class='va'><a href='https://rdrr.io/pkg/knitr/man/opts_chunk.html'>opts_chunk</a></span><span class='op'>$</span><span class='fu'>set</span><span class='op'>(</span>dev <span class='op'>=</span> <span class='st'>"ragg_png"</span><span class='op'>)</span> <span class='co'># Use Ragg device so emojis work</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
 <span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://gt.rstudio.com/'>gt</a></span><span class='op'>)</span> <span class='co'># For pretty tables</span></span>
 <span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidygraph.data-imaginist.com'>tidygraph</a></span><span class='op'>)</span> <span class='co'># For network graphs</span></span>
 <span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://ggraph.data-imaginist.com'>ggraph</a></span><span class='op'>)</span> <span class='co'># To plot the network graphs</span></span>
 <span></span>
 <span><span class='va'>PATH_TO_SAID</span> <span class='op'>&lt;-</span> <span class='st'>"../../data/said.csv"</span></span>
+<span><span class='va'>PATH_TO_CHARACTERS</span> <span class='op'>&lt;-</span> <span class='st'>"../../data/characters.csv"</span></span>
 <span></span>
 <span><span class='va'>said</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span><span class='op'>(</span><span class='va'>PATH_TO_SAID</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span></span>
@@ -2526,7 +2530,10 @@ RSS
 <span>    <span class='co'># Let's remove the asides to the reader from this analysis</span></span>
 <span>    <span class='va'>speaker</span> <span class='op'>!=</span> <span class='st'>"#reader"</span>,</span>
 <span>    <span class='va'>addressee</span> <span class='op'>!=</span> <span class='st'>"#reader"</span>,</span>
-<span>  <span class='op'>)</span></span></code></pre>
+<span>  <span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>dram_pers</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/utils/read.table.html'>read.csv</a></span><span class='op'>(</span><span class='va'>PATH_TO_CHARACTERS</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/select.html'>select</a></span><span class='op'>(</span><span class='op'>-</span><span class='va'>fullName</span><span class='op'>)</span></span></code></pre>
 </div>
 </div>
 <h2 id="who-speaks-who-listens">Who Speaks? Who Listens?</h2>
@@ -2547,7 +2554,7 @@ RSS
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>.groups <span class='op'>=</span> <span class='st'>"drop"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
 <span>  <span class='co'># Group &amp; summarize </span></span>
 <span>  <span class='co'># to count lines spoken by character</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span>character <span class='op'>=</span> <span class='va'>speaker</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span>id <span class='op'>=</span> <span class='va'>speaker</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>speaks <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
 <span>  <span class='co'># Arrange by count</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/arrange.html'>arrange</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/desc.html'>desc</a></span><span class='op'>(</span><span class='va'>speaks</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
@@ -2555,12 +2562,12 @@ RSS
 </div>
 <p>Here are the top five out of 38 speakers:</p>
 <div class="layout-chunk" data-layout="l-body">
-<div id="gxzmuzxwrf" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="kavvtpbarr" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#gxzmuzxwrf .gt_table {
+#kavvtpbarr .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2585,7 +2592,7 @@ RSS
   border-left-color: #D3D3D3;
 }
 
-#gxzmuzxwrf .gt_heading {
+#kavvtpbarr .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -2597,7 +2604,7 @@ RSS
   border-right-color: #D3D3D3;
 }
 
-#gxzmuzxwrf .gt_title {
+#kavvtpbarr .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2609,7 +2616,7 @@ RSS
   border-bottom-width: 0;
 }
 
-#gxzmuzxwrf .gt_subtitle {
+#kavvtpbarr .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2621,13 +2628,13 @@ RSS
   border-top-width: 0;
 }
 
-#gxzmuzxwrf .gt_bottom_border {
+#kavvtpbarr .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#gxzmuzxwrf .gt_col_headings {
+#kavvtpbarr .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2642,7 +2649,7 @@ RSS
   border-right-color: #D3D3D3;
 }
 
-#gxzmuzxwrf .gt_col_heading {
+#kavvtpbarr .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2662,7 +2669,7 @@ RSS
   overflow-x: hidden;
 }
 
-#gxzmuzxwrf .gt_column_spanner_outer {
+#kavvtpbarr .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2674,15 +2681,15 @@ RSS
   padding-right: 4px;
 }
 
-#gxzmuzxwrf .gt_column_spanner_outer:first-child {
+#kavvtpbarr .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#gxzmuzxwrf .gt_column_spanner_outer:last-child {
+#kavvtpbarr .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#gxzmuzxwrf .gt_column_spanner {
+#kavvtpbarr .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2694,7 +2701,7 @@ RSS
   width: 100%;
 }
 
-#gxzmuzxwrf .gt_group_heading {
+#kavvtpbarr .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2719,7 +2726,7 @@ RSS
   vertical-align: middle;
 }
 
-#gxzmuzxwrf .gt_empty_group_heading {
+#kavvtpbarr .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2734,15 +2741,15 @@ RSS
   vertical-align: middle;
 }
 
-#gxzmuzxwrf .gt_from_md > :first-child {
+#kavvtpbarr .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#gxzmuzxwrf .gt_from_md > :last-child {
+#kavvtpbarr .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#gxzmuzxwrf .gt_row {
+#kavvtpbarr .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2761,7 +2768,7 @@ RSS
   overflow-x: hidden;
 }
 
-#gxzmuzxwrf .gt_stub {
+#kavvtpbarr .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2774,7 +2781,7 @@ RSS
   padding-right: 5px;
 }
 
-#gxzmuzxwrf .gt_stub_row_group {
+#kavvtpbarr .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2788,11 +2795,11 @@ RSS
   vertical-align: top;
 }
 
-#gxzmuzxwrf .gt_row_group_first td {
+#kavvtpbarr .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#gxzmuzxwrf .gt_summary_row {
+#kavvtpbarr .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2802,16 +2809,16 @@ RSS
   padding-right: 5px;
 }
 
-#gxzmuzxwrf .gt_first_summary_row {
+#kavvtpbarr .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#gxzmuzxwrf .gt_first_summary_row.thick {
+#kavvtpbarr .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#gxzmuzxwrf .gt_last_summary_row {
+#kavvtpbarr .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2821,7 +2828,7 @@ RSS
   border-bottom-color: #D3D3D3;
 }
 
-#gxzmuzxwrf .gt_grand_summary_row {
+#kavvtpbarr .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2831,7 +2838,7 @@ RSS
   padding-right: 5px;
 }
 
-#gxzmuzxwrf .gt_first_grand_summary_row {
+#kavvtpbarr .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2841,11 +2848,11 @@ RSS
   border-top-color: #D3D3D3;
 }
 
-#gxzmuzxwrf .gt_striped {
+#kavvtpbarr .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#gxzmuzxwrf .gt_table_body {
+#kavvtpbarr .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2854,7 +2861,7 @@ RSS
   border-bottom-color: #D3D3D3;
 }
 
-#gxzmuzxwrf .gt_footnotes {
+#kavvtpbarr .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2868,7 +2875,7 @@ RSS
   border-right-color: #D3D3D3;
 }
 
-#gxzmuzxwrf .gt_footnote {
+#kavvtpbarr .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -2877,7 +2884,7 @@ RSS
   padding-right: 5px;
 }
 
-#gxzmuzxwrf .gt_sourcenotes {
+#kavvtpbarr .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2891,7 +2898,7 @@ RSS
   border-right-color: #D3D3D3;
 }
 
-#gxzmuzxwrf .gt_sourcenote {
+#kavvtpbarr .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2899,64 +2906,64 @@ RSS
   padding-right: 5px;
 }
 
-#gxzmuzxwrf .gt_left {
+#kavvtpbarr .gt_left {
   text-align: left;
 }
 
-#gxzmuzxwrf .gt_center {
+#kavvtpbarr .gt_center {
   text-align: center;
 }
 
-#gxzmuzxwrf .gt_right {
+#kavvtpbarr .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#gxzmuzxwrf .gt_font_normal {
+#kavvtpbarr .gt_font_normal {
   font-weight: normal;
 }
 
-#gxzmuzxwrf .gt_font_bold {
+#kavvtpbarr .gt_font_bold {
   font-weight: bold;
 }
 
-#gxzmuzxwrf .gt_font_italic {
+#kavvtpbarr .gt_font_italic {
   font-style: italic;
 }
 
-#gxzmuzxwrf .gt_super {
+#kavvtpbarr .gt_super {
   font-size: 65%;
 }
 
-#gxzmuzxwrf .gt_footnote_marks {
+#kavvtpbarr .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#gxzmuzxwrf .gt_asterisk {
+#kavvtpbarr .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#gxzmuzxwrf .gt_indent_1 {
+#kavvtpbarr .gt_indent_1 {
   text-indent: 5px;
 }
 
-#gxzmuzxwrf .gt_indent_2 {
+#kavvtpbarr .gt_indent_2 {
   text-indent: 10px;
 }
 
-#gxzmuzxwrf .gt_indent_3 {
+#kavvtpbarr .gt_indent_3 {
   text-indent: 15px;
 }
 
-#gxzmuzxwrf .gt_indent_4 {
+#kavvtpbarr .gt_indent_4 {
   text-indent: 20px;
 }
 
-#gxzmuzxwrf .gt_indent_5 {
+#kavvtpbarr .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2964,20 +2971,26 @@ RSS
   
   <thead class="gt_col_headings">
     <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">character</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">Name</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">Emoji</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">speaks</th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">#Carlyle</td>
+    <tr><td class="gt_row gt_left">Carlyle</td>
+<td class="gt_row gt_left">🙏</td>
 <td class="gt_row gt_right">246</td></tr>
-    <tr><td class="gt_row gt_left">#Mycroft</td>
+    <tr><td class="gt_row gt_left">Mycroft</td>
+<td class="gt_row gt_left">✍️</td>
 <td class="gt_row gt_right">218</td></tr>
-    <tr><td class="gt_row gt_left">#Bridger</td>
+    <tr><td class="gt_row gt_left">Bridger</td>
+<td class="gt_row gt_left">🧸</td>
 <td class="gt_row gt_right">89</td></tr>
-    <tr><td class="gt_row gt_left">#Thisbe</td>
+    <tr><td class="gt_row gt_left">Thisbe</td>
+<td class="gt_row gt_left">🦨</td>
 <td class="gt_row gt_right">80</td></tr>
-    <tr><td class="gt_row gt_left">#Vivien</td>
+    <tr><td class="gt_row gt_left">Vivien</td>
+<td class="gt_row gt_left">🧮</td>
 <td class="gt_row gt_right">77</td></tr>
   </tbody>
   
@@ -2996,7 +3009,7 @@ RSS
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>.groups <span class='op'>=</span> <span class='st'>"drop"</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
 <span>  <span class='co'># Group &amp; summarize</span></span>
 <span>  <span class='co'># to count lines addressed to character</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span>character <span class='op'>=</span> <span class='va'>addressee</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span>id <span class='op'>=</span> <span class='va'>addressee</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>spokenTo <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/context.html'>n</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
 <span>  <span class='co'># Arrange by count</span></span>
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/arrange.html'>arrange</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/desc.html'>desc</a></span><span class='op'>(</span><span class='va'>spokenTo</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
@@ -3004,12 +3017,12 @@ RSS
 </div>
 <p>Here are the top five out of 50 addressees:</p>
 <div class="layout-chunk" data-layout="l-body">
-<div id="bwtidcsfxg" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="mtaoxwieax" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#bwtidcsfxg .gt_table {
+#mtaoxwieax .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -3034,7 +3047,7 @@ RSS
   border-left-color: #D3D3D3;
 }
 
-#bwtidcsfxg .gt_heading {
+#mtaoxwieax .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3046,7 +3059,7 @@ RSS
   border-right-color: #D3D3D3;
 }
 
-#bwtidcsfxg .gt_title {
+#mtaoxwieax .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3058,7 +3071,7 @@ RSS
   border-bottom-width: 0;
 }
 
-#bwtidcsfxg .gt_subtitle {
+#mtaoxwieax .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3070,13 +3083,13 @@ RSS
   border-top-width: 0;
 }
 
-#bwtidcsfxg .gt_bottom_border {
+#mtaoxwieax .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bwtidcsfxg .gt_col_headings {
+#mtaoxwieax .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3091,7 +3104,7 @@ RSS
   border-right-color: #D3D3D3;
 }
 
-#bwtidcsfxg .gt_col_heading {
+#mtaoxwieax .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3111,7 +3124,7 @@ RSS
   overflow-x: hidden;
 }
 
-#bwtidcsfxg .gt_column_spanner_outer {
+#mtaoxwieax .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3123,15 +3136,15 @@ RSS
   padding-right: 4px;
 }
 
-#bwtidcsfxg .gt_column_spanner_outer:first-child {
+#mtaoxwieax .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bwtidcsfxg .gt_column_spanner_outer:last-child {
+#mtaoxwieax .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bwtidcsfxg .gt_column_spanner {
+#mtaoxwieax .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3143,7 +3156,7 @@ RSS
   width: 100%;
 }
 
-#bwtidcsfxg .gt_group_heading {
+#mtaoxwieax .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3168,7 +3181,7 @@ RSS
   vertical-align: middle;
 }
 
-#bwtidcsfxg .gt_empty_group_heading {
+#mtaoxwieax .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3183,15 +3196,15 @@ RSS
   vertical-align: middle;
 }
 
-#bwtidcsfxg .gt_from_md > :first-child {
+#mtaoxwieax .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bwtidcsfxg .gt_from_md > :last-child {
+#mtaoxwieax .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bwtidcsfxg .gt_row {
+#mtaoxwieax .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3210,7 +3223,7 @@ RSS
   overflow-x: hidden;
 }
 
-#bwtidcsfxg .gt_stub {
+#mtaoxwieax .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3223,7 +3236,7 @@ RSS
   padding-right: 5px;
 }
 
-#bwtidcsfxg .gt_stub_row_group {
+#mtaoxwieax .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3237,11 +3250,11 @@ RSS
   vertical-align: top;
 }
 
-#bwtidcsfxg .gt_row_group_first td {
+#mtaoxwieax .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bwtidcsfxg .gt_summary_row {
+#mtaoxwieax .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3251,16 +3264,16 @@ RSS
   padding-right: 5px;
 }
 
-#bwtidcsfxg .gt_first_summary_row {
+#mtaoxwieax .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bwtidcsfxg .gt_first_summary_row.thick {
+#mtaoxwieax .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bwtidcsfxg .gt_last_summary_row {
+#mtaoxwieax .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3270,7 +3283,7 @@ RSS
   border-bottom-color: #D3D3D3;
 }
 
-#bwtidcsfxg .gt_grand_summary_row {
+#mtaoxwieax .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3280,7 +3293,7 @@ RSS
   padding-right: 5px;
 }
 
-#bwtidcsfxg .gt_first_grand_summary_row {
+#mtaoxwieax .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3290,11 +3303,11 @@ RSS
   border-top-color: #D3D3D3;
 }
 
-#bwtidcsfxg .gt_striped {
+#mtaoxwieax .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bwtidcsfxg .gt_table_body {
+#mtaoxwieax .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3303,7 +3316,7 @@ RSS
   border-bottom-color: #D3D3D3;
 }
 
-#bwtidcsfxg .gt_footnotes {
+#mtaoxwieax .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3317,7 +3330,7 @@ RSS
   border-right-color: #D3D3D3;
 }
 
-#bwtidcsfxg .gt_footnote {
+#mtaoxwieax .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -3326,7 +3339,7 @@ RSS
   padding-right: 5px;
 }
 
-#bwtidcsfxg .gt_sourcenotes {
+#mtaoxwieax .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3340,7 +3353,7 @@ RSS
   border-right-color: #D3D3D3;
 }
 
-#bwtidcsfxg .gt_sourcenote {
+#mtaoxwieax .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3348,64 +3361,64 @@ RSS
   padding-right: 5px;
 }
 
-#bwtidcsfxg .gt_left {
+#mtaoxwieax .gt_left {
   text-align: left;
 }
 
-#bwtidcsfxg .gt_center {
+#mtaoxwieax .gt_center {
   text-align: center;
 }
 
-#bwtidcsfxg .gt_right {
+#mtaoxwieax .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bwtidcsfxg .gt_font_normal {
+#mtaoxwieax .gt_font_normal {
   font-weight: normal;
 }
 
-#bwtidcsfxg .gt_font_bold {
+#mtaoxwieax .gt_font_bold {
   font-weight: bold;
 }
 
-#bwtidcsfxg .gt_font_italic {
+#mtaoxwieax .gt_font_italic {
   font-style: italic;
 }
 
-#bwtidcsfxg .gt_super {
+#mtaoxwieax .gt_super {
   font-size: 65%;
 }
 
-#bwtidcsfxg .gt_footnote_marks {
+#mtaoxwieax .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#bwtidcsfxg .gt_asterisk {
+#mtaoxwieax .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bwtidcsfxg .gt_indent_1 {
+#mtaoxwieax .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bwtidcsfxg .gt_indent_2 {
+#mtaoxwieax .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bwtidcsfxg .gt_indent_3 {
+#mtaoxwieax .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bwtidcsfxg .gt_indent_4 {
+#mtaoxwieax .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bwtidcsfxg .gt_indent_5 {
+#mtaoxwieax .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -3413,20 +3426,26 @@ RSS
   
   <thead class="gt_col_headings">
     <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">character</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">Name</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">Emoji</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">spokenTo</th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">#Carlyle</td>
+    <tr><td class="gt_row gt_left">Carlyle</td>
+<td class="gt_row gt_left">🙏</td>
 <td class="gt_row gt_right">258</td></tr>
-    <tr><td class="gt_row gt_left">#Mycroft</td>
+    <tr><td class="gt_row gt_left">Mycroft</td>
+<td class="gt_row gt_left">✍️</td>
 <td class="gt_row gt_right">235</td></tr>
-    <tr><td class="gt_row gt_left">#Bridger</td>
+    <tr><td class="gt_row gt_left">Bridger</td>
+<td class="gt_row gt_left">🧸</td>
 <td class="gt_row gt_right">99</td></tr>
-    <tr><td class="gt_row gt_left">#Vivien</td>
+    <tr><td class="gt_row gt_left">Vivien</td>
+<td class="gt_row gt_left">🧮</td>
 <td class="gt_row gt_right">81</td></tr>
-    <tr><td class="gt_row gt_left">#Ganymede</td>
+    <tr><td class="gt_row gt_left">Ganymede</td>
+<td class="gt_row gt_left">🌞</td>
 <td class="gt_row gt_right">80</td></tr>
   </tbody>
   
@@ -3441,8 +3460,10 @@ RSS
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>characters</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate-joins.html'>full_join</a></span><span class='op'>(</span></span>
 <span>  <span class='va'>top_speakers</span>,</span>
 <span>  <span class='va'>top_addressees</span>,</span>
-<span>  by <span class='op'>=</span> <span class='st'>"character"</span></span>
-<span><span class='op'>)</span></span></code></pre>
+<span>  by <span class='op'>=</span> <span class='st'>"id"</span></span>
+<span>  <span class='op'>)</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span>   <span class='co'># Join to retrieve names</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate-joins.html'>left_join</a></span><span class='op'>(</span><span class='va'>dram_pers</span>, by <span class='op'>=</span> <span class='st'>"id"</span><span class='op'>)</span></span></code></pre>
 </div>
 </div>
 <p>Tables are nice and all, but this seems like a good time for a graph. Here are the top 20 out of 51 characters by lines of dialog:</p>
@@ -3489,12 +3510,12 @@ RSS
 <p>That’s it, it’s that easy!</p>
 <p>Here are the top four directed pairs by number of lines, out of 206:</p>
 <div class="layout-chunk" data-layout="l-body">
-<div id="lgcwwpdcxt" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="nuvvsbsqbw" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#lgcwwpdcxt .gt_table {
+#nuvvsbsqbw .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -3519,7 +3540,7 @@ RSS
   border-left-color: #D3D3D3;
 }
 
-#lgcwwpdcxt .gt_heading {
+#nuvvsbsqbw .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -3531,7 +3552,7 @@ RSS
   border-right-color: #D3D3D3;
 }
 
-#lgcwwpdcxt .gt_title {
+#nuvvsbsqbw .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3543,7 +3564,7 @@ RSS
   border-bottom-width: 0;
 }
 
-#lgcwwpdcxt .gt_subtitle {
+#nuvvsbsqbw .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3555,13 +3576,13 @@ RSS
   border-top-width: 0;
 }
 
-#lgcwwpdcxt .gt_bottom_border {
+#nuvvsbsqbw .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#lgcwwpdcxt .gt_col_headings {
+#nuvvsbsqbw .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3576,7 +3597,7 @@ RSS
   border-right-color: #D3D3D3;
 }
 
-#lgcwwpdcxt .gt_col_heading {
+#nuvvsbsqbw .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3596,7 +3617,7 @@ RSS
   overflow-x: hidden;
 }
 
-#lgcwwpdcxt .gt_column_spanner_outer {
+#nuvvsbsqbw .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3608,15 +3629,15 @@ RSS
   padding-right: 4px;
 }
 
-#lgcwwpdcxt .gt_column_spanner_outer:first-child {
+#nuvvsbsqbw .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#lgcwwpdcxt .gt_column_spanner_outer:last-child {
+#nuvvsbsqbw .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#lgcwwpdcxt .gt_column_spanner {
+#nuvvsbsqbw .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -3628,7 +3649,7 @@ RSS
   width: 100%;
 }
 
-#lgcwwpdcxt .gt_group_heading {
+#nuvvsbsqbw .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3653,7 +3674,7 @@ RSS
   vertical-align: middle;
 }
 
-#lgcwwpdcxt .gt_empty_group_heading {
+#nuvvsbsqbw .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3668,15 +3689,15 @@ RSS
   vertical-align: middle;
 }
 
-#lgcwwpdcxt .gt_from_md > :first-child {
+#nuvvsbsqbw .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#lgcwwpdcxt .gt_from_md > :last-child {
+#nuvvsbsqbw .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#lgcwwpdcxt .gt_row {
+#nuvvsbsqbw .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3695,7 +3716,7 @@ RSS
   overflow-x: hidden;
 }
 
-#lgcwwpdcxt .gt_stub {
+#nuvvsbsqbw .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3708,7 +3729,7 @@ RSS
   padding-right: 5px;
 }
 
-#lgcwwpdcxt .gt_stub_row_group {
+#nuvvsbsqbw .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3722,11 +3743,11 @@ RSS
   vertical-align: top;
 }
 
-#lgcwwpdcxt .gt_row_group_first td {
+#nuvvsbsqbw .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#lgcwwpdcxt .gt_summary_row {
+#nuvvsbsqbw .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3736,16 +3757,16 @@ RSS
   padding-right: 5px;
 }
 
-#lgcwwpdcxt .gt_first_summary_row {
+#nuvvsbsqbw .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#lgcwwpdcxt .gt_first_summary_row.thick {
+#nuvvsbsqbw .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#lgcwwpdcxt .gt_last_summary_row {
+#nuvvsbsqbw .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3755,7 +3776,7 @@ RSS
   border-bottom-color: #D3D3D3;
 }
 
-#lgcwwpdcxt .gt_grand_summary_row {
+#nuvvsbsqbw .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3765,7 +3786,7 @@ RSS
   padding-right: 5px;
 }
 
-#lgcwwpdcxt .gt_first_grand_summary_row {
+#nuvvsbsqbw .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3775,11 +3796,11 @@ RSS
   border-top-color: #D3D3D3;
 }
 
-#lgcwwpdcxt .gt_striped {
+#nuvvsbsqbw .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#lgcwwpdcxt .gt_table_body {
+#nuvvsbsqbw .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3788,7 +3809,7 @@ RSS
   border-bottom-color: #D3D3D3;
 }
 
-#lgcwwpdcxt .gt_footnotes {
+#nuvvsbsqbw .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3802,7 +3823,7 @@ RSS
   border-right-color: #D3D3D3;
 }
 
-#lgcwwpdcxt .gt_footnote {
+#nuvvsbsqbw .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -3811,7 +3832,7 @@ RSS
   padding-right: 5px;
 }
 
-#lgcwwpdcxt .gt_sourcenotes {
+#nuvvsbsqbw .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3825,7 +3846,7 @@ RSS
   border-right-color: #D3D3D3;
 }
 
-#lgcwwpdcxt .gt_sourcenote {
+#nuvvsbsqbw .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3833,64 +3854,64 @@ RSS
   padding-right: 5px;
 }
 
-#lgcwwpdcxt .gt_left {
+#nuvvsbsqbw .gt_left {
   text-align: left;
 }
 
-#lgcwwpdcxt .gt_center {
+#nuvvsbsqbw .gt_center {
   text-align: center;
 }
 
-#lgcwwpdcxt .gt_right {
+#nuvvsbsqbw .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#lgcwwpdcxt .gt_font_normal {
+#nuvvsbsqbw .gt_font_normal {
   font-weight: normal;
 }
 
-#lgcwwpdcxt .gt_font_bold {
+#nuvvsbsqbw .gt_font_bold {
   font-weight: bold;
 }
 
-#lgcwwpdcxt .gt_font_italic {
+#nuvvsbsqbw .gt_font_italic {
   font-style: italic;
 }
 
-#lgcwwpdcxt .gt_super {
+#nuvvsbsqbw .gt_super {
   font-size: 65%;
 }
 
-#lgcwwpdcxt .gt_footnote_marks {
+#nuvvsbsqbw .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#lgcwwpdcxt .gt_asterisk {
+#nuvvsbsqbw .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#lgcwwpdcxt .gt_indent_1 {
+#nuvvsbsqbw .gt_indent_1 {
   text-indent: 5px;
 }
 
-#lgcwwpdcxt .gt_indent_2 {
+#nuvvsbsqbw .gt_indent_2 {
   text-indent: 10px;
 }
 
-#lgcwwpdcxt .gt_indent_3 {
+#nuvvsbsqbw .gt_indent_3 {
   text-indent: 15px;
 }
 
-#lgcwwpdcxt .gt_indent_4 {
+#nuvvsbsqbw .gt_indent_4 {
   text-indent: 20px;
 }
 
-#lgcwwpdcxt .gt_indent_5 {
+#nuvvsbsqbw .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -3898,27 +3919,27 @@ RSS
   
   <thead class="gt_col_headings">
     <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">speaker</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">addressee</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">lines</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">words</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">Speaker</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">Addressee</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">Lines</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col">Words</th>
     </tr>
   </thead>
   <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">#Carlyle</td>
-<td class="gt_row gt_left">#Bridger</td>
+    <tr><td class="gt_row gt_left">Carlyle</td>
+<td class="gt_row gt_left">Bridger</td>
 <td class="gt_row gt_right">72</td>
 <td class="gt_row gt_right">1864</td></tr>
-    <tr><td class="gt_row gt_left">#Bridger</td>
-<td class="gt_row gt_left">#Carlyle</td>
+    <tr><td class="gt_row gt_left">Bridger</td>
+<td class="gt_row gt_left">Carlyle</td>
 <td class="gt_row gt_right">71</td>
 <td class="gt_row gt_right">965</td></tr>
-    <tr><td class="gt_row gt_left">#Carlyle</td>
-<td class="gt_row gt_left">#Mycroft</td>
+    <tr><td class="gt_row gt_left">Carlyle</td>
+<td class="gt_row gt_left">Mycroft</td>
 <td class="gt_row gt_right">63</td>
 <td class="gt_row gt_right">745</td></tr>
-    <tr><td class="gt_row gt_left">#Mycroft</td>
-<td class="gt_row gt_left">#Carlyle</td>
+    <tr><td class="gt_row gt_left">Mycroft</td>
+<td class="gt_row gt_left">Carlyle</td>
 <td class="gt_row gt_right">63</td>
 <td class="gt_row gt_right">1520</td></tr>
   </tbody>
@@ -3933,6 +3954,7 @@ RSS
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="who-talks-to-whom_files/figure-html5/radar_plot-1.png" width="624" /></p>
 </div>
+<p>See <a href="#emoji-to-character-mapping">below</a> for the emoji mapping for the addressees. We are missing an emoji for Martin at 11 o’clock.</p>
 <p>Everybody speaks to Carlyle, but Carlyle mostly speaks to Mycroft and Bridger. Only Mycroft speaks to the outside world.</p>
 <p>This works pretty well for small groups of characters but it won’t scale well to the 38 speaking parts we have so far, which is only going to grow as we add chapters.</p>
 <h3 id="network-graph">Network Graph</h3>
@@ -3942,14 +3964,476 @@ RSS
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>network_graph</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://tidygraph.data-imaginist.com/reference/tbl_graph.html'>tbl_graph</a></span><span class='op'>(</span></span>
 <span>  edges <span class='op'>=</span> <span class='va'>pair_list</span>,</span>
 <span>  nodes <span class='op'>=</span> <span class='va'>characters</span>,</span>
+<span>  node_key <span class='op'>=</span> <span class='st'>"id"</span>,</span>
 <span><span class='op'>)</span></span></code></pre>
 </div>
 </div>
-<p>That’s all it takes to make network graph, which we can then plot various visualizations of, e.g. a hairball of characters with at least fifteen spoken lines of dialog:</p>
+<p>That’s all it takes to make a network graph, which we can then visualize in various ways, e.g. a hairball of characters with at least fifteen spoken lines of dialog:</p>
 <div class="layout-chunk" data-layout="l-body">
 <p><img src="who-talks-to-whom_files/figure-html5/network_plot-1.png" width="624" data-distill-preview=1 /></p>
 </div>
+<p>See <a href="#emoji-to-character-mapping">below</a> for the emoji mapping for the other characters. We are missing emojis for Lesley, Martin, and Su-Hyeon, going from left to right.</p>
 <p>Mycroft is the hinge between several conversations, one dominated by Carlyle currently taking place at the Saneer-Weeksbooth bash’house, another one over at Ganymede’s palace during the Renunciation Day party, and some more isolated pairs around the periphery, like Ockham and Martin or Dominic and Lesley.</p>
+<h3 id="emoji-to-character-mapping">Emoji-to-Character Mapping</h3>
+<div class="layout-chunk" data-layout="l-body">
+<div id="sdcugmhfgp" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#sdcugmhfgp .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#sdcugmhfgp .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#sdcugmhfgp .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#sdcugmhfgp .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#sdcugmhfgp .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#sdcugmhfgp .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#sdcugmhfgp .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#sdcugmhfgp .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#sdcugmhfgp .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#sdcugmhfgp .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#sdcugmhfgp .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#sdcugmhfgp .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#sdcugmhfgp .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#sdcugmhfgp .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#sdcugmhfgp .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#sdcugmhfgp .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#sdcugmhfgp .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sdcugmhfgp .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#sdcugmhfgp .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#sdcugmhfgp .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sdcugmhfgp .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#sdcugmhfgp .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#sdcugmhfgp .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#sdcugmhfgp .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sdcugmhfgp .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#sdcugmhfgp .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#sdcugmhfgp .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#sdcugmhfgp .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#sdcugmhfgp .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sdcugmhfgp .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#sdcugmhfgp .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#sdcugmhfgp .gt_left {
+  text-align: left;
+}
+
+#sdcugmhfgp .gt_center {
+  text-align: center;
+}
+
+#sdcugmhfgp .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#sdcugmhfgp .gt_font_normal {
+  font-weight: normal;
+}
+
+#sdcugmhfgp .gt_font_bold {
+  font-weight: bold;
+}
+
+#sdcugmhfgp .gt_font_italic {
+  font-style: italic;
+}
+
+#sdcugmhfgp .gt_super {
+  font-size: 65%;
+}
+
+#sdcugmhfgp .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#sdcugmhfgp .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#sdcugmhfgp .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#sdcugmhfgp .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#sdcugmhfgp .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#sdcugmhfgp .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#sdcugmhfgp .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">Emoji</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col">Name</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">🙏</td>
+<td class="gt_row gt_left">Carlyle</td></tr>
+    <tr><td class="gt_row gt_left">✍️</td>
+<td class="gt_row gt_left">Mycroft</td></tr>
+    <tr><td class="gt_row gt_left">🧸</td>
+<td class="gt_row gt_left">Bridger</td></tr>
+    <tr><td class="gt_row gt_left">🦨</td>
+<td class="gt_row gt_left">Thisbe</td></tr>
+    <tr><td class="gt_row gt_left">🧮</td>
+<td class="gt_row gt_left">Vivien</td></tr>
+    <tr><td class="gt_row gt_left">🌞</td>
+<td class="gt_row gt_left">Ganymede</td></tr>
+    <tr><td class="gt_row gt_left">NA</td>
+<td class="gt_row gt_left">Martin</td></tr>
+    <tr><td class="gt_row gt_left">🪒</td>
+<td class="gt_row gt_left">Ockham</td></tr>
+    <tr><td class="gt_row gt_left">👸</td>
+<td class="gt_row gt_left">Danaë</td></tr>
+    <tr><td class="gt_row gt_left">🌸</td>
+<td class="gt_row gt_left">Andō</td></tr>
+    <tr><td class="gt_row gt_left">🤺</td>
+<td class="gt_row gt_left">Dominic</td></tr>
+    <tr><td class="gt_row gt_left">NA</td>
+<td class="gt_row gt_left">Lesley</td></tr>
+    <tr><td class="gt_row gt_left">🎯</td>
+<td class="gt_row gt_left">Sniper</td></tr>
+    <tr><td class="gt_row gt_left">💡</td>
+<td class="gt_row gt_left">Eureka</td></tr>
+    <tr><td class="gt_row gt_left">💊</td>
+<td class="gt_row gt_left">Kosala</td></tr>
+    <tr><td class="gt_row gt_left">🪖</td>
+<td class="gt_row gt_left">the Major</td></tr>
+    <tr><td class="gt_row gt_left">👑</td>
+<td class="gt_row gt_left">Spain</td></tr>
+    <tr><td class="gt_row gt_left">🧱</td>
+<td class="gt_row gt_left">MASON</td></tr>
+    <tr><td class="gt_row gt_left">NA</td>
+<td class="gt_row gt_left">Su-Hyeon</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+</div>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <section class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr />
