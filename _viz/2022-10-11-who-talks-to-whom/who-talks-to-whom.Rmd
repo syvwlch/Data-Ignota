@@ -68,7 +68,7 @@ top_speakers <- said %>%
 
 Here are the top five out of `r nrow(top_speakers)` speakers:
 
-```{r show_top_speakers}
+```{r show_top_speakers, echo=FALSE}
 top_speakers %>%
   # Left join to retrieve names
   left_join(dram_pers, by = "id") %>%
@@ -211,6 +211,16 @@ Here are the top four directed pairs by number of lines, out of `r nrow(pair_lis
 
 ```{r show_top_pairs, echo=FALSE}
 pair_list %>%
+  left_join(dram_pers, by = c("speaker" = "id")) %>%
+  rename(s_emoji = emoji, s_name = name) %>%
+  left_join(dram_pers, by = c("addressee" = "id")) %>%
+  rename(a_emoji = emoji, a_name = name) %>%
+  select(
+    Speaker = s_name,
+    Addressee = a_name,
+    Lines = lines,
+    Words = words,
+  ) %>%
   head(4) %>%
   gt()
 ```
@@ -227,16 +237,27 @@ pair_list %>%
     speaker %in% head(top_speakers, 4)$id,
     addressee %in% head(top_addressees)$id,
   ) %>%
+  left_join(dram_pers, by = c("speaker" = "id")) %>%
+  rename(s_emoji = emoji, s_name = name) %>%
+  left_join(dram_pers, by = c("addressee" = "id")) %>%
+  rename(a_emoji = emoji, a_name = name) %>%
+  select(
+    Speaker = s_name,
+    Addressee = a_name,
+    Emoji = a_emoji,
+    Lines = lines,
+    Words = words,
+  ) %>%
   ggplot(
     aes(
-      x = reorder(addressee, -words),
-      y = lines, 
-      fill = addressee
+      x = reorder(Emoji, -Words),
+      y = Lines, 
+      fill = Addressee
     )
   ) +
     geom_col() +
     coord_polar() +
-    facet_wrap(vars(speaker)) +
+    facet_wrap(vars(Speaker)) +
     theme(
       legend.position="none",
       axis.text.y=element_blank(),
@@ -249,6 +270,8 @@ pair_list %>%
     )
     
 ```
+
+See [below](#emoji-to-character-mapping) for the emoji mapping for the addressees. We are missing an emoji for Martin at 11 o'clock.
 
 Everybody speaks to Carlyle, but Carlyle mostly speaks to Mycroft and Bridger. Only Mycroft speaks to the outside world.
 
@@ -283,7 +306,7 @@ network_graph %>%
     theme(legend.position="none")
 ```
 
-NB: We're missing emojis for Lesley, Martin, and Su-Hyeon, going from left to right. See [below](#emoji-to-character-mapping) for the emoji mapping for the other characters.
+See [below](#emoji-to-character-mapping) for the emoji mapping for the other characters. We are missing emojis for Lesley, Martin, and Su-Hyeon, going from left to right. 
 
 Mycroft is the hinge between several conversations, one dominated by Carlyle currently taking place at the Saneer-Weeksbooth bash'house, another one over at Ganymede's palace during the Renunciation Day party, and some more isolated pairs around the periphery, like Ockham and Martin or Dominic and Lesley.
 
