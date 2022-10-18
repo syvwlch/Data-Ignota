@@ -113,6 +113,7 @@ The Xquery script outputs an XML output file of the form:
       <emoji>✍</emoji>
       <name>Mycroft</name>
       <fullName>Mycroft Canner</fullName>
+      <sameAs>NA</sameAs>
    </character>
    ...
 </records>
@@ -134,10 +135,28 @@ characters <- xmlToDataFrame(xml_path) %>%
     emoji = na_if(emoji, "NA"),
     name = na_if(name, "NA"),
     fullName = na_if(fullName, "NA"),
+    sameAs = na_if(sameAs, "NA"),
   )
 ```
 
 NB: Luckily for you, when you read in this data as a CSV file the `readr` package is smart enough to correctly guess on all of this.
+
+### Tidy: Separate Delimited Lists
+
+Second, any rows containing delimited lists^[In the XML output the lists were space-delimited, since they derived from XML node parameters.] must be^[In order to be _Tidy Data_, in which each row represents a single observation.] separated into multiple rows.
+
+```{r row_count}
+num_alts <- nrow(filter(characters, str_detect(sameAs, "#")))
+num_multiple_alts <- nrow(filter(characters, str_detect(sameAs, " ")))
+```
+
+In the case of our characters, this would only happen if a `<person>` node had more than one `sameAs` alternate identities. There are currently `r num_alts` characters with alternate identities but `r num_multiple_alts` of them have more than one.
+
+```{r data_tidy, echo=TRUE}
+characters <- characters %>%
+  # Break space-delimited columns across multiple rows
+  separate_rows(sameAs, sep = " ") 
+```
 
 ```{r write_csv}
 characters %>%
@@ -226,4 +245,22 @@ Derived from the `<persName type="primary">` child node of the `<person>` node i
   else "NA"
   }
 </fullName>
+```
+
+### `sameAs`
+
+The unique identifier of another character that is actually the same person, aka an alternate identity. Alternate identities result in multiple rows for the same person.
+
+Optional, `NA` indicates no alternate identity exists for that person.
+
+Derived from parameter `sameAs` of the `<person>` node itself.
+
+```xml
+<sameAs>
+  {
+  if ($character/@sameAs) 
+  then data($character/@sameAs)
+  else "NA"
+  }
+</sameAs>
 ```
