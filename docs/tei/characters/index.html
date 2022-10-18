@@ -2505,6 +2505,7 @@ RSS
 <li><a href="#data-prep" id="toc-data-prep">Data Prep</a>
 <ul>
 <li><a href="#clean-fix-na-values" id="toc-clean-fix-na-values">Clean: Fix <em>NA</em> Values</a></li>
+<li><a href="#tidy-separate-delimited-lists" id="toc-tidy-separate-delimited-lists">Tidy: Separate Delimited Lists</a></li>
 </ul></li>
 <li><a href="#editing-progress" id="toc-editing-progress">Editing Progress</a>
 <ul>
@@ -2517,6 +2518,7 @@ RSS
 <li><a href="#emoji" id="toc-emoji"><code>emoji</code></a></li>
 <li><a href="#name" id="toc-name"><code>name</code></a></li>
 <li><a href="#fullname" id="toc-fullname"><code>fullName</code></a></li>
+<li><a href="#sameas" id="toc-sameas"><code>sameAs</code></a></li>
 </ul></li>
 </ul>
 </nav>
@@ -2551,7 +2553,7 @@ RSS
 <a href="../../data/characters.csv">Download the data</a><br>
 </div>
 <h3 id="last-updated">Last Updated</h3>
-<p>This file was last updated on 2022-10-15.</p>
+<p>This file was last updated on 2022-10-18.</p>
 <h2 id="raw-data-generation">Raw Data Generation</h2>
 <p>The raw data is first extracted from the <code>&lt;person&gt;</code> nodes using an Xquery script.</p>
 <h3 id="xquery-script">Xquery Script</h3>
@@ -2581,9 +2583,10 @@ RSS
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">emoji</span>&gt;✍&lt;/<span class="kw">emoji</span>&gt;</span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">name</span>&gt;Mycroft&lt;/<span class="kw">name</span>&gt;</span>
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">fullName</span>&gt;Mycroft Canner&lt;/<span class="kw">fullName</span>&gt;</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>   &lt;/<span class="kw">character</span>&gt;</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>   ...</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">records</span>&gt;</span></code></pre></div>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">sameAs</span>&gt;NA&lt;/<span class="kw">sameAs</span>&gt;</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>   &lt;/<span class="kw">character</span>&gt;</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>   ...</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">records</span>&gt;</span></code></pre></div>
 <h2 id="data-prep">Data Prep</h2>
 <p>This XML output file must then be cleaned before being saved to the csv file provided above.</p>
 <h3 id="clean-fix-na-values">Clean: Fix <em>NA</em> Values</h3>
@@ -2597,10 +2600,24 @@ RSS
 <span>    emoji <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/na_if.html'>na_if</a></span><span class='op'>(</span><span class='va'>emoji</span>, <span class='st'>"NA"</span><span class='op'>)</span>,</span>
 <span>    name <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/na_if.html'>na_if</a></span><span class='op'>(</span><span class='va'>name</span>, <span class='st'>"NA"</span><span class='op'>)</span>,</span>
 <span>    fullName <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/na_if.html'>na_if</a></span><span class='op'>(</span><span class='va'>fullName</span>, <span class='st'>"NA"</span><span class='op'>)</span>,</span>
+<span>    sameAs <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/na_if.html'>na_if</a></span><span class='op'>(</span><span class='va'>sameAs</span>, <span class='st'>"NA"</span><span class='op'>)</span>,</span>
 <span>  <span class='op'>)</span></span></code></pre>
 </div>
 </div>
 <p>NB: Luckily for you, when you read in this data as a CSV file the <code>readr</code> package is smart enough to correctly guess on all of this.</p>
+<h3 id="tidy-separate-delimited-lists">Tidy: Separate Delimited Lists</h3>
+<p>Second, any rows containing delimited lists<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> must be<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a> separated into multiple rows.</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<p>In the case of our characters, this would only happen if a <code>&lt;person&gt;</code> node had more than one <code>sameAs</code> alternate identities. There are currently 2 characters with alternate identities but 0 of them have more than one.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>characters</span> <span class='op'>&lt;-</span> <span class='va'>characters</span> <span class='op'><a href='https://magrittr.tidyverse.org/reference/pipe.html'>%&gt;%</a></span></span>
+<span>  <span class='co'># Break space-delimited columns across multiple rows</span></span>
+<span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/separate_rows.html'>separate_rows</a></span><span class='op'>(</span><span class='va'>sameAs</span>, sep <span class='op'>=</span> <span class='st'>" "</span><span class='op'>)</span> </span></code></pre>
+</div>
+</div>
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
@@ -2653,11 +2670,24 @@ RSS
 <span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  else &quot;NA&quot;</span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">fullName</span>&gt;</span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<h3 id="sameas"><code>sameAs</code></h3>
+<p>The unique identifier of another character that is actually the same person, aka an alternate identity. Alternate identities result in multiple rows for the same person.</p>
+<p>Optional, <code>NA</code> indicates no alternate identity exists for that person.</p>
+<p>Derived from parameter <code>sameAs</code> of the <code>&lt;person&gt;</code> node itself.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">sameAs</span>&gt;</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  if ($character/@sameAs) </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  then data($character/@sameAs)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  else &quot;NA&quot;</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">sameAs</span>&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <section class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr />
 <ol>
 <li id="fn1" role="doc-endnote"><p>i.e. yours truly.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>In the XML output the lists were space-delimited, since they derived from XML node parameters.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3" role="doc-endnote"><p>In order to be <em>Tidy Data</em>, in which each row represents a single observation.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section>
 <!--radix_placeholder_article_footer-->
