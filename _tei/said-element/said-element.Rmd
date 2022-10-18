@@ -41,7 +41,8 @@ A line between Mycroft and Dominic would be encoded thus:
 #### Novel Layout
 ```xml
 <p>
-  <said>"Where hast thou been, stray?"</said>, Dominic snarled.
+  <said>"Where hast thou been, stray?"</said>, Dominic
+  snarled. <said>"Thy master needs thee."</said>
 </p>
 ```
 
@@ -84,8 +85,11 @@ declare namespace tei = "http://www.tei-c.org/ns/1.0";
 declare variable $doc := doc("PATH_TO_TEI_FILE");
 
 <records>
-  {for $line at $index in $doc//tei:body//tei:said
-  return 
+  {
+  for $book in $doc//tei:text[@type = "book"]
+    for $chapter in $book//tei:div[@type = "chapter"]
+      for $p at $p_index in $chapter//(tei:p | tei:sp)
+        for $line at $line_index in $p//tei:said
   <line>
     ...
     A node per column in the output file, see below for details
@@ -93,6 +97,8 @@ declare variable $doc := doc("PATH_TO_TEI_FILE");
   </line>}
 </records>
 ```
+
+The query iterates thru books, chapters, paragraphs, and lines of dialog. The first two levels are numbered in the original file, but the lower two are numbered during data extraction, hence their need for an index.
 
 ### XML Output File
 
@@ -104,8 +110,9 @@ The Xquery script outputs an XML output file of the form:
    <line>
       <book>1</book>
       <chapter>1</chapter>
-      <page>13</page>
+      <paragraph>1</paragraph>
       <line>1</line>
+      <page>13</page>
       <speaker>#Mycroft</speaker>
       <addressee>#reader</addressee>
       <person>#reader</person>
@@ -136,8 +143,9 @@ said <- xmlToDataFrame(xml_path) %>%
     # Column data types must be correct
     book = as.integer(book),
     chapter = as.integer(chapter),
-    page = as.integer(page),
+    paragraph = as.integer(paragraph),
     line = as.integer(line),
+    page = as.integer(page),
     aloud = as.logical(aloud),
     # Missing values must be _NA_
     speaker = na_if(speaker, "NA"),
@@ -164,8 +172,6 @@ said <- said %>%
   separate_rows(place, sep = " ") 
 ```
 
-After this operation, the `r said %>% group_by(line) %>% summarize(n = n()) %>% nrow()` lines of dialog in the text have generated `r said %>% nrow()` rows in the data.
-
 ### Copyright: Remove Raw Text
 
 Lastly, before writing to the CSV file, any text under copyright is removed. This is the last chance to process that text, so let's add a `words` column for the number of words in the line.
@@ -191,8 +197,8 @@ NB: If you have ideas for other columns I could generate from the text at this s
 ```{r editing_progress}
 progress <- said %>% 
   mutate(chapter = book + chapter/100) %>%
-  group_by(chapter, line, speaker, addressee) %>%
-  summarize(line = mean(line), .groups = "drop") %>%
+  group_by(chapter, paragraph, line, speaker, addressee) %>%
+  summarize(.groups = "drop") %>%
   group_by(chapter)
 
 progress <- progress %>%
@@ -248,7 +254,7 @@ Derived from parameter `n` of the `<text type="book">` node the line is a child 
 
 ```xml
 <book>
-  {data($line/ancestor::tei:text[@type = "book"]/@n)}
+  {data($book/@n)}
 </book>
 ```
 
@@ -262,8 +268,43 @@ Derived from parameter `n` of the `<div type="chapter">` node the line is a chil
 
 ```xml
 <chapter>
-  {data($line/ancestor::tei:div[@type = "chapter"]/@n)}
+  {data($chapter/@n)}
 </chapter>
+```
+
+### `paragraph`
+
+The number of the paragraph (within the chapter) of the paragraph containing the line.
+
+Required, numeric.
+
+Derived from the index `$p_index` generated while iterating in document order thru the `<p>` and `<sp>` children of the current chapter. 
+
+```xml
+<paragraph>
+  {$p_index}
+</paragraph>
+```
+
+### `line`
+
+The number of the actual line of dialog within the current paragraph.
+
+Required, numeric.
+
+```xml
+<line>
+  {$line_index}
+</line>
+```
+
+If there are more than one line of dialog for a paragraph, this usually indicates that there is some narration separating them. The paragraph below contains two lines of dialog, for example.
+
+```xml
+<p>
+  <said>"Where hast thou been, stray?"</said>, Dominic
+  snarled. <said>"Thy master needs thee."</said>
+</p>
 ```
 
 ### `page`
@@ -279,22 +320,6 @@ Derived from parameter `n` of the `<pb/>` milestone node which precedes the line
   {data($line/preceding::tei:pb[1]/@n)}
 </page>
 ```
-
-### `line`
-
-The number of the actual line of dialog in the original text, unique across all four books.
-
-Required, numeric.
-
-If it is important to count or visualize the data by lines in the original text, the data should be nested first by the columns from `speaker` to `place`.
-
-```xml
-<line>
-  {$index}
-</line>
-```
-
-NB: The `line` value is assigned dynamically by the Xquery when the file is generated, not embedded in the text as markup. Therefore it can change between releases.
 
 ### `speaker`
 

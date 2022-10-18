@@ -2513,8 +2513,9 @@ RSS
 <ul>
 <li><a href="#book" id="toc-book"><code>book</code></a></li>
 <li><a href="#chapter" id="toc-chapter"><code>chapter</code></a></li>
-<li><a href="#page" id="toc-page"><code>page</code></a></li>
+<li><a href="#paragraph" id="toc-paragraph"><code>paragraph</code></a></li>
 <li><a href="#line" id="toc-line"><code>line</code></a></li>
+<li><a href="#page" id="toc-page"><code>page</code></a></li>
 <li><a href="#speaker" id="toc-speaker"><code>speaker</code></a></li>
 <li><a href="#addressee" id="toc-addressee"><code>addressee</code></a></li>
 <li><a href="#person" id="toc-person"><code>person</code></a></li>
@@ -2536,8 +2537,9 @@ RSS
 <p>A line between Mycroft and Dominic would be encoded thus:</p>
 <h4 id="novel-layout">Novel Layout</h4>
 <div class="sourceCode" id="cb1"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">p</span>&gt;</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">said</span>&gt;&quot;Where hast thou been, stray?&quot;&lt;/<span class="kw">said</span>&gt;, Dominic snarled.</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">p</span>&gt;</span></code></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">said</span>&gt;&quot;Where hast thou been, stray?&quot;&lt;/<span class="kw">said</span>&gt;, Dominic</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  snarled. &lt;<span class="kw">said</span>&gt;&quot;Thy master needs thee.&quot;&lt;/<span class="kw">said</span>&gt;</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">p</span>&gt;</span></code></pre></div>
 <h4 id="script-layout">Script Layout</h4>
 <div class="sourceCode" id="cb2"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">sp</span>&gt;</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">speaker</span>&gt;Child:&lt;/<span class="kw">speaker</span>&gt;</span>
@@ -2552,7 +2554,7 @@ RSS
 <a href="../../data/said.csv">Download the data</a><br>
 </div>
 <h3 id="last-updated">Last Updated</h3>
-<p>This file was last updated on 2022-10-14.</p>
+<p>This file was last updated on 2022-10-18.</p>
 <h2 id="raw-data-generation">Raw Data Generation</h2>
 <p>The raw data is first extracted from the <code>&lt;said&gt;</code> nodes using an Xquery script.</p>
 <h3 id="xquery-script">Xquery Script</h3>
@@ -2563,14 +2565,18 @@ RSS
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>declare variable $doc := doc(&quot;PATH_TO_TEI_FILE&quot;);</span>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">records</span>&gt;</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  {for $line at $index in $doc//tei:body//tei:said</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  return </span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">line</span>&gt;</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    ...</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    A node per column in the output file, see below for details</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    ...</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">line</span>&gt;}</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">records</span>&gt;</span></code></pre></div>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  for $book in $doc//tei:text[@type = &quot;book&quot;]</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    for $chapter in $book//tei:div[@type = &quot;chapter&quot;]</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>      for $p at $p_index in $chapter//(tei:p | tei:sp)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        for $line at $line_index in $p//tei:said</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">line</span>&gt;</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    A node per column in the output file, see below for details</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    ...</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  &lt;/<span class="kw">line</span>&gt;}</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">records</span>&gt;</span></code></pre></div>
+<p>The query iterates thru books, chapters, paragraphs, and lines of dialog. The first two levels are numbered in the original file, but the lower two are numbered during data extraction, hence their need for an index.</p>
 <h3 id="xml-output-file">XML Output File</h3>
 <p>The Xquery script outputs an XML output file of the form:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">&lt;?xml</span><span class="ot"> version=</span><span class="st">&quot;1.0&quot;</span><span class="ot"> encoding=</span><span class="st">&quot;UTF-8&quot;</span><span class="fu">?&gt;</span></span>
@@ -2578,22 +2584,23 @@ RSS
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>   &lt;<span class="kw">line</span>&gt;</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">book</span>&gt;1&lt;/<span class="kw">book</span>&gt;</span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">chapter</span>&gt;1&lt;/<span class="kw">chapter</span>&gt;</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">page</span>&gt;13&lt;/<span class="kw">page</span>&gt;</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">paragraph</span>&gt;1&lt;/<span class="kw">paragraph</span>&gt;</span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">line</span>&gt;1&lt;/<span class="kw">line</span>&gt;</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">speaker</span>&gt;#Mycroft&lt;/<span class="kw">speaker</span>&gt;</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">addressee</span>&gt;#reader&lt;/<span class="kw">addressee</span>&gt;</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">person</span>&gt;#reader&lt;/<span class="kw">person</span>&gt;</span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">org</span>&gt;NA&lt;/<span class="kw">org</span>&gt;</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">place</span>&gt;NA&lt;/<span class="kw">place</span>&gt;</span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">language</span>&gt;en-en&lt;/<span class="kw">language</span>&gt;</span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">aloud</span>&gt;FALSE&lt;/<span class="kw">aloud</span>&gt;</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">format</span>&gt;novel&lt;/<span class="kw">format</span>&gt;</span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">text</span>&gt;You will criticize me, reader, for ... &lt;/<span class="kw">text</span>&gt;</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>   &lt;/<span class="kw">line</span>&gt;</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>   etc...</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">records</span>&gt;</span></code></pre></div>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">page</span>&gt;13&lt;/<span class="kw">page</span>&gt;</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">speaker</span>&gt;#Mycroft&lt;/<span class="kw">speaker</span>&gt;</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">addressee</span>&gt;#reader&lt;/<span class="kw">addressee</span>&gt;</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">person</span>&gt;#reader&lt;/<span class="kw">person</span>&gt;</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">org</span>&gt;NA&lt;/<span class="kw">org</span>&gt;</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">place</span>&gt;NA&lt;/<span class="kw">place</span>&gt;</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">language</span>&gt;en-en&lt;/<span class="kw">language</span>&gt;</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">aloud</span>&gt;FALSE&lt;/<span class="kw">aloud</span>&gt;</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">format</span>&gt;novel&lt;/<span class="kw">format</span>&gt;</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>      &lt;<span class="kw">text</span>&gt;You will criticize me, reader, for ... &lt;/<span class="kw">text</span>&gt;</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>   &lt;/<span class="kw">line</span>&gt;</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>   etc...</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">records</span>&gt;</span></code></pre></div>
 <h2 id="data-prep">Data Prep</h2>
 <p>This XML output file must then be cleaned, tidied, and purged of content under copyright before being saved to the csv file provided above.</p>
 <h3 id="clean-fix-data-types-and-na-values">Clean: Fix Data Types and <em>NA</em> Values</h3>
@@ -2605,8 +2612,9 @@ RSS
 <span>    <span class='co'># Column data types must be correct</span></span>
 <span>    book <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/integer.html'>as.integer</a></span><span class='op'>(</span><span class='va'>book</span><span class='op'>)</span>,</span>
 <span>    chapter <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/integer.html'>as.integer</a></span><span class='op'>(</span><span class='va'>chapter</span><span class='op'>)</span>,</span>
-<span>    page <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/integer.html'>as.integer</a></span><span class='op'>(</span><span class='va'>page</span><span class='op'>)</span>,</span>
+<span>    paragraph <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/integer.html'>as.integer</a></span><span class='op'>(</span><span class='va'>paragraph</span><span class='op'>)</span>,</span>
 <span>    line <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/integer.html'>as.integer</a></span><span class='op'>(</span><span class='va'>line</span><span class='op'>)</span>,</span>
+<span>    page <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/integer.html'>as.integer</a></span><span class='op'>(</span><span class='va'>page</span><span class='op'>)</span>,</span>
 <span>    aloud <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/logical.html'>as.logical</a></span><span class='op'>(</span><span class='va'>aloud</span><span class='op'>)</span>,</span>
 <span>    <span class='co'># Missing values must be _NA_</span></span>
 <span>    speaker <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/na_if.html'>na_if</a></span><span class='op'>(</span><span class='va'>speaker</span>, <span class='st'>"NA"</span><span class='op'>)</span>,</span>
@@ -2631,7 +2639,6 @@ RSS
 <span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/separate_rows.html'>separate_rows</a></span><span class='op'>(</span><span class='va'>place</span>, sep <span class='op'>=</span> <span class='st'>" "</span><span class='op'>)</span> </span></code></pre>
 </div>
 </div>
-<p>After this operation, the 4994 lines of dialog in the text have generated 5884 rows in the data.</p>
 <h3 id="copyright-remove-raw-text">Copyright: Remove Raw Text</h3>
 <p>Lastly, before writing to the CSV file, any text under copyright is removed. This is the last chance to process that text, so let’s add a <code>words</code> column for the number of words in the line.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -2649,12 +2656,12 @@ RSS
 <p>NB: If you have ideas for other columns I could generate from the text at this step, please create an issue in the tracker <a href="https://github.com/syvwlch/Data-Ignota/issues">here</a>, or start a new discussion <a href="https://github.com/syvwlch/Data-Ignota/discussions">here</a>.</p>
 <h2 id="editing-progress">Editing Progress</h2>
 <div class="layout-chunk" data-layout="l-body">
-<div id="jnfjqjkmia" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="eipvkqjsxe" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#jnfjqjkmia .gt_table {
+#eipvkqjsxe .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -2679,7 +2686,7 @@ RSS
   border-left-color: #D3D3D3;
 }
 
-#jnfjqjkmia .gt_heading {
+#eipvkqjsxe .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -2691,7 +2698,7 @@ RSS
   border-right-color: #D3D3D3;
 }
 
-#jnfjqjkmia .gt_title {
+#eipvkqjsxe .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -2703,7 +2710,7 @@ RSS
   border-bottom-width: 0;
 }
 
-#jnfjqjkmia .gt_subtitle {
+#eipvkqjsxe .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -2715,13 +2722,13 @@ RSS
   border-top-width: 0;
 }
 
-#jnfjqjkmia .gt_bottom_border {
+#eipvkqjsxe .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#jnfjqjkmia .gt_col_headings {
+#eipvkqjsxe .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2736,7 +2743,7 @@ RSS
   border-right-color: #D3D3D3;
 }
 
-#jnfjqjkmia .gt_col_heading {
+#eipvkqjsxe .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2756,7 +2763,7 @@ RSS
   overflow-x: hidden;
 }
 
-#jnfjqjkmia .gt_column_spanner_outer {
+#eipvkqjsxe .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2768,15 +2775,15 @@ RSS
   padding-right: 4px;
 }
 
-#jnfjqjkmia .gt_column_spanner_outer:first-child {
+#eipvkqjsxe .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#jnfjqjkmia .gt_column_spanner_outer:last-child {
+#eipvkqjsxe .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#jnfjqjkmia .gt_column_spanner {
+#eipvkqjsxe .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -2788,7 +2795,7 @@ RSS
   width: 100%;
 }
 
-#jnfjqjkmia .gt_group_heading {
+#eipvkqjsxe .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2813,7 +2820,7 @@ RSS
   vertical-align: middle;
 }
 
-#jnfjqjkmia .gt_empty_group_heading {
+#eipvkqjsxe .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -2828,15 +2835,15 @@ RSS
   vertical-align: middle;
 }
 
-#jnfjqjkmia .gt_from_md > :first-child {
+#eipvkqjsxe .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#jnfjqjkmia .gt_from_md > :last-child {
+#eipvkqjsxe .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#jnfjqjkmia .gt_row {
+#eipvkqjsxe .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2855,7 +2862,7 @@ RSS
   overflow-x: hidden;
 }
 
-#jnfjqjkmia .gt_stub {
+#eipvkqjsxe .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2868,7 +2875,7 @@ RSS
   padding-right: 5px;
 }
 
-#jnfjqjkmia .gt_stub_row_group {
+#eipvkqjsxe .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -2882,11 +2889,11 @@ RSS
   vertical-align: top;
 }
 
-#jnfjqjkmia .gt_row_group_first td {
+#eipvkqjsxe .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#jnfjqjkmia .gt_summary_row {
+#eipvkqjsxe .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2896,16 +2903,16 @@ RSS
   padding-right: 5px;
 }
 
-#jnfjqjkmia .gt_first_summary_row {
+#eipvkqjsxe .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#jnfjqjkmia .gt_first_summary_row.thick {
+#eipvkqjsxe .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#jnfjqjkmia .gt_last_summary_row {
+#eipvkqjsxe .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2915,7 +2922,7 @@ RSS
   border-bottom-color: #D3D3D3;
 }
 
-#jnfjqjkmia .gt_grand_summary_row {
+#eipvkqjsxe .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -2925,7 +2932,7 @@ RSS
   padding-right: 5px;
 }
 
-#jnfjqjkmia .gt_first_grand_summary_row {
+#eipvkqjsxe .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -2935,11 +2942,11 @@ RSS
   border-top-color: #D3D3D3;
 }
 
-#jnfjqjkmia .gt_striped {
+#eipvkqjsxe .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#jnfjqjkmia .gt_table_body {
+#eipvkqjsxe .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -2948,7 +2955,7 @@ RSS
   border-bottom-color: #D3D3D3;
 }
 
-#jnfjqjkmia .gt_footnotes {
+#eipvkqjsxe .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2962,7 +2969,7 @@ RSS
   border-right-color: #D3D3D3;
 }
 
-#jnfjqjkmia .gt_footnote {
+#eipvkqjsxe .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -2971,7 +2978,7 @@ RSS
   padding-right: 5px;
 }
 
-#jnfjqjkmia .gt_sourcenotes {
+#eipvkqjsxe .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -2985,7 +2992,7 @@ RSS
   border-right-color: #D3D3D3;
 }
 
-#jnfjqjkmia .gt_sourcenote {
+#eipvkqjsxe .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -2993,64 +3000,64 @@ RSS
   padding-right: 5px;
 }
 
-#jnfjqjkmia .gt_left {
+#eipvkqjsxe .gt_left {
   text-align: left;
 }
 
-#jnfjqjkmia .gt_center {
+#eipvkqjsxe .gt_center {
   text-align: center;
 }
 
-#jnfjqjkmia .gt_right {
+#eipvkqjsxe .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#jnfjqjkmia .gt_font_normal {
+#eipvkqjsxe .gt_font_normal {
   font-weight: normal;
 }
 
-#jnfjqjkmia .gt_font_bold {
+#eipvkqjsxe .gt_font_bold {
   font-weight: bold;
 }
 
-#jnfjqjkmia .gt_font_italic {
+#eipvkqjsxe .gt_font_italic {
   font-style: italic;
 }
 
-#jnfjqjkmia .gt_super {
+#eipvkqjsxe .gt_super {
   font-size: 65%;
 }
 
-#jnfjqjkmia .gt_footnote_marks {
+#eipvkqjsxe .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#jnfjqjkmia .gt_asterisk {
+#eipvkqjsxe .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#jnfjqjkmia .gt_indent_1 {
+#eipvkqjsxe .gt_indent_1 {
   text-indent: 5px;
 }
 
-#jnfjqjkmia .gt_indent_2 {
+#eipvkqjsxe .gt_indent_2 {
   text-indent: 10px;
 }
 
-#jnfjqjkmia .gt_indent_3 {
+#eipvkqjsxe .gt_indent_3 {
   text-indent: 15px;
 }
 
-#jnfjqjkmia .gt_indent_4 {
+#eipvkqjsxe .gt_indent_4 {
   text-indent: 20px;
 }
 
-#jnfjqjkmia .gt_indent_5 {
+#eipvkqjsxe .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -3138,37 +3145,47 @@ RSS
 <p>Required, numeric.</p>
 <p>Derived from parameter <code>n</code> of the <code>&lt;text type="book"&gt;</code> node the line is a child of.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">book</span>&gt;</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  {data($line/ancestor::tei:text[@type = &quot;book&quot;]/@n)}</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  {data($book/@n)}</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">book</span>&gt;</span></code></pre></div>
 <h3 id="chapter"><code>chapter</code></h3>
 <p>The number of the chapter containing the line.</p>
 <p>Required, numeric.</p>
 <p>Derived from parameter <code>n</code> of the <code>&lt;div type="chapter"&gt;</code> node the line is a child of.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">chapter</span>&gt;</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  {data($line/ancestor::tei:div[@type = &quot;chapter&quot;]/@n)}</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  {data($chapter/@n)}</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">chapter</span>&gt;</span></code></pre></div>
+<h3 id="paragraph"><code>paragraph</code></h3>
+<p>The number of the paragraph (within the chapter) of the paragraph containing the line.</p>
+<p>Required, numeric.</p>
+<p>Derived from the index <code>$p_index</code> generated while iterating in document order thru the <code>&lt;p&gt;</code> and <code>&lt;sp&gt;</code> children of the current chapter.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">paragraph</span>&gt;</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  {$p_index}</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">paragraph</span>&gt;</span></code></pre></div>
+<h3 id="line"><code>line</code></h3>
+<p>The number of the actual line of dialog within the current paragraph.</p>
+<p>Required, numeric.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">line</span>&gt;</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  {$line_index}</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">line</span>&gt;</span></code></pre></div>
+<p>If there are more than one line of dialog for a paragraph, this usually indicates that there is some narration separating them. The paragraph below contains two lines of dialog, for example.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">p</span>&gt;</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  &lt;<span class="kw">said</span>&gt;&quot;Where hast thou been, stray?&quot;&lt;/<span class="kw">said</span>&gt;, Dominic</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  snarled. &lt;<span class="kw">said</span>&gt;&quot;Thy master needs thee.&quot;&lt;/<span class="kw">said</span>&gt;</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">p</span>&gt;</span></code></pre></div>
 <h3 id="page"><code>page</code></h3>
 <p>The number of the page on which the line starts.</p>
 <p>Required, numeric.</p>
 <p>Derived from parameter <code>n</code> of the <code>&lt;pb/&gt;</code> milestone node which precedes the line in document order.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">page</span>&gt;</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  {data($line/preceding::tei:pb[1]/@n)}</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">page</span>&gt;</span></code></pre></div>
-<h3 id="line"><code>line</code></h3>
-<p>The number of the actual line of dialog in the original text, unique across all four books.</p>
-<p>Required, numeric.</p>
-<p>If it is important to count or visualize the data by lines in the original text, the data should be nested first by the columns from <code>speaker</code> to <code>place</code>.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">line</span>&gt;</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  {$index}</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">line</span>&gt;</span></code></pre></div>
-<p>NB: The <code>line</code> value is assigned dynamically by the Xquery when the file is generated, not embedded in the text as markup. Therefore it can change between releases.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">page</span>&gt;</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  {data($line/preceding::tei:pb[1]/@n)}</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">page</span>&gt;</span></code></pre></div>
 <h3 id="speaker"><code>speaker</code></h3>
 <p>The unique identifier of the character speaking the line. Multiple speakers result in multiple rows for the same line.</p>
 <p>Required, <code>NA</code> indicates the line needs to be edited.</p>
 <p>Derived from parameter <code>who</code> of the line’s <code>&lt;said&gt;</code> node.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">speaker</span>&gt;</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  {if ($line/@who) then data($line/@who) else &quot;NA&quot;}</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">speaker</span>&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">speaker</span>&gt;</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  {if ($line/@who) then data($line/@who) else &quot;NA&quot;}</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">speaker</span>&gt;</span></code></pre></div>
 <h4 id="character-ids">Character IDs</h4>
 <p>The identifier takes the form <code>#Mycroft</code> or <code>#Carlyle</code>. It points to a unique <code>&lt;person&gt;</code> node with the <code>xml:id</code> parameter set to that value.</p>
 <p>Those <code>&lt;person&gt;</code> nodes contain metadata about the character, e.g. names, affiliations, age, etc… and are stored outside the text in a <code>&lt;standoff&gt;</code> node within the Digital Edition’s file.</p>
@@ -3181,9 +3198,9 @@ RSS
 <p>Required, <code>NA</code> indicates the line needs to be edited.</p>
 <p>Derived from the parameter <code>toWhom</code> of the line’s <code>&lt;said&gt;</code> node.</p>
 <p>See <code>speaker</code> for format and meaning of the identifier.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">addressee</span>&gt;</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  {if ($line/@toWhom) then data($line/@toWhom) else &quot;NA&quot;}</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">addressee</span>&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">addressee</span>&gt;</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  {if ($line/@toWhom) then data($line/@toWhom) else &quot;NA&quot;}</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">addressee</span>&gt;</span></code></pre></div>
 <h4 id="asides-to-the-reader">Asides to the Reader</h4>
 <p>The text does not call out Mycroft’s asides to his gentle reader typographically. I have therefore had to make some editorial decisions when marking up those parts of the text which are typeset like narration but which I believe to be such an aside.</p>
 <p>This allows me to include the conversations between Mycroft and the reader in this data, but at the cost of some personal interpretation in what does or does not make the cut.</p>
@@ -3193,22 +3210,22 @@ RSS
 <p>Optional, <code>NA</code> indicates no one was mentioned in the line.</p>
 <p>Derived from the <code>ref</code> parameter of any children <code>&lt;persName&gt;</code> nodes of the line.</p>
 <p>See <code>speaker</code> for format and meaning of the identifier.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">person</span>&gt;</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  {if ($line//tei:persName) then </span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    for $name in distinct-values($line//tei:persName/@ref)</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>    return normalize-space(concat($name, &quot; &quot;))</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  else &quot;NA&quot;}</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">person</span>&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">person</span>&gt;</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  {if ($line//tei:persName) then </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    for $name in distinct-values($line//tei:persName/@ref)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    return normalize-space(concat($name, &quot; &quot;))</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  else &quot;NA&quot;}</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">person</span>&gt;</span></code></pre></div>
 <h3 id="org"><code>org</code></h3>
 <p>The unique identifier of an organization or group mentioned by name in the line. Multiple orgs mentioned result in multiple rows for the same line.</p>
 <p>Optional, <code>NA</code> indicates no organization was mentioned in the line.</p>
 <p>Derived from the <code>ref</code> parameter of any children <code>&lt;orgName&gt;</code> nodes of the line,.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">org</span>&gt;</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  {if ($line//tei:orgName)then </span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    for $name in distinct-values($line//tei:orgName/@ref)</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    return normalize-space(concat($name, &quot; &quot;))</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  else &quot;NA&quot;}</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">org</span>&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">org</span>&gt;</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  {if ($line//tei:orgName)then </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    for $name in distinct-values($line//tei:orgName/@ref)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    return normalize-space(concat($name, &quot; &quot;))</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  else &quot;NA&quot;}</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">org</span>&gt;</span></code></pre></div>
 <h4 id="org-ids">Org IDs</h4>
 <p>The organizations are managed much like the characters, but using <code>&lt;org&gt;</code> nodes instead of <code>&lt;person&gt;</code>. Unlike persons, orgs can nest.</p>
 <p>These include Hives, bash’es, nation strats, the servicers, or the Chicago Museum of Science and Industry as well as its Junior Scientist Club.</p>
@@ -3216,12 +3233,12 @@ RSS
 <p>The unique identifier of a place mentioned by name in the line. Multiple places mentioned result in multiple rows for the same line.</p>
 <p>Optional, <code>NA</code> indicates no place was mentioned in the line.</p>
 <p>Derived from the <code>ref</code> parameter of any children <code>&lt;placeName&gt;</code> nodes of the line.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">place</span>&gt;</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  {if ($line//tei:placeName) then </span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    for $name in distinct-values($line//tei:placeName/@ref)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    return normalize-space(concat($name, &quot; &quot;))</span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  else &quot;NA&quot;}</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">place</span>&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">place</span>&gt;</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  {if ($line//tei:placeName) then </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>    for $name in distinct-values($line//tei:placeName/@ref)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    return normalize-space(concat($name, &quot; &quot;))</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  else &quot;NA&quot;}</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">place</span>&gt;</span></code></pre></div>
 <h4 id="place-ids">Place IDs</h4>
 <p>Places are managed much like orgs, but using <code>&lt;place&gt;</code> nodes instead of <code>&lt;org&gt;</code>.</p>
 <p>These include planets, continents, cities, bash’houses, palaces, or flower trenches and they nest as well.</p>
@@ -3230,9 +3247,9 @@ RSS
 <p>Required, but the output file defaults to <code>en-en</code> since Mycroft’s typographic conventions allowed a programmatic approach to setting the attribute in the text.</p>
 <p>Derived from the <code>xml:lang</code> parameter of the line’s <code>&lt;said&gt;</code> node.</p>
 <p>Note that this is <em>not</em> the language of the line in the text itself, since Mycroft takes it upon himself to translate most of the dialog into English.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">language</span>&gt;</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  {if ($line/@xml:lang) then data($line/@xml:lang) else &quot;en-en&quot;}</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">language</span>&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">language</span>&gt;</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  {if ($line/@xml:lang) then data($line/@xml:lang) else &quot;en-en&quot;}</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">language</span>&gt;</span></code></pre></div>
 <h4 id="future-iso-language-codes">Future ISO Language Codes</h4>
 <p>Several of the languages used are future invented variants of current ones. In that spirit, I have created fictitious ISO codes for this parameter:</p>
 <ul>
@@ -3250,25 +3267,25 @@ RSS
 <p>A boolean indicating whether the line is spoken aloud or not. Takes the value <code>FALSE</code> when texting or between Mycroft and the reader, for example.</p>
 <p>Required, but the file defaults to <code>TRUE</code> when the attribute has not been set in the text.</p>
 <p>Derived from the <code>aloud</code> parameter of the line’s <code>&lt;said&gt;</code> node.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">aloud</span>&gt;</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  {if ($line[@aloud=&quot;false&quot;]) then &quot;FALSE&quot; else &quot;TRUE&quot;}</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">aloud</span>&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">aloud</span>&gt;</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  {if ($line[@aloud=&quot;false&quot;]) then &quot;FALSE&quot; else &quot;TRUE&quot;}</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">aloud</span>&gt;</span></code></pre></div>
 <h3 id="format"><code>format</code></h3>
 <p>The style in which the dialog is rendered in the text. Takes the value <code>script</code> when the layout changes to a script-like format with the speaker’s name repeated at each line, and <code>novel</code> otherwise.</p>
 <p>Required, <code>NA</code> indicates a <code>&lt;said&gt;</code> element which does not match the criteria below.</p>
 <p>Set to <code>script</code> when the ancestor of the line just below the chapter <code>&lt;div&gt;</code> level is an <code>&lt;sp&gt;</code> node, and to <code>novel</code> otherwise.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">format</span>&gt;</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  {if ($line/ancestor::tei:sp) then &quot;script&quot; else &quot;novel&quot;}</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">format</span>&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">format</span>&gt;</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  {if ($line/ancestor::tei:sp) then &quot;script&quot; else &quot;novel&quot;}</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">format</span>&gt;</span></code></pre></div>
 <h3 id="words"><code>words</code></h3>
 <p>The number of words in the line.</p>
 <p>Required, numeric.</p>
 <p>Derived during data cleaning by counting the normalized spaces in the <code>text</code> column, plus one.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">text</span>&gt;</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  {normalize-space(data($line))}</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">text</span>&gt;</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode xml"><code class="sourceCode xml"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>&lt;<span class="kw">text</span>&gt;</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  {normalize-space(data($line))}</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>&lt;/<span class="kw">text</span>&gt;</span></code></pre></div>
 <p>NB: If you have ideas for other columns I could generate from the text without infringing on the author’s copyright, please create an issue in the tracker <a href="https://github.com/syvwlch/Data-Ignota/issues">here</a>, or start a new discussion <a href="https://github.com/syvwlch/Data-Ignota/discussions">here</a>.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <section class="footnotes footnotes-end-of-document" role="doc-endnotes">
 <hr />
 <ol>
