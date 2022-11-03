@@ -6,7 +6,7 @@
       "description": "Fit to Sail a Sea of Words\n",
       "author": [],
       "contents": "\n\nContents\nA Ship Worthy of Apollo’s Call\nThe Analyses\nThe Dev Log\nThe Dashboard\nThe Data\n\nWhat Is This Ship Made of?\nTEI Encoding\nXquery\nR\nTEI Publisher\n\nCopyright Concerns\nWhat I Will Share in the Public Repo\nWhat I Will Not Share\n\n\nI have read Ada Palmer’s Terra Ignota series a few times1 since it came out - alone or with friends - because on every reread I discover new ideas, new calls forward or back within the text or outside of it, and new structural complexities.\nI am, to be frank, obsessed with it, and I have the years-long chat logs, the dedicated Zettelkasten vault, and the nigh-unreadable ebooks bursting with rainbow-hued highlights to prove it.\n\nSimple marginalia are just not cutting it anymore.\nA Ship Worthy of Apollo’s Call\nThis project is an attempt to upgrade from those first hollowed logs to a ship worthy of the perils and mysteries we gentle readers face when we heed Apollo’s call to push away from shore and sail toward terra ignota.\nThe Analyses\nI will post demos and examples of the analyses that can be performed on the data generated from this digital edition of the novels. As these accumulate, they should progressively build a map of the feasible… more of a spur to your own explorations than anything definitive or comprehensive.\nThe Dev Log\nI will also keep a dev log along this voyage. This will provide a more sequential view of what we found when, any shoals we hit along the way, and any issues with the crew’s morale or theology which might crop up.\nThe Dashboard\nTo help with navigation, I will set up a dashboard page to display the progress made and list any failed sanity checks & smoke tests with the latest version of the data.\nThe Data\nThis website will have links to data files generated for and used in the analyses. Feel free to download and re-use for non-commercial use with attribution.\nWhat Is This Ship Made of?\nTEI Encoding\nI am encoding the novels in the TEI2 dialect of XML, as this is the de facto standard for text analysis in the Digital Humanities3.\nThis is truly a labor of love4: going over the text, line by line, and marking it up with various xml elements. This is also the step where most errors will be introduced by yours truly, altho some of those errors can be detected by sanity check queries.\nXquery\nIt’s worth it, tho, because then I can use Xquery5 to ask questions like:\n“How many different ways does Mycroft refer to J.E.D.D. Mason while speaking to Bridger?”\n“¿Who talks about the Masons in Humanist Spanish? ¿On which pages?”\n“How many different Utopian coats are there in the text? How are they described?”\nR\nTo analyze this data further and display the results, I use the R language6. In particular I am applying the Tidy Data paradigm7 as best I understand it. This is a new language for me and this serves as practical hands-on learning for me.\nTEI Publisher\nLastly, I can load this Digital Edition into TEI Publisher8 an application running on top of the XML database eXist-db9 which will display the text with various enhanced features based on the markup, such as highlighting names and displaying popups with their metadata on hover.\nFor interest, here is a copy of the ODD configuration file for this digital edition.\nCopyright Concerns\nThe novels are under copyright, so there are parts of this project I can share and others I cannot.\nThe project therefore has two repositories on Github:\na private repo to version control and back-up the marked-up text\na public repo for everything else, including this website\nWhat I Will Share in the Public Repo\nCSV files containing tidy data about the text.\nTo allow others to reuse the data for their own analysis.\nThese will NOT contain stretches of text from the books.\n\nXquery files which extract data from the text.\nTo show my work and to help anyone who’s trying to do something similar.\nThese will pull from the private repo and put their output xml files there as well.\n\nR markdown files which generate example analysis reports from the data.\nTo show my work and to demo how the data can be used.\nThese will pull the output xml files from the private repo and put their output html and CSV files in the public repo, i.e. accessible on this website.\n\nWhat I Will Not Share\nThe text of the novels, in any format.\nData files containing stretches of text from the novels, in any format.\n\nThis project counts as my eighth reread of the first book in the series, Too Like the Lighting.↩︎\nText Encoding Initiative: https://tei-c.org/↩︎\nan area of scholarly activity at the intersection of computing and the disciplines of the humanities. https://en.wikipedia.org/wiki/Digital_humanities↩︎\nIt took a month of sustained effort to mark up the first twelve chapters of Too Like the Lightning.↩︎\na query and functional programming language that queries and transforms collections of structured and unstructured data, usually in the form of XML. https://en.wikipedia.org/wiki/XQuery↩︎\na language and environment for statistical computing and graphics. https://www.r-project.org/↩︎\nTidy datasets are easy to manipulate, model and visualize, and have a specific structure: each variable is a column, each observation is a row, and each type of observational unit is a table. https://vita.had.co.nz/papers/tidy-data.html↩︎\nhttp://teipublisher.com/↩︎\nhttp://exist-db.org/↩︎\n",
-      "last_modified": "2022-10-18T17:59:05-04:00"
+      "last_modified": "2022-11-03T14:10:27-04:00"
     },
     {
       "path": "devlog.html",
@@ -14,7 +14,7 @@
       "description": "Developer's log for Data Ignota\n",
       "author": [],
       "contents": "\n\n\n\n",
-      "last_modified": "2022-10-18T17:59:07-04:00"
+      "last_modified": "2022-11-03T14:10:28-04:00"
     },
     {
       "path": "index.html",
@@ -22,7 +22,7 @@
       "description": "The Data-Ship _Data Ignota_\n",
       "author": [],
       "contents": "\nThis is the online lab journal for my experiments exploring Ada Palmer’s Terra Ignota series using techniques and tools from the Digital Humanities.\nIn it I will:\ndocument the journey,\nexplain how and why I’m doing what I’m doing,\npost a dashboard of the progress made,\nwrite up some demo visualizations, and\nshare the data collected which are not covered by the author’s copyright.\nFeedback\nIf you’d like to contribute, comment, or otherwise engage with this project, you can:\nStart or join a discussion on our Github Discussions page,\nRequest a particular analysis, dataset, or explanation on our Github Issues page.\n\n\n\n",
-      "last_modified": "2022-10-18T17:59:10-04:00"
+      "last_modified": "2022-11-03T14:10:30-04:00"
     },
     {
       "path": "tei.html",
@@ -30,7 +30,7 @@
       "description": "Each post provides a data file for download and explains its contents\n",
       "author": [],
       "contents": "\n\n\n\n",
-      "last_modified": "2022-10-18T17:59:11-04:00"
+      "last_modified": "2022-11-03T14:10:31-04:00"
     },
     {
       "path": "viz.html",
@@ -38,7 +38,7 @@
       "description": "Some demos and explorations of the data\n",
       "author": [],
       "contents": "\n\n\n\n",
-      "last_modified": "2022-10-18T17:59:12-04:00"
+      "last_modified": "2022-11-03T14:10:32-04:00"
     }
   ],
   "collections": ["posts/posts.json", "tei/tei.json", "viz/viz.json"]

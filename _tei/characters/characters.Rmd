@@ -165,6 +165,8 @@ characters %>%
 
 ## Editing Progress
 
+There are currently `r nrow(characters)` characters in the file, including `r nrow(filter(characters, str_detect(name, "Unknown")))` generic ones like 'unknown Junior Scientist' or 'unknown Servicer'.
+
 ### Names
 
 Names are required and there are currently `r nrow(filter(characters, is.na(name)))` character(s) without one.
