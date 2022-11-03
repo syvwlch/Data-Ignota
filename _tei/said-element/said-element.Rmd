@@ -110,6 +110,7 @@ The Xquery script outputs an XML output file of the form:
    <line>
       <book>1</book>
       <chapter>1</chapter>
+      <scene>3</scene>
       <paragraph>1</paragraph>
       <line>1</line>
       <page>13</page>
@@ -143,6 +144,7 @@ said <- xmlToDataFrame(xml_path) %>%
     # Column data types must be correct
     book = as.integer(book),
     chapter = as.integer(chapter),
+    scene = as.integer(scene),
     paragraph = as.integer(paragraph),
     line = as.integer(line),
     page = as.integer(page),
@@ -270,6 +272,20 @@ Derived from parameter `n` of the `<div type="chapter">` node the line is a chil
 <chapter>
   {data($chapter/@n)}
 </chapter>
+```
+
+### `scene`
+
+The number of the scene containing the line.
+
+Required, numeric.
+
+Derived by counting the number of preceding `<milestone unit="scene">` nodes in document order.
+
+```xml
+<scene>{
+  count($line/preceding::tei:milestone[@unit = "scene"])
+}</scene>
 ```
 
 ### `paragraph`
