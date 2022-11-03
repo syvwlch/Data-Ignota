@@ -100,7 +100,6 @@ The Xquery script outputs an XML output file of the form:
 <records>
   <scene>
     <scene>45</scene>
-    <page>56</page>
     <location>#Entrance-SWBH</location>
     <present>#Carlyle</present>
     <remote>#Eureka #Mycroft</remote>
